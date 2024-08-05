@@ -1,5 +1,9 @@
 import { CogIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
+import {
+  filterForUsedPagesAndNews,
+  filterForUsedPagesHomePage,
+} from '../../lib/filterOptions'
 
 export default defineType({
   name: 'siteSettings',
@@ -27,6 +31,10 @@ export default defineType({
       name: 'errorpage',
       title: 'Page Images',
     },
+    {
+      name: 'logos',
+      title: 'Logos',
+    },
   ],
 
   fields: [
@@ -35,7 +43,7 @@ export default defineType({
       title: 'Title',
       name: 'title',
       type: 'string',
-      // hidden: true,
+      hidden: true,
     }),
 
     // * * * * homePage * * * *
@@ -45,6 +53,11 @@ export default defineType({
       description: 'Select the page to be displayed as the home page',
       type: 'reference',
       to: [{ type: 'page' }],
+      options: {
+        filter: ({ document }) => filterForUsedPagesHomePage(document),
+      },
+      group: 'menuDef',
+      validation: (Rule) => Rule.required(),
     }),
     // * * * * Menu * * * *
     defineField({
@@ -65,53 +78,61 @@ export default defineType({
       of: [
         {
           type: 'reference',
-          to: [{ type: 'page' }],
+          to: [{ type: 'page' }, { type: 'news' }],
+          description:
+            'Select a page to add it to the footer quick links. Pages used in the menu are excluded.',
+          options: {
+            filter: ({ document }) => filterForUsedPagesAndNews(document),
+          },
         },
       ],
+    }),
+
+    //* * * * Fallback OG image * * * *
+    defineField({
+      name: 'ogImage',
+      title: 'Fallback Open Graph Image',
+      type: 'aiImage',
+      description: 'Displayed on social cards and search engine results.',
+      group: 'errorpage',
     }),
     // * * * * Error Pages * * * *
     defineField({
       name: 'pageNotFound',
       title: '404 - Page not found',
-      type: 'image',
+      type: 'aiImage',
       group: 'errorpage',
     }),
     defineField({
       name: 'serverError',
       title: '500 - Woops something went wrong',
-      type: 'image',
+      type: 'aiImage',
       group: 'errorpage',
     }),
+    // * * * * Logos * * * *
     defineField({
       name: 'logos',
       title: 'Logos',
       type: 'object',
-      group: 'errorpage',
+      group: 'logos',
       fields: [
         defineField({
           name: 'logoColor',
           title: 'Logo',
-          type: 'image',
+          type: 'aiImage',
           validation: (Rule) => Rule.required().assetRequired(),
         }),
         defineField({
           name: 'logoWhite',
           title: 'White Logo',
-          type: 'image',
+          type: 'aiImage',
         }),
         defineField({
           name: 'logoBlack',
           title: 'Black Logo',
-          type: 'image',
+          type: 'aiImage',
         }),
       ],
-    }),
-    defineField({
-      name: 'ogImage',
-      title: 'Fallback Open Graph Image',
-      type: 'image',
-      description: 'Displayed on social cards and search engine results.',
-      group: 'errorpage',
     }),
   ],
 })

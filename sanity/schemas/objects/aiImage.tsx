@@ -2,7 +2,7 @@ import { ImageIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
-  name: 'image',
+  name: 'aiImage',
   title: 'Image',
   type: 'image',
   description: `Please add the metadata you want to use in the frontend.`,

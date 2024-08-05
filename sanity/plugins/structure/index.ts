@@ -1,6 +1,7 @@
 import { StructureBuilder, StructureResolverContext } from 'sanity/structure'
 import { hiddenDocTypes } from './hiddenDocumentTypes'
 import { aiStructure } from './lists/aiStructure'
+import { pageStructure } from './lists/pageStructure'
 import { singletonListItems } from './lists/singletonStructure'
 
 /** # Structure Tool with Custom Structure list
@@ -20,7 +21,7 @@ export const structure = async (
   return S.list()
     .title('Content')
     .items([
-      // await pageStructure(S, context),
+      await pageStructure(S, context),
       S.divider(),
 
       // The rest of this document is from the original manual grouping in this series of articles

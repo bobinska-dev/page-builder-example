@@ -1,6 +1,6 @@
 import { FooterQuickLink, MenuItemValue } from '@/types'
 import { Card, Flex, Stack, Text } from '@sanity/ui'
-import { IntentButton } from 'sanity'
+import { IntentButton, ReferenceValue } from 'sanity'
 
 export const renderItems = ({
   path,
@@ -33,6 +33,7 @@ export const renderItems = ({
             <IntentButton
               intent="edit"
               mode="ghost"
+              replace={false}
               params={{
                 id: 'siteSettings',
                 type: 'siteSettings',
@@ -52,46 +53,56 @@ export const renderItems = ({
        */}
       {items && (
         <Stack space={3}>
-          {items.map((item: MenuItemValue | FooterQuickLink, index: number) => {
-            return (
-              <Card key={item._key} padding={3} shadow={1}>
-                <Flex justify={'space-between'} align={'center'}>
-                  <Text as={'h4'} weight="semibold" size={1}>
-                    {/* If item is of type MenuItemValue, return item.title, if not a string `This page is part of the Quicklinks as the ${item.index+1}th item` */}
-                    {item._type === 'menuItem'
-                      ? (item as MenuItemValue).isNested
-                        ? // @ts-ignore
-                          item.title + ' → ' + item.menuItems[0]?.title
-                        : (item as MenuItemValue).title
-                      : `This page is part of the quick links as the ${index + 1}. item`}
-                  </Text>
-                  <IntentButton
-                    intent="edit"
-                    mode="ghost"
-                    params={{
-                      id: 'siteSettings',
-                      type: 'siteSettings',
-                      path:
-                        item._type === 'menuItem'
-                          ? (item as MenuItemValue).isNested
-                            ? // @ts-ignore
-                              `menu.menuItems[_key == "${item._key}"].menuItems[_key == "${item.menuItems[0]?._key}"].title`
-                            : `menu.menuItems[_key == "${item._key}"].title`
-                          : `quickLinks[_key == "${item._key}"]`,
-                    }}
-                    text="Edit in Settings"
-                    tooltipProps={{
-                      placement: 'top',
-                      content:
-                        item._type === 'menuItem'
-                          ? 'Edit the menu item in the overall Site Settings'
-                          : 'Edit the Quicklink in the overall Site Settings',
-                    }}
-                  />
-                </Flex>
-              </Card>
-            )
-          })}
+          {items.map(
+            (
+              item: MenuItemValue | FooterQuickLink | ReferenceValue,
+              index: number,
+            ) => {
+              return (
+                <Card key={item._key} padding={3} shadow={1}>
+                  <Flex justify={'space-between'} align={'center'}>
+                    <Text as={'h4'} weight="semibold" size={1}>
+                      {/* If item is of type MenuItemValue, return item.title, if not a string `This page is part of the Quicklinks as the ${item.index+1}th item` */}
+                      {item._type === 'menuItem'
+                        ? (item as MenuItemValue).isNested
+                          ? // @ts-ignore
+                            item.title + ' → ' + item.menuItems[0]?.title
+                          : (item as MenuItemValue).title
+                        : item._type === 'home'
+                          ? 'This page is set as the Home Page'
+                          : `This page is part of the Quick Links array as the ${index + 1}. item`}
+                    </Text>
+                    <IntentButton
+                      intent="edit"
+                      mode="ghost"
+                      replace={false}
+                      params={{
+                        id: 'siteSettings',
+                        type: 'siteSettings',
+                        path:
+                          item._type === 'menuItem'
+                            ? (item as MenuItemValue).isNested
+                              ? // @ts-ignore
+                                `menu.menuItems[_key == "${item._key}"].menuItems[_key == "${item.menuItems[0]?._key}"].title`
+                              : `menu.menuItems[_key == "${item._key}"].title`
+                            : item._type === 'reference'
+                              ? `homePage`
+                              : `quickLinks[_key == "${item._key}"]`,
+                      }}
+                      text="Edit in Settings"
+                      tooltipProps={{
+                        placement: 'top',
+                        content:
+                          item._type === 'menuItem'
+                            ? 'Edit the menu item in the overall Site Settings'
+                            : 'Edit the Quick Links array in the overall Site Settings',
+                      }}
+                    />
+                  </Flex>
+                </Card>
+              )
+            },
+          )}
         </Stack>
       )}
     </Stack>

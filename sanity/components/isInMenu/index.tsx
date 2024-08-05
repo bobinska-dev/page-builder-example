@@ -6,17 +6,18 @@ import { ComponentType, useEffect, useState } from 'react'
 import { BooleanInputProps, getIdPair, useClient, useFormValue } from 'sanity'
 import { renderItems } from './renderItems'
 
+// TODO: Add new menu items to the settings doc query
 /** ## InMenuInput
  *
  * This component is used to render the input for the `isInMenu` field in the Sanity Studio.
  *
  */
 const InMenuInput: ComponentType<BooleanInputProps> = (props) => {
-  const { renderDefault } = props
   const client = useClient({ apiVersion }).withConfig({
     perspective: 'previewDrafts',
   })
   const documentId = useFormValue(['_id']) as string
+  const documentType = useFormValue(['_type']) as string
 
   const [loading, setLoading] = useState(true)
   const [menuItems, setMenuItems] = useState<MenuItemValue[] | undefined>()
@@ -28,16 +29,18 @@ const InMenuInput: ComponentType<BooleanInputProps> = (props) => {
   useEffect(() => {
     setLoading(true)
     const settingsQuery = `*[_type == "siteSettings"][0]{
-      "firstMenuItems": menu.menuItems[link._ref == $documentId],
-      "nestedMenuItems": menu.menuItems[]{
+      homePage._ref == $documentId => { "homePage": { "_ref": homePage._ref, "_type": 'home' } },
+      "firstMenuItems": menu[link._ref == $documentId],
+      "nestedMenuItems": menu[]{
         ...,
         "menuItems":select(count(menuItems[link._ref == $documentId]) > 0 => menuItems[link._ref == $documentId], null),
         }[menuItems != null],
       "footerQuickLinks": quickLinks[_ref == $documentId]
       }{
-        "menuItems": [...firstMenuItems, ...nestedMenuItems], footerQuickLinks,
+        "menuItems": array::compact([homePage, ...firstMenuItems, ...nestedMenuItems]), footerQuickLinks,
       }`
     const params = { documentId: publishedId }
+
     client
       .fetch(settingsQuery, params)
       .then((res) => {
@@ -66,6 +69,7 @@ const InMenuInput: ComponentType<BooleanInputProps> = (props) => {
           </Card>
         )}
         {!loading &&
+          documentType !== 'news' &&
           renderItems({
             title: 'Menu',
             items: menuItems,

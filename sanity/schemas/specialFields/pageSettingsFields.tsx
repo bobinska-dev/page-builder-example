@@ -8,8 +8,6 @@ import { defineField } from 'sanity'
  *
  */
 export const pageSettingsFields = [
-  // * * * * Color Fields * * * *
-
   // * * * * Page Placement Settings * * * *
   defineField({
     name: 'isInMenu',

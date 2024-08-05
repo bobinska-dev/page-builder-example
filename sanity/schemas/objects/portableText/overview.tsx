@@ -22,7 +22,7 @@ export default defineType({
   description: 'Short and on point – max. 280',
   title: 'Meta & SEO Description',
   type: 'array',
-  validation: (Rule) => [Rule.required(), Rule.max(280)],
+  validation: (Rule) => Rule.required().max(280),
   components: {
     input: CharacterCountInputPTE,
   },

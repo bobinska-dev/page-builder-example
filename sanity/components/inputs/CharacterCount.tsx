@@ -1,4 +1,5 @@
 import { Stack, Text } from '@sanity/ui'
+import { toPlainText } from 'next-sanity'
 import { PortableTextInputProps, StringInputProps } from 'sanity'
 
 export function CharacterCountInput(props: StringInputProps) {
@@ -24,6 +25,7 @@ export function CharacterCountInputPTE(props: PortableTextInputProps) {
   // check if validations exist
   // @ts-ignore
   const validationRules = props.schemaType.validation[0]._rules || []
+  const characters = props.value ? toPlainText(props.value).length : 0
 
   //check if max Character validation exists and get the value
   const max = validationRules
@@ -33,7 +35,7 @@ export function CharacterCountInputPTE(props: PortableTextInputProps) {
     <Stack space={3}>
       {props.renderDefault(props)}
       <Text muted align={'right'} size={1}>
-        Characters: {props.value?.length || 0}
+        Characters: {characters}
         {max ? ` / ${max}` : ''}
       </Text>
     </Stack>

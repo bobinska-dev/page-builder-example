@@ -37,7 +37,7 @@ export const seoFields = [
   defineField({
     name: 'image',
     title: 'OG Image',
-    type: 'image',
+    type: 'aiImage',
     group: 'seo',
     validation: (Rule) => Rule.required().assetRequired(),
   }),

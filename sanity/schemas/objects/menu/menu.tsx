@@ -1,5 +1,6 @@
 import { VscGitMerge, VscLocation } from 'react-icons/vsc'
 import { defineArrayMember, defineField, defineType } from 'sanity'
+import { filterForUsedPages } from '../../../lib/filterOptions'
 
 /**
  * Menu items for page navigation
@@ -36,7 +37,8 @@ export default defineType({
         // * * * * Link * * * *
         defineField({
           name: 'link',
-          title: 'Link',
+          title: 'Page that should be used as the target',
+          description: 'Pages already used in the menu are excluded.',
           type: 'reference',
           validation: (Rule) =>
             Rule.custom((link, context) => {
@@ -48,10 +50,10 @@ export default defineType({
               return true
             }),
           hidden: ({ parent }) => parent?.isNested,
-          to: [
-            // { type: 'news' },
-            { type: 'page' },
-          ],
+          to: [{ type: 'page' }],
+          options: {
+            filter: ({ document }) => filterForUsedPages(document),
+          },
         }),
 
         // * * * * Submenu -> no nesting * * * *
@@ -89,12 +91,24 @@ export default defineType({
                   title: 'Link',
                   type: 'reference',
                   validation: (Rule) => Rule.required(),
-                  to: [
-                    // { type: 'news' },
-                    { type: 'page' },
-                  ],
+                  to: [{ type: 'page' }],
+                  options: {
+                    filter: ({ document }) => filterForUsedPages(document),
+                  },
                 }),
               ],
+              preview: {
+                select: {
+                  title: 'title',
+                  link: 'link.title',
+                },
+                prepare({ title, link }) {
+                  return {
+                    title: title,
+                    subtitle: `Page: ${link}`,
+                  }
+                },
+              },
             }),
           ],
         }),
@@ -103,13 +117,14 @@ export default defineType({
         select: {
           title: 'title',
           isNested: 'isNested',
-          link: 'link',
+          link: 'link.title',
           submenu: 'menuItems',
         },
         prepare({ title, isNested, link, submenu }) {
+          const submenuItems = submenu?.map((item) => item.title).join(', ')
           return {
             title: title,
-            subtitle: isNested ? 'Nested menu' : link?.title,
+            subtitle: isNested ? `Nested menu: ${submenuItems}` : link,
             media: isNested ? <VscGitMerge /> : <VscLocation />,
           }
         },

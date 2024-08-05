@@ -1,4 +1,8 @@
+import { BellIcon, BookIcon } from '@sanity/icons'
 import { defineArrayMember, defineType } from 'sanity'
+import NewsAnnotation from '../../documents/news/NewsAnnotation'
+import PublicationAnnotation from '../../documents/publication/PublicationAnnotation'
+import link from './annotations/link'
 import {
   validateH2IsFirst,
   validateHeadingOrder,
@@ -31,7 +35,34 @@ export default defineType({
       type: 'block',
       validation: (rule) => [warnWhenHeadingOrBlockIsAllBold(rule)],
       marks: {
-        // annotations: [],
+        annotations: [
+          // Link annotation to external and internal pages
+          link,
+          // Publication annotation
+          {
+            name: 'publication',
+            title: 'Reference Publication',
+            type: 'reference',
+            icon: BookIcon,
+            validation: (Rule) => Rule.required(),
+            to: { type: 'publication' },
+            components: {
+              annotation: PublicationAnnotation,
+            },
+          },
+          // News Annotation
+          {
+            name: 'news',
+            title: ' Reference News',
+            type: 'reference',
+            icon: BellIcon,
+            validation: (Rule) => Rule.required(),
+            components: {
+              annotation: NewsAnnotation,
+            },
+            to: { type: 'news' },
+          },
+        ],
         // decorators: [],
       },
       styles: [
@@ -54,7 +85,7 @@ export default defineType({
     defineArrayMember({
       name: 'imageBlock',
       title: 'Image',
-      type: 'image',
+      type: 'aiImage',
       options: {
         hotspot: true,
       },

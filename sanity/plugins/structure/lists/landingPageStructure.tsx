@@ -20,11 +20,12 @@ export const landingPageStructure = (
       // * Fetch menu Items
       const pageMenuItems = await client.fetch(
         // make sure you don't overfetch -> only return the value that you need and name it appropriately
-        ` *[_type == "siteSettings"][0]{
-            "menuItems": menu.menuItems[isNested != true].link->._id,
-            "subItems": menu.menuItems[isNested == true].menuItems[].link->._id
+        `*[_type == "siteSettings"][0]{
+            "homePage": homePage._ref,
+            "menuItems": menu[isNested != true].link._ref,
+            "subItems": menu[isNested == true].menuItems[].link._ref
             }{
-              "pageIds":[...menuItems, ...subItems ]
+              "pageIds":array::compact([homePage, ...menuItems, ...subItems ])
             }{
               pageIds,
               "pages": *[_type == 'page' && !(_id in ^.pageIds)]._id

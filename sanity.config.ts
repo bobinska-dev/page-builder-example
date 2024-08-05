@@ -11,9 +11,10 @@ import { structureTool } from 'sanity/structure'
 
 import { apiVersion, dataset, projectId, studioUrl } from '@/sanity/lib/api'
 import * as resolve from '@/sanity/plugins/resolve'
-import { pageStructure, singletonPlugin } from '@/sanity/plugins/settings'
+import { singletonPlugin } from '@/sanity/plugins/settings'
 
-import settings from '@/sanity/schemas/singletons/siteSettings'
+import { previewDocumentNode } from './sanity/plugins/previewPane'
+import { structure } from './sanity/plugins/structure'
 import { schema } from './sanity/schemas/schemas'
 import { allSingletonTypeNames } from './sanity/schemas/singletons'
 
@@ -30,7 +31,9 @@ export default defineConfig({
   schema,
   plugins: [
     structureTool({
-      structure: pageStructure([settings]),
+      structure: structure,
+      // `defaultDocumentNode` is responsible for adding a “Preview” tab to the document pane
+      defaultDocumentNode: previewDocumentNode(),
     }),
     presentationTool({
       resolve,
