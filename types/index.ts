@@ -1,29 +1,9 @@
 import type { PortableTextBlock } from 'next-sanity'
-import type { Image } from 'sanity'
+import type { Image, Path, PortableTextSpan } from 'sanity'
 
 export interface MenuItem {
   _type: string
   slug?: string
-  title?: string
-}
-
-export interface MilestoneItem {
-  description?: string
-  duration?: {
-    start?: string
-    end?: string
-  }
-  image?: Image
-  tags?: string[]
-  title?: string
-}
-
-export interface ShowcaseProject {
-  _type: string
-  coverImage?: Image
-  overview?: PortableTextBlock[]
-  slug?: string
-  tags?: string[]
   title?: string
 }
 
@@ -32,7 +12,6 @@ export interface ShowcaseProject {
 export interface HomePagePayload {
   footer?: PortableTextBlock[]
   overview?: PortableTextBlock[]
-  showcaseProjects?: ShowcaseProject[]
   title?: string
 }
 
@@ -44,23 +23,35 @@ export interface PagePayload {
   slug?: string
 }
 
-export interface ProjectPayload {
-  client?: string
-  coverImage?: Image
-  description?: PortableTextBlock[]
-  duration?: {
-    start?: string
-    end?: string
-  }
-  overview?: PortableTextBlock[]
-  site?: string
-  slug: string
-  tags?: string[]
-  title?: string
-}
-
 export interface SettingsPayload {
   footer?: PortableTextBlock[]
   menuItems?: MenuItem[]
   ogImage?: Image
+}
+
+// * * * NEW * * *
+export interface ForbiddenLocationPTE {
+  matchText?: string
+  message: string
+  offset: number
+  path: Path
+  span: PortableTextSpan
+  level: 'error' | 'info' | 'warning'
+}
+
+export interface MenuItemValue {
+  title: string
+  isNested: boolean
+  link?: {
+    _type: string
+    _ref: string
+  }
+  _type: string
+  _key: string
+  menuItems?: MenuItemValue[]
+}
+export interface FooterQuickLink {
+  _ref: string
+  _key: string
+  _type: string
 }
