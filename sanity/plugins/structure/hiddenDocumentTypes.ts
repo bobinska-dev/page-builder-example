@@ -17,6 +17,7 @@ export const hiddenDocTypes = (listItem: any) =>
     'media.tag',
     // All Documents
     'page',
+    'news',
     // AI Assist context document type
     'assist.instruction.context',
     // All Singletons

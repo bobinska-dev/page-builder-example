@@ -37,8 +37,8 @@ const NewsAnnotation: ComponentType<BlockAnnotationProps> = (props) => {
         content={
           /* In this instance we stack our text instead of only using a Box with padding we can hen also define a space between items */
           <Stack space={2} padding={3}>
-            <Text align="center" size={1}>
-              {`News: ${reference?.title}` || 'No title found'}
+            <Text align="center" muted size={1}>
+              {`Title: ${reference?.title}` || 'No title found'}
             </Text>
           </Stack>
         }

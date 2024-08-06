@@ -1,6 +1,7 @@
 import { StructureBuilder, StructureResolverContext } from 'sanity/structure'
 import { hiddenDocTypes } from './hiddenDocumentTypes'
 import { aiStructure } from './lists/aiStructure'
+import { newsStructure } from './lists/newsStructure'
 import { pageStructure } from './lists/pageStructure'
 import { singletonListItems } from './lists/singletonStructure'
 
@@ -23,6 +24,8 @@ export const structure = async (
     .items([
       await pageStructure(S, context),
       S.divider(),
+      newsStructure(S, context),
+      S.divider(),
 
       // The rest of this document is from the original manual grouping in this series of articles
       ...S.documentTypeListItems().filter(hiddenDocTypes),
@@ -30,6 +33,8 @@ export const structure = async (
       S.divider(),
       // All singleton documents
       ...singletonListItems(S),
+      S.divider(),
+      // AI Assist context document
       aiStructure(S),
     ])
 }

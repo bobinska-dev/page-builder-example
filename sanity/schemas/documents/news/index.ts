@@ -47,7 +47,7 @@ export default defineType({
     defineField({
       name: 'body',
       type: 'body',
-      title: 'Content',
+      title: 'Body',
       group: 'content',
     }),
 

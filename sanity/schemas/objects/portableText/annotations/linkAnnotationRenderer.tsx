@@ -1,7 +1,6 @@
-import { capitaliseFirstLetter } from '@/sanity/lib/utils/capitaliseFirstLetter'
 import { LinkIcon } from '@sanity/icons'
 import { Box, Text, Tooltip } from '@sanity/ui'
-import { useEffect, useState } from 'react'
+import { ComponentType, useEffect, useState } from 'react'
 import { Subscription } from 'rxjs'
 import { BlockAnnotationProps, useClient } from 'sanity'
 import styled from 'styled-components'
@@ -25,7 +24,9 @@ interface ReferenceProps {
   title: string
 }
 
-const LinkAnnotationRenderer = (props: BlockAnnotationPropsWithValueTypes) => {
+const LinkAnnotationRenderer: ComponentType<
+  BlockAnnotationPropsWithValueTypes
+> = (props) => {
   const type = props.value.type
   const referencedDocId = props.value.reference?._ref || ''
 
@@ -81,9 +82,8 @@ const LinkAnnotationRenderer = (props: BlockAnnotationPropsWithValueTypes) => {
   // we need to define the text we want to display in the tooltip depending on the type of link (internal or external)
   const text =
     type === 'internal'
-      ? `${capitaliseFirstLetter(reference?._type!)}: ${reference?.title}` ||
-        'No reference set'
-      : `${props.value.href}` || 'No url found'
+      ? `Title: ${reference?.title}` || 'No reference set'
+      : `To: ${props.value.href}` || 'No url found'
 
   return (
     <>
@@ -95,8 +95,8 @@ const LinkAnnotationRenderer = (props: BlockAnnotationPropsWithValueTypes) => {
             </Text>
           </Box>
         }
-        fallbackPlacements={['bottom', 'left']}
-        placement="right"
+        fallbackPlacements={['right', 'left']}
+        placement="bottom"
         portal
       >
         {/* We add a bit of styling to the span surrounding annotated text */}

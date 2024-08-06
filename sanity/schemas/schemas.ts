@@ -7,6 +7,7 @@ import testimonial from './documents/testimonial '
 import aiImage from './objects/aiImage'
 import menu from './objects/menu/menu'
 
+import button from './objects/button'
 import body from './objects/portableText/body'
 import overview from './objects/portableText/overview'
 import reducedBody from './objects/portableText/reducedBody'
@@ -34,6 +35,7 @@ export const schema: {
     body,
     overview,
     reducedBody,
+    button,
   ],
   templates: templates,
 }

@@ -1,7 +1,9 @@
-import { BellIcon, BookIcon } from '@sanity/icons'
-import { defineArrayMember, defineType } from 'sanity'
+import { ButtonsPTItem } from '@/sanity/components/inputs/ButttonsPTinput'
+import { BellIcon, BookIcon, CommentIcon } from '@sanity/icons'
+import { defineArrayMember, defineField, defineType } from 'sanity'
 import NewsAnnotation from '../../documents/news/NewsAnnotation'
 import PublicationAnnotation from '../../documents/publication/PublicationAnnotation'
+import TestimonialPreview from '../../documents/testimonial /TestimonialPreview'
 import link from './annotations/link'
 import {
   validateH2IsFirst,
@@ -41,7 +43,7 @@ export default defineType({
           // Publication annotation
           {
             name: 'publication',
-            title: 'Reference Publication',
+            title: 'Publication Reference',
             type: 'reference',
             icon: BookIcon,
             validation: (Rule) => Rule.required(),
@@ -53,7 +55,7 @@ export default defineType({
           // News Annotation
           {
             name: 'news',
-            title: ' Reference News',
+            title: 'News Reference',
             type: 'reference',
             icon: BellIcon,
             validation: (Rule) => Rule.required(),
@@ -86,14 +88,51 @@ export default defineType({
       name: 'imageBlock',
       title: 'Image',
       type: 'aiImage',
-      options: {
-        hotspot: true,
-      },
     }),
-    // TODO: Add buttons, testimonial and publication blocks
 
     // * BUTTONS BLOCK
+    defineArrayMember({
+      name: 'buttons',
+      title: 'Buttons',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'buttons',
+          title: 'Buttons',
+          description:
+            'Add buttons to the text instead of just links, to make them stand out more.',
+          type: 'array',
+          of: [
+            defineArrayMember({
+              name: 'button',
+              title: 'Button',
+              type: 'button',
+            }),
+          ],
+          validation: (Rule) => Rule.min(1),
+        }),
+      ],
+      components: {
+        block: ButtonsPTItem,
+      },
+    }),
+
     // * TESTIMONIAL BLOCK
+    defineArrayMember({
+      name: 'testimonial',
+      title: 'Testimonial',
+      type: 'reference',
+      icon: CommentIcon,
+      to: [
+        {
+          type: 'testimonial',
+        },
+      ],
+      components: {
+        preview: TestimonialPreview,
+      },
+    }),
+
     // * PUBLICATION BLOCK
   ],
 })
