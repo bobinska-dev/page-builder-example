@@ -1,13 +1,14 @@
-import { CharacterCountInputPTE } from '@/sanity/components/inputs/CharacterCount'
+import { CharacterCountInputPTEreducedHeight } from '@/sanity/components/inputs/CharacterCount'
 import { defineArrayMember, defineType, PortableTextBlock } from 'sanity'
 
 /** ## `overview` Type - reduced Portable Text
  *
  * Used both for the <meta> description tag for SEO, and the personal website subheader.
+ * The height of the input is reduced to 2 lines.
  *
  * @name overview
  * @type {PortableTextBlock[]}
- * @validation {Rule} - Required, max 155 characters
+ * @validation {Rule} - Required, max 280 characters
  * @description Used both for the <meta> description tag for SEO, and the personal website subheader.
  *
  * ### Blocks
@@ -15,6 +16,7 @@ import { defineArrayMember, defineType, PortableTextBlock } from 'sanity'
  * - **Annotations**: none
  * - **Styles**: none
  * - **Lists**: none
+ *
  *
  */
 export default defineType({
@@ -24,7 +26,7 @@ export default defineType({
   type: 'array',
   validation: (Rule) => Rule.required().max(280),
   components: {
-    input: CharacterCountInputPTE,
+    input: CharacterCountInputPTEreducedHeight,
   },
   of: [
     // Paragraphs

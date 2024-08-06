@@ -39,6 +39,59 @@ export const validateH2IsFirst = (
 
     return true
   })
+/** ## Validation for H3 is First Heading
+ *
+ * Validates whether the first heading is an h3, because H2 will be the section title.
+ *
+ */
+export const validateH3IsFirst = (
+  Rule: ArrayRule<PortableTextBlock[] | unknown[]>,
+) =>
+  Rule.custom((value: unknown[], context) => {
+    const { path } = context
+    if (path && value) {
+      // get all headings
+      const headings = value.filter(
+        (block: PortableTextBlock) =>
+          block._type == 'block' &&
+          (block.style as PortableTextTextBlock['style'])?.startsWith('h'),
+      ) as PortableTextTextBlock[]
+
+      if (headings.length && headings[0].style !== 'h3')
+        return {
+          message: 'First heading should be h3.',
+          path: [{ _key: headings[0]._key }],
+        }
+      return true
+    }
+
+    return true
+  })
+
+/** Validate if there is no h2 in the body of text Sections */
+export const validateNoH2 = (
+  Rule: ArrayRule<PortableTextBlock[] | unknown[]>,
+) =>
+  Rule.custom((value: unknown[], context) => {
+    const { path } = context
+    if (path && value) {
+      // get all headings
+      const h2Headings = value.filter(
+        (block: PortableTextBlock) =>
+          block._type == 'block' &&
+          (block.style as PortableTextTextBlock['style']) === 'h2',
+      ) as PortableTextTextBlock[]
+
+      if (h2Headings.length)
+        return {
+          message: 'H2 headings are not allowed in this section.',
+          path: [{ _key: h2Headings[0]._key }],
+        }
+      return true
+    }
+
+    return true
+  })
 
 /** ## Validation for Heading Order
  *

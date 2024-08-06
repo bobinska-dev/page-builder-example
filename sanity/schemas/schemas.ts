@@ -7,7 +7,17 @@ import testimonial from './documents/testimonial '
 import aiImage from './objects/aiImage'
 import menu from './objects/menu/menu'
 
+import accordionItem from './objects/accordionItem'
 import button from './objects/button'
+import linkCard from './objects/linkCard'
+import accordionSection from './objects/pageSections/accordionSection'
+import ctaBannerSection from './objects/pageSections/ctaBannerSection'
+import furtherLinksSection from './objects/pageSections/furtherLinksSection'
+import imageHeader from './objects/pageSections/imageHeader'
+import newsSection from './objects/pageSections/newsSection'
+import testimonialSection from './objects/pageSections/testimonialSection'
+import textHeader from './objects/pageSections/textHeader'
+import textSection from './objects/pageSections/textSection'
 import body from './objects/portableText/body'
 import overview from './objects/portableText/overview'
 import reducedBody from './objects/portableText/reducedBody'
@@ -31,11 +41,22 @@ export const schema: {
     // Objects
     menu,
     aiImage,
+    accordionItem,
+    linkCard,
     // PTE
     body,
     overview,
     reducedBody,
     button,
+    // Page builder sections
+    textHeader,
+    imageHeader,
+    accordionSection,
+    testimonialSection,
+    textSection,
+    ctaBannerSection,
+    furtherLinksSection,
+    newsSection,
   ],
   templates: templates,
 }

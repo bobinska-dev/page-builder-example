@@ -2,6 +2,7 @@ import { Card, Stack, Text } from '@sanity/ui'
 import { ComponentType } from 'react'
 import { TableOfContentsProps } from './TableOfContentsInspector'
 
+// TODO: Add a Table of Contents for the page builder
 export const MultipleBodyTableOfContents: ComponentType<
   TableOfContentsProps
 > = () => {

@@ -1,6 +1,7 @@
 import { apiVersion } from '@/sanity/lib/api'
 import { RemoveCircleIcon } from '@sanity/icons'
 import { Button, Stack } from '@sanity/ui'
+
 import groq from 'groq'
 import { ComponentType, useState } from 'react'
 import { ArrayOfObjectsInputProps, useClient, useFormValue } from 'sanity'
@@ -31,7 +32,7 @@ export const DeletionLogInputComponent: ComponentType<
   // * Set the logs state which will be set by a query
   // that fetches all document ids that are in the logs and check if they exist
   const [logs, setLogs] = useState<{ docId: string }[]>([])
-  const query = groq`*[_id in $docIds]{
+  const checkDocumentQuery = groq`*[_id in $docIds]{
               'docId': _id,
             }`
   const params = { docIds: ids }
@@ -39,7 +40,7 @@ export const DeletionLogInputComponent: ComponentType<
   // * Fetch the data to check if the documents exist
   const fetchData = async () => {
     await client
-      .fetch(query, params)
+      .fetch(checkDocumentQuery, params)
       .then((res) => {
         setLogs(res)
       })

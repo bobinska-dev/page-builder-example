@@ -1,6 +1,12 @@
 import { CommentIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
+export const testimonialTags = [
+  { title: 'Customer', value: 'customer' },
+  { title: 'Partner', value: 'partner' },
+  { title: 'Investor', value: 'investor' },
+]
+
 export default defineType({
   name: 'testimonial',
   title: 'Testimonials',
@@ -25,11 +31,7 @@ export default defineType({
       type: 'array',
       of: [{ type: 'string' }],
       options: {
-        list: [
-          { title: 'Customer', value: 'customer' },
-          { title: 'Partner', value: 'partner' },
-          { title: 'Investor', value: 'investor' },
-        ],
+        list: testimonialTags,
       },
     }),
   ],

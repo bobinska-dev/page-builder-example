@@ -1,5 +1,6 @@
 import { VscBrowser } from 'react-icons/vsc'
 import { defineField, defineType } from 'sanity'
+import { pageBuilderArrayField } from '../../specialFields/pageBuilderArrayField'
 import { pageSettingsFields } from '../../specialFields/pageSettingsFields'
 import { seoFields } from '../../specialFields/seoFields'
 
@@ -13,6 +14,7 @@ export default defineType({
     {
       name: 'content',
       title: 'Content',
+      default: true,
     },
     {
       name: 'seo',
@@ -34,6 +36,10 @@ export default defineType({
     }),
     // * * SEO FIELDS * *
     ...seoFields,
+
+    // * * * Page Builder * * *
+    pageBuilderArrayField,
+
     // * * PAGE SETTINGS * *
     ...pageSettingsFields,
   ],
