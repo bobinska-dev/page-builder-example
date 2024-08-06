@@ -1,6 +1,6 @@
 import { UlistIcon } from '@sanity/icons'
 import { defineDocumentInspector, DocumentInspectorMenuItem } from 'sanity'
-import BodyStructureInspector from './BodyStructureInspector'
+import TableOfContentsInspector from './TableOfContentsInspector'
 
 function useMenuItem(): DocumentInspectorMenuItem {
   return {
@@ -12,6 +12,6 @@ function useMenuItem(): DocumentInspectorMenuItem {
 
 export const tableOfContentsInspector = defineDocumentInspector({
   name: 'tableOfContents',
-  component: BodyStructureInspector,
+  component: TableOfContentsInspector,
   useMenuItem,
 })

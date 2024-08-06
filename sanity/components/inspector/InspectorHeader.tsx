@@ -26,7 +26,7 @@ export const InspectorHeader = forwardRef(function InspectorHeader(
       <Flex padding={2}>
         <Flex align="center" flex={1} gap={2} paddingY={2} padding={3}>
           <Text as="h1" size={1} weight="medium">
-            Text Structure Inspector
+            Table Of Contents
           </Text>
         </Flex>
 

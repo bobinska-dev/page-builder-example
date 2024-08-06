@@ -9,7 +9,7 @@ import { TableOfContents } from './TableOfContents'
 export type TableOfContentsProps = {
   documentId: string
 }
-const BodyStructureInspector: ComponentType<DocumentInspectorProps> = (
+const TableOfContentsInspector: ComponentType<DocumentInspectorProps> = (
   props,
 ) => {
   const { onClose, documentId, documentType } = props
@@ -24,7 +24,7 @@ const BodyStructureInspector: ComponentType<DocumentInspectorProps> = (
     </RootLayer>
   )
 }
-export default BodyStructureInspector
+export default TableOfContentsInspector
 
 const RootLayer = styled(Layer)`
   display: flex;

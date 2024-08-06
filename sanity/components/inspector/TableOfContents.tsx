@@ -6,7 +6,7 @@ import { ComponentType, useCallback, useEffect, useState } from 'react'
 import { Path, useClient } from 'sanity'
 import { useDocumentPane } from 'sanity/structure'
 import styled from 'styled-components'
-import { TableOfContentsProps } from './BodyStructureInspector'
+import { TableOfContentsProps } from './TableOfContentsInspector'
 
 export const TableOfContents: ComponentType<TableOfContentsProps> = (props) => {
   const client = useClient({ apiVersion }).withConfig({
