@@ -13,6 +13,7 @@ import { apiVersion, dataset, projectId, studioUrl } from '@/sanity/lib/api'
 import * as resolve from '@/sanity/plugins/resolve'
 import { singletonPlugin } from '@/sanity/plugins/settings'
 
+import { bodyStructureInspector } from './sanity/components/inspector'
 import { previewDocumentNode } from './sanity/plugins/previewPane'
 import { structure } from './sanity/plugins/structure'
 import { schema } from './sanity/schemas/schemas'
@@ -52,4 +53,19 @@ export default defineConfig({
     // https://www.sanity.io/docs/the-vision-plugin
     visionTool({ defaultApiVersion: apiVersion }),
   ],
+  document: {
+    inspectors: (prev, context) => {
+      if (context.documentType === 'page' || context.documentType === 'news') {
+        return [...prev, bodyStructureInspector]
+      }
+      return prev
+    },
+  },
+  features: {
+    beta: {
+      treeArrayEditing: {
+        enabled: true,
+      },
+    },
+  },
 })
