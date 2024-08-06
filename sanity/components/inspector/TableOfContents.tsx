@@ -3,19 +3,16 @@ import { capitaliseFirstLetter } from '@/sanity/lib/utils/capitaliseFirstLetter'
 import { Card, Flex, Stack, Text } from '@sanity/ui'
 import groq from 'groq'
 import { ComponentType, useCallback, useEffect, useState } from 'react'
-import { getIdPair, Path, useClient } from 'sanity'
+import { Path, useClient } from 'sanity'
 import { useDocumentPane } from 'sanity/structure'
 import styled from 'styled-components'
+import { TableOfContentsProps } from './BodyStructureInspector'
 
-type HeadingsListProps = {
-  documentId: string
-}
-// TODO: ADD PAGE TYPE TO QUERY
-export const HeadingsList: ComponentType<HeadingsListProps> = (props) => {
+export const TableOfContents: ComponentType<TableOfContentsProps> = (props) => {
   const client = useClient({ apiVersion }).withConfig({
     perspective: 'previewDrafts',
   })
-  const publishedId = getIdPair(props.documentId).publishedId
+
   const [content, setContent] = useState<{
     bodyPath: string
     _type: string
@@ -28,15 +25,12 @@ export const HeadingsList: ComponentType<HeadingsListProps> = (props) => {
   } | null>(null)
 
   useEffect(() => {
-    const query = groq`*[_id == $documentId][0]{
-      _type == 'news' => { 
-        body[style != 'normal'] {
+    const query = groq`*[_id == $documentId && _type == 'news'][0]{
+      body[style != 'normal'] {
           _key, _type, style, "text": array::join(children[].text, ' ')
         },
-        "bodyPath": "body",
         _type,
-      },
-      
+        "bodyPath": "body",
     }`
 
     const params = { documentId: props.documentId }
@@ -74,19 +68,15 @@ export const HeadingsList: ComponentType<HeadingsListProps> = (props) => {
               ? [content.bodyPath, { _key: block._key }, 'buttons']
               : [content.bodyPath, { _key: block._key }, 'title']
 
-        // * Heading indentation
-        const indentation =
-          block.style === 'h2'
+        // * Heading indentation based on style
+        const indentation = block.style?.startsWith('h')
+          ? // h2 has no indentation
+            Number(block.style.slice(1)) === 2
             ? 0
-            : block.style === 'h3'
-              ? 3
-              : block.style === 'h4'
-                ? 4
-                : block.style === 'h5'
-                  ? 5
-                  : block.style === 'h6'
-                    ? 6
-                    : 0
+            : // all other indentations match the heading level
+              Number(block.style.slice(1))
+          : 0
+
         return (
           <Card
             onClick={() => handleOpen(blockPath)}

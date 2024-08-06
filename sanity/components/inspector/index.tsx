@@ -6,12 +6,12 @@ function useMenuItem(): DocumentInspectorMenuItem {
   return {
     icon: UlistIcon,
     showAsAction: true,
-    title: 'Text Structure',
+    title: 'Table of Contents',
   }
 }
 
-export const bodyStructureInspector = defineDocumentInspector({
-  name: 'bodySructureInspector',
+export const tableOfContentsInspector = defineDocumentInspector({
+  name: 'tableOfContents',
   component: BodyStructureInspector,
   useMenuItem,
 })
