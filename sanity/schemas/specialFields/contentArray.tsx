@@ -1,11 +1,11 @@
 import FilteredSectionsArrayInput from '@/sanity/components/inputs/FilteredSectionsArrayInput'
-import { defineArrayMember, defineField } from 'sanity'
+import { defineArrayMember, defineType } from 'sanity'
 import {
   headersAreOnTopValidation,
   onlyOneHeaderValidation,
 } from '../validations/contentArrayValidation'
 
-/** ###  Content Array Field
+/** ###  Content Array
  *
  * Content Array Field is an array of different page builder sections
  *
@@ -19,11 +19,11 @@ import {
  * - Testimonial Gallery
  *
  */
-export const pageBuilderArrayField = defineField({
+export default defineType({
   name: 'content',
   title: 'Content',
   type: 'array',
-  group: 'content',
+  // group: 'content',
 
   validation: (Rule) => [
     Rule.required(),
