@@ -35,10 +35,6 @@ export default defineType({
         'This field will be generated automatically by AI, if you change the image. It can also be synced to the image asset itself so it can be reused -> use the button below, if there is a difference.',
       rows: 2,
       validation: (Rule) => Rule.required(),
-      components: {
-        // TODO: add component to sync image alt to asset document
-        // field: ResolveImageAltField,
-      },
     }),
 
     // * prompt input for AI image generation
