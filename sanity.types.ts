@@ -46,6 +46,33 @@ export type Geopoint = {
   alt?: number
 }
 
+export type Content = Array<
+  | ({
+      _key: string
+    } & TextHeaderSection)
+  | ({
+      _key: string
+    } & ImageHeaderSection)
+  | ({
+      _key: string
+    } & TextSection)
+  | ({
+      _key: string
+    } & CtaBannerSection)
+  | ({
+      _key: string
+    } & FurtherLinkSection)
+  | ({
+      _key: string
+    } & AccordionSection)
+  | ({
+      _key: string
+    } & TestimonialSection)
+  | ({
+      _key: string
+    } & NewsSection)
+>
+
 export type NewsSection = {
   _type: 'newsSection'
   title: Array<{
@@ -62,89 +89,87 @@ export type NewsSection = {
     _type: 'block'
     _key: string
   }>
-  body?:
-    | Body
-    | Array<
-        | {
-            children?: Array<{
-              marks?: Array<string>
-              text?: string
-              _type: 'span'
+  body?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>
+          text?: string
+          _type: 'span'
+          _key: string
+        }>
+        style?:
+          | 'normal'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'blockquote'
+          | 'small'
+        listItem?: 'bullet' | 'number'
+        markDefs?: Array<
+          | {
+              type: 'external' | 'internal'
+              href?: string
+              reference?: {
+                _ref: string
+                _type: 'reference'
+                _weak?: boolean
+                [internalGroqTypeReferenceTo]?: 'page'
+              }
+              _type: 'link'
               _key: string
-            }>
-            style?:
-              | 'normal'
-              | 'h2'
-              | 'h3'
-              | 'h4'
-              | 'h5'
-              | 'h6'
-              | 'blockquote'
-              | 'small'
-            listItem?: 'bullet' | 'number'
-            markDefs?: Array<
-              | {
-                  type: 'external' | 'internal'
-                  href?: string
-                  reference?: {
-                    _ref: string
-                    _type: 'reference'
-                    _weak?: boolean
-                    [internalGroqTypeReferenceTo]?: 'page'
-                  }
-                  _type: 'link'
-                  _key: string
-                }
-              | {
-                  _ref: string
-                  _type: 'reference'
-                  _weak?: boolean
-                  _key: string
-                  [internalGroqTypeReferenceTo]?: 'publication'
-                }
-              | {
-                  _ref: string
-                  _type: 'reference'
-                  _weak?: boolean
-                  _key: string
-                  [internalGroqTypeReferenceTo]?: 'news'
-                }
-            >
-            level?: number
-            _type: 'block'
-            _key: string
-          }
-        | {
-            asset?: {
+            }
+          | {
               _ref: string
               _type: 'reference'
               _weak?: boolean
-              [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+              _key: string
+              [internalGroqTypeReferenceTo]?: 'publication'
             }
-            hotspot?: SanityImageHotspot
-            crop?: SanityImageCrop
-            altText: string
-            promptForImage?: string
-            _type: 'imageBlock'
+          | {
+              _ref: string
+              _type: 'reference'
+              _weak?: boolean
+              _key: string
+              [internalGroqTypeReferenceTo]?: 'news'
+            }
+        >
+        level?: number
+        _type: 'block'
+        _key: string
+      }
+    | {
+        asset?: {
+          _ref: string
+          _type: 'reference'
+          _weak?: boolean
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+        }
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        altText: string
+        promptForImage?: string
+        _type: 'imageBlock'
+        _key: string
+      }
+    | {
+        buttons?: Array<
+          {
             _key: string
-          }
-        | {
-            buttons: Array<
-              {
-                _key: string
-              } & Button
-            >
-            _type: 'buttons'
-            _key: string
-          }
-        | {
-            _ref: string
-            _type: 'reference'
-            _weak?: boolean
-            _key: string
-            [internalGroqTypeReferenceTo]?: 'testimonial'
-          }
-      >
+          } & Button
+        >
+        _type: 'buttons'
+        _key: string
+      }
+    | {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        _key: string
+        [internalGroqTypeReferenceTo]?: 'testimonial'
+      }
+  >
   loadAll?: boolean
   news?: Array<{
     _ref: string
@@ -236,7 +261,7 @@ export type FurtherLinkSection = {
         _key: string
       }
     | {
-        buttons: Array<
+        buttons?: Array<
           {
             _key: string
           } & Button
@@ -340,7 +365,7 @@ export type CtaBannerSection = {
         _key: string
       }
     | {
-        buttons: Array<
+        buttons?: Array<
           {
             _key: string
           } & Button
@@ -453,7 +478,7 @@ export type TextSection = {
         _key: string
       }
     | {
-        buttons: Array<
+        buttons?: Array<
           {
             _key: string
           } & Button
@@ -473,106 +498,101 @@ export type TextSection = {
 
 export type TestimonialSection = {
   _type: 'testimonialSection'
-  title:
-    | Overview
-    | Array<{
+  title: Array<{
+    children?: Array<{
+      marks?: Array<string>
+      text?: string
+      _type: 'span'
+      _key: string
+    }>
+    style?: 'normal'
+    listItem?: never
+    markDefs?: null
+    level?: number
+    _type: 'block'
+    _key: string
+  }>
+  body?: Array<
+    | {
         children?: Array<{
           marks?: Array<string>
           text?: string
           _type: 'span'
           _key: string
         }>
-        style?: 'normal'
-        listItem?: never
-        markDefs?: null
-        level?: number
-        _type: 'block'
-        _key: string
-      }>
-  body?:
-    | Body
-    | Array<
-        | {
-            children?: Array<{
-              marks?: Array<string>
-              text?: string
-              _type: 'span'
+        style?:
+          | 'normal'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'blockquote'
+          | 'small'
+        listItem?: 'bullet' | 'number'
+        markDefs?: Array<
+          | {
+              type: 'external' | 'internal'
+              href?: string
+              reference?: {
+                _ref: string
+                _type: 'reference'
+                _weak?: boolean
+                [internalGroqTypeReferenceTo]?: 'page'
+              }
+              _type: 'link'
               _key: string
-            }>
-            style?:
-              | 'normal'
-              | 'h2'
-              | 'h3'
-              | 'h4'
-              | 'h5'
-              | 'h6'
-              | 'blockquote'
-              | 'small'
-            listItem?: 'bullet' | 'number'
-            markDefs?: Array<
-              | {
-                  type: 'external' | 'internal'
-                  href?: string
-                  reference?: {
-                    _ref: string
-                    _type: 'reference'
-                    _weak?: boolean
-                    [internalGroqTypeReferenceTo]?: 'page'
-                  }
-                  _type: 'link'
-                  _key: string
-                }
-              | {
-                  _ref: string
-                  _type: 'reference'
-                  _weak?: boolean
-                  _key: string
-                  [internalGroqTypeReferenceTo]?: 'publication'
-                }
-              | {
-                  _ref: string
-                  _type: 'reference'
-                  _weak?: boolean
-                  _key: string
-                  [internalGroqTypeReferenceTo]?: 'news'
-                }
-            >
-            level?: number
-            _type: 'block'
-            _key: string
-          }
-        | {
-            asset?: {
+            }
+          | {
               _ref: string
               _type: 'reference'
               _weak?: boolean
-              [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+              _key: string
+              [internalGroqTypeReferenceTo]?: 'publication'
             }
-            hotspot?: SanityImageHotspot
-            crop?: SanityImageCrop
-            altText: string
-            promptForImage?: string
-            _type: 'imageBlock'
+          | {
+              _ref: string
+              _type: 'reference'
+              _weak?: boolean
+              _key: string
+              [internalGroqTypeReferenceTo]?: 'news'
+            }
+        >
+        level?: number
+        _type: 'block'
+        _key: string
+      }
+    | {
+        asset?: {
+          _ref: string
+          _type: 'reference'
+          _weak?: boolean
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+        }
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        altText: string
+        promptForImage?: string
+        _type: 'imageBlock'
+        _key: string
+      }
+    | {
+        buttons?: Array<
+          {
             _key: string
-          }
-        | {
-            buttons: Array<
-              {
-                _key: string
-              } & Button
-            >
-            _type: 'buttons'
-            _key: string
-          }
-        | {
-            _ref: string
-            _type: 'reference'
-            _weak?: boolean
-            _key: string
-            [internalGroqTypeReferenceTo]?: 'testimonial'
-          }
-      >
-
+          } & Button
+        >
+        _type: 'buttons'
+        _key: string
+      }
+    | {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        _key: string
+        [internalGroqTypeReferenceTo]?: 'testimonial'
+      }
+  >
   loadTags?: Array<string>
   testimonials?: Array<{
     _ref: string
@@ -585,105 +605,101 @@ export type TestimonialSection = {
 
 export type AccordionSection = {
   _type: 'accordionSection'
-  title:
-    | Overview
-    | Array<{
+  title: Array<{
+    children?: Array<{
+      marks?: Array<string>
+      text?: string
+      _type: 'span'
+      _key: string
+    }>
+    style?: 'normal'
+    listItem?: never
+    markDefs?: null
+    level?: number
+    _type: 'block'
+    _key: string
+  }>
+  body?: Array<
+    | {
         children?: Array<{
           marks?: Array<string>
           text?: string
           _type: 'span'
           _key: string
         }>
-        style?: 'normal'
-        listItem?: never
-        markDefs?: null
-        level?: number
-        _type: 'block'
-        _key: string
-      }>
-  body?:
-    | Body
-    | Array<
-        | {
-            children?: Array<{
-              marks?: Array<string>
-              text?: string
-              _type: 'span'
+        style?:
+          | 'normal'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'blockquote'
+          | 'small'
+        listItem?: 'bullet' | 'number'
+        markDefs?: Array<
+          | {
+              type: 'external' | 'internal'
+              href?: string
+              reference?: {
+                _ref: string
+                _type: 'reference'
+                _weak?: boolean
+                [internalGroqTypeReferenceTo]?: 'page'
+              }
+              _type: 'link'
               _key: string
-            }>
-            style?:
-              | 'normal'
-              | 'h2'
-              | 'h3'
-              | 'h4'
-              | 'h5'
-              | 'h6'
-              | 'blockquote'
-              | 'small'
-            listItem?: 'bullet' | 'number'
-            markDefs?: Array<
-              | {
-                  type: 'external' | 'internal'
-                  href?: string
-                  reference?: {
-                    _ref: string
-                    _type: 'reference'
-                    _weak?: boolean
-                    [internalGroqTypeReferenceTo]?: 'page'
-                  }
-                  _type: 'link'
-                  _key: string
-                }
-              | {
-                  _ref: string
-                  _type: 'reference'
-                  _weak?: boolean
-                  _key: string
-                  [internalGroqTypeReferenceTo]?: 'publication'
-                }
-              | {
-                  _ref: string
-                  _type: 'reference'
-                  _weak?: boolean
-                  _key: string
-                  [internalGroqTypeReferenceTo]?: 'news'
-                }
-            >
-            level?: number
-            _type: 'block'
-            _key: string
-          }
-        | {
-            asset?: {
+            }
+          | {
               _ref: string
               _type: 'reference'
               _weak?: boolean
-              [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+              _key: string
+              [internalGroqTypeReferenceTo]?: 'publication'
             }
-            hotspot?: SanityImageHotspot
-            crop?: SanityImageCrop
-            altText: string
-            promptForImage?: string
-            _type: 'imageBlock'
+          | {
+              _ref: string
+              _type: 'reference'
+              _weak?: boolean
+              _key: string
+              [internalGroqTypeReferenceTo]?: 'news'
+            }
+        >
+        level?: number
+        _type: 'block'
+        _key: string
+      }
+    | {
+        asset?: {
+          _ref: string
+          _type: 'reference'
+          _weak?: boolean
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+        }
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        altText: string
+        promptForImage?: string
+        _type: 'imageBlock'
+        _key: string
+      }
+    | {
+        buttons?: Array<
+          {
             _key: string
-          }
-        | {
-            buttons: Array<
-              {
-                _key: string
-              } & Button
-            >
-            _type: 'buttons'
-            _key: string
-          }
-        | {
-            _ref: string
-            _type: 'reference'
-            _weak?: boolean
-            _key: string
-            [internalGroqTypeReferenceTo]?: 'testimonial'
-          }
-      >
+          } & Button
+        >
+        _type: 'buttons'
+        _key: string
+      }
+    | {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        _key: string
+        [internalGroqTypeReferenceTo]?: 'testimonial'
+      }
+  >
   accordion: Array<
     {
       _key: string
@@ -831,7 +847,7 @@ export type TextHeaderSection = {
         _key: string
       }
     | {
-        buttons: Array<
+        buttons?: Array<
           {
             _key: string
           } & Button
@@ -991,7 +1007,7 @@ export type Body = Array<
       _key: string
     }
   | {
-      buttons: Array<
+      buttons?: Array<
         {
           _key: string
         } & Button
@@ -1399,29 +1415,7 @@ export type Page = {
     promptForImage?: string
     _type: 'aiImage'
   }
-  content: Array<
-    | ({
-        _key: string
-      } & TextHeaderSection)
-    | ({
-        _key: string
-      } & ImageHeaderSection)
-    | ({
-        _key: string
-      } & AccordionSection)
-    | ({
-        _key: string
-      } & TestimonialSection)
-    | ({
-        _key: string
-      } & TextSection)
-    | ({
-        _key: string
-      } & CtaBannerSection)
-    | ({
-        _key: string
-      } & FurtherLinkSection)
-  >
+  content: Content
   isInMenu?: boolean
   firstPublishedAt?: string
 }
@@ -1643,6 +1637,7 @@ export type AllSanitySchemaTypes =
   | SanityImagePalette
   | SanityImageDimensions
   | Geopoint
+  | Content
   | NewsSection
   | FurtherLinkSection
   | CtaBannerSection
