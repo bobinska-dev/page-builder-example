@@ -4,12 +4,12 @@ import { defineArrayMember, defineField, defineType } from 'sanity'
 import NewsAnnotation from '../../documents/news/NewsAnnotation'
 import PublicationAnnotation from '../../documents/publication/PublicationAnnotation'
 import TestimonialPreview from '../../documents/testimonial /TestimonialPreview'
-import link from './annotations/link'
 import {
   validateH2IsFirst,
   validateHeadingOrder,
   warnWhenHeadingOrBlockIsAllBold,
-} from './validations'
+} from '../../validations/portableTextValidations'
+import link from './annotations/link'
 
 // TODO: ADD blocks, annotations, decorators etc. and add TS docs for them
 /** ## `body` Type - Portable Text

@@ -1,4 +1,9 @@
+import FilteredSectionsArrayInput from '@/sanity/components/inputs/FilteredSectionsArrayInput'
 import { defineArrayMember, defineField } from 'sanity'
+import {
+  headersAreOnTopValidation,
+  onlyOneHeaderValidation,
+} from '../validations/contentArrayValidation'
 
 /** ###  Content Array Field
  *
@@ -18,9 +23,14 @@ export const pageBuilderArrayField = defineField({
   name: 'content',
   title: 'Content',
   type: 'array',
-  // TODO: add validation
-  validation: (Rule) => Rule.required(),
   group: 'content',
+
+  validation: (Rule) => [
+    Rule.required(),
+    onlyOneHeaderValidation(Rule),
+    headersAreOnTopValidation(Rule),
+  ],
+
   options: {
     treeEditing: true,
     insertMenu: {
@@ -29,6 +39,11 @@ export const pageBuilderArrayField = defineField({
       showIcons: true,
     },
   },
+
+  components: {
+    input: FilteredSectionsArrayInput,
+  },
+
   of: [
     defineArrayMember({ type: 'textHeaderSection' }),
     defineArrayMember({ type: 'imageHeaderSection' }),
@@ -38,6 +53,5 @@ export const pageBuilderArrayField = defineField({
     defineArrayMember({ type: 'accordionSection' }),
     defineArrayMember({ type: 'testimonialSection' }),
     defineArrayMember({ type: 'newsSection' }),
-    // TODO: Add more page builder sections here
   ],
 })

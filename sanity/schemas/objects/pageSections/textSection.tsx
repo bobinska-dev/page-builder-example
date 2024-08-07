@@ -5,7 +5,7 @@ import {
   validateH3IsFirst,
   validateHeadingOrder,
   validateNoH2,
-} from '../portableText/validations'
+} from '../../validations/portableTextValidations'
 
 export default defineType({
   name: 'textSection',
