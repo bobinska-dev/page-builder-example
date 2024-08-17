@@ -7,6 +7,12 @@ import { Path, useClient } from 'sanity'
 import { useDocumentPane } from 'sanity/structure'
 import styled from 'styled-components'
 import { TableOfContentsProps } from './TableOfContentsInspector'
+export type BodyHeader = {
+  _type: string
+  _key: string
+  style?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+  text?: string
+}
 
 export const TableOfContents: ComponentType<TableOfContentsProps> = (props) => {
   const client = useClient({ apiVersion }).withConfig({
@@ -16,12 +22,7 @@ export const TableOfContents: ComponentType<TableOfContentsProps> = (props) => {
   const [content, setContent] = useState<{
     bodyPath: string
     _type: string
-    body: {
-      _type: string
-      _key: string
-      style?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
-      text?: string
-    }[]
+    body: BodyHeader[]
   } | null>(null)
 
   useEffect(() => {

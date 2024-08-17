@@ -90,7 +90,7 @@ export default defineType({
     // * IMAGE BLOCK
     defineArrayMember({
       name: 'imageBlock',
-      title: 'Image',
+      title: 'Image Block',
       type: 'aiImage',
     }),
 

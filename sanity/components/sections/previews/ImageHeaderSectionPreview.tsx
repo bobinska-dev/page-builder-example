@@ -26,7 +26,14 @@ const ImageHeaderSectionPreview: ComponentType<
       body="" //{props.subtitle as string}
       icon={<ImageIcon />}
     >
-      <Flex align={'center'} paddingX={4} paddingY={3}>
+      <Flex
+        align={'center'}
+        paddingX={4}
+        paddingY={3}
+        // direction={['column', 'row']}
+        // wrap={['wrap', 'nowrap']}
+        gap={[3, 0]}
+      >
         <Stack space={4}>
           <Box>
             <h2>{props.title as string}</h2>
