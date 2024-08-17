@@ -1,6 +1,11 @@
 import FurtherLinkSectionPreview from '@/sanity/components/sections/previews/FurtherLinkSectionPreview'
 import { TagsIcon } from '@sanity/icons'
-import { defineField, defineType } from 'sanity'
+import { defineField, defineType, SchemaValidationValue } from 'sanity'
+import {
+  validateH3IsFirst,
+  validateHeadingOrder,
+  validateNoH2,
+} from '../../validations/portableTextValidations'
 
 export default defineType({
   name: 'furtherLinkSection',
@@ -33,6 +38,14 @@ export default defineType({
       name: 'body',
       title: 'Body',
       type: 'body',
+      validation: (Rule) => [
+        //* Validate if there is no h2 in the body of text Sections
+        validateNoH2(Rule) as SchemaValidationValue,
+        // * Validate if first heading is h3
+        validateH3IsFirst(Rule) as SchemaValidationValue,
+        // * Validate if headings are in order when descending
+        validateHeadingOrder(Rule) as SchemaValidationValue,
+      ],
     }),
 
     // * * * links * * *

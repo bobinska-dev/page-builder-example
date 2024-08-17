@@ -1,6 +1,16 @@
 import AutomaticSectionPreview from '@/sanity/components/sections/previews/AutomaticSelectionPreview'
 import { BellIcon } from '@sanity/icons'
-import { defineArrayMember, defineField, defineType } from 'sanity'
+import {
+  defineArrayMember,
+  defineField,
+  defineType,
+  SchemaValidationValue,
+} from 'sanity'
+import {
+  validateH3IsFirst,
+  validateHeadingOrder,
+  validateNoH2,
+} from '../../validations/portableTextValidations'
 
 export default defineType({
   name: 'newsSection',
@@ -36,6 +46,14 @@ export default defineType({
       name: 'body',
       type: 'body',
       title: 'Body',
+      validation: (Rule) => [
+        //* Validate if there is no h2 in the body of text Sections
+        validateNoH2(Rule) as SchemaValidationValue,
+        // * Validate if first heading is h3
+        validateH3IsFirst(Rule) as SchemaValidationValue,
+        // * Validate if headings are in order when descending
+        validateHeadingOrder(Rule) as SchemaValidationValue,
+      ],
     }),
 
     // * * * Load All Boolean * * *

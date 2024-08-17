@@ -1,3 +1,4 @@
+import { BodyFieldWithActions } from '@/sanity/components/fields/BodyFieldWithActions'
 import { ButtonsPTItem } from '@/sanity/components/inputs/ButttonsPTinput'
 import { BellIcon, BookIcon, CommentIcon } from '@sanity/icons'
 import { defineArrayMember, defineField, defineType } from 'sanity'
@@ -31,6 +32,9 @@ export default defineType({
   name: 'body',
   title: 'Body',
   type: 'array',
+  components: {
+    field: BodyFieldWithActions,
+  },
   validation: (rule) => [validateH2IsFirst(rule), validateHeadingOrder(rule)],
   of: [
     defineArrayMember({

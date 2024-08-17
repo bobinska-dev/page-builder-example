@@ -1,6 +1,11 @@
 import TextHeaderSectionPreview from '@/sanity/components/sections/previews/TextHeaderSectionPreview'
 import { TextIcon } from '@sanity/icons'
-import { defineField, defineType } from 'sanity'
+import { defineField, defineType, SchemaValidationValue } from 'sanity'
+import {
+  validateH3IsFirst,
+  validateHeadingOrder,
+  validateNoH2,
+} from '../../validations/portableTextValidations'
 
 export default defineType({
   name: 'textHeaderSection',
@@ -43,7 +48,15 @@ export default defineType({
       type: 'body',
       name: 'body',
       title: 'Body',
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) => [
+        Rule.required(),
+        //* Validate if there is no h2 in the body of text Sections
+        validateNoH2(Rule) as SchemaValidationValue,
+        // * Validate if first heading is h3
+        validateH3IsFirst(Rule) as SchemaValidationValue,
+        // * Validate if headings are in order when descending
+        validateHeadingOrder(Rule) as SchemaValidationValue,
+      ],
     }),
   ],
 })
