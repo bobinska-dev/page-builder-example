@@ -26,7 +26,7 @@ export const TableOfContents: ComponentType<TableOfContentsProps> = (props) => {
   } | null>(null)
 
   useEffect(() => {
-    const query = groq`*[_id == $documentId && _type == 'news'][0]{
+    const tableOfContentQuery = groq`*[_id == $documentId && _type == 'news'][0]{
       body[style != 'normal'] {
           _key, _type, style, "text": array::join(children[].text, ' ')
         },
@@ -36,7 +36,7 @@ export const TableOfContents: ComponentType<TableOfContentsProps> = (props) => {
 
     const params = { documentId: props.documentId }
     client
-      .fetch(query, params)
+      .fetch(tableOfContentQuery, params)
       .then((result) => {
         setContent(result)
       })

@@ -95,6 +95,7 @@ export default defineType({
       type: 'aiImage',
       description: 'Displayed on social cards and search engine results.',
       group: 'errorpage',
+      validation: (Rule) => Rule.assetRequired(),
     }),
     // * * * * Error Pages * * * *
     defineField({
@@ -102,12 +103,14 @@ export default defineType({
       title: '404 - Page not found',
       type: 'aiImage',
       group: 'errorpage',
+      validation: (Rule) => Rule.required().assetRequired(),
     }),
     defineField({
       name: 'serverError',
       title: '500 - Woops something went wrong',
       type: 'aiImage',
       group: 'errorpage',
+      validation: (Rule) => Rule.required().assetRequired(),
     }),
     // * * * * Logos * * * *
     defineField({

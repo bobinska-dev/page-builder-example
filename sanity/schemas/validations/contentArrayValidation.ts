@@ -25,6 +25,7 @@ type PageBuilderSection =
 // Use an intersection type to combine the union type with the additional properties
 type ContentArrayItem = PageBuilderSection & { _key: string }
 
+const headerTypes = ['imageHeaderSection', 'textHeaderSection']
 /** ### Page header Validation: Header on top
  *
  * Validation to ensure header sections are on top validation
@@ -36,8 +37,8 @@ export const headersAreOnTopValidation = (
   Rule: ArrayRule<(ContentArrayItem & { _key: string })[]>,
 ) =>
   Rule.custom((content) => {
-    const headers = (content || []).filter(
-      (item) => item._type === 'heroSection' || item._type === 'headerSection',
+    const headers = (content || []).filter((item) =>
+      headerTypes.includes(item._type!),
     )
     // header index
     const headerIndex = headers.map((header) => content?.indexOf(header))
@@ -64,8 +65,8 @@ export const onlyOneHeaderValidation = (
 ) =>
   Rule.custom((content) => {
     // get all headers in array
-    const headers = (content || []).filter(
-      (item) => item._type === 'heroSection' || item._type === 'headerSection',
+    const headers = (content || []).filter((item) =>
+      headerTypes.includes(item._type!),
     )
     // headerPaths for error message
     const headerPaths = headers.map((header) => [{ _key: header._key }])

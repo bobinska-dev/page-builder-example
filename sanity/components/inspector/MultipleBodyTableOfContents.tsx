@@ -1,6 +1,6 @@
 import { Page } from '@/sanity.types'
 import { apiVersion } from '@/sanity/lib/api'
-import { Stack } from '@sanity/ui'
+import { Card, Stack, Text } from '@sanity/ui'
 import groq from 'groq'
 import { ComponentType, useCallback, useEffect, useState } from 'react'
 import { Subscription } from 'rxjs'
@@ -9,10 +9,9 @@ import { useDocumentPane } from 'sanity/structure'
 import { TableOfContentsProps } from './TableOfContentsInspector'
 import ContentSection from './components/Section'
 
-const BODY_FRAGMENT = groq`body[style != 'normal'] {
-          _key, _type, style, "text": array::join(children[].text, ' ')
-        }
-        `
+const BODY_HEADING_FRAGMENT = groq`body[style != 'normal'] {
+  _key, _type, style, "text": array::join(children[].text, ' ')
+}`
 
 export const MultipleBodyTableOfContents: ComponentType<
   TableOfContentsProps
@@ -51,30 +50,30 @@ export const MultipleBodyTableOfContents: ComponentType<
           title,
           _key,
           _type,
-          ${BODY_FRAGMENT}
+          ${BODY_HEADING_FRAGMENT}
         },
         _type == "textSection" => {
           title,
           _key,
           _type,
-          ${BODY_FRAGMENT}
+          ${BODY_HEADING_FRAGMENT}
         },
         _type == 'accordionSection' => {
           'title':pt::text(title),
           _key,
-          ${BODY_FRAGMENT},
+          ${BODY_HEADING_FRAGMENT},
           _type,
           accordion[]{
             title,
             _key,
-            ${BODY_FRAGMENT}
+            ${BODY_HEADING_FRAGMENT}
           }
         },
         _type == 'ctaBannerSection'=> {
           'title':pt::text(title),
           _key,
           _type,
-          ${BODY_FRAGMENT}
+          ${BODY_HEADING_FRAGMENT}
         },
         _type == 'furtherLinkSection' => {
           'title':pt::text(title),
@@ -89,13 +88,13 @@ export const MultipleBodyTableOfContents: ComponentType<
           'title':pt::text(title),
           _key,
           _type,
-          ${BODY_FRAGMENT}
+          ${BODY_HEADING_FRAGMENT}
         },
         _type == 'newsSection' => {
           'title':pt::text(title),
           _key,
           _type,
-          ${BODY_FRAGMENT}
+          ${BODY_HEADING_FRAGMENT}
         },
       } // end of content
     }`
@@ -135,19 +134,27 @@ export const MultipleBodyTableOfContents: ComponentType<
   return (
     <Stack space={4} paddingY={4} paddingX={3} style={{ overflowY: 'scroll' }}>
       <Stack space={3} paddingX={3}>
-        {documentValue?.content.map((section) => {
-          const schemaTypeTitle =
-            (section._type && schema.get(section._type)?.title) || ''
+        {!documentValue?.content && (
+          <Card padding={3}>
+            <Text style={{ fontStyle: 'italic' }} size={1} muted>
+              No Content yet...
+            </Text>
+          </Card>
+        )}
+        {documentValue?.content &&
+          documentValue?.content?.map((section) => {
+            const schemaTypeTitle =
+              (section._type && schema.get(section._type)?.title) || ''
 
-          return (
-            <ContentSection
-              {...section}
-              schemaTypeTitle={schemaTypeTitle}
-              handleOpen={handleOpen}
-              schema={schema}
-            />
-          )
-        })}
+            return (
+              <ContentSection
+                {...section}
+                schemaTypeTitle={schemaTypeTitle}
+                handleOpen={handleOpen}
+                schema={schema}
+              />
+            )
+          })}
       </Stack>
     </Stack>
   )

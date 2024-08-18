@@ -10,6 +10,7 @@ export default defineType({
   name: 'menu',
   title: 'Menu',
   type: 'array',
+  validation: (Rule) => Rule.required().min(2),
   of: [
     defineArrayMember({
       type: 'object',

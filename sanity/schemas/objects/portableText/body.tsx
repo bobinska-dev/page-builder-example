@@ -45,7 +45,7 @@ export default defineType({
           // Link annotation to external and internal pages
           link,
           // Publication annotation
-          {
+          defineField({
             name: 'publication',
             title: 'Publication Reference',
             type: 'reference',
@@ -55,9 +55,9 @@ export default defineType({
             components: {
               annotation: PublicationAnnotation,
             },
-          },
+          }),
           // News Annotation
-          {
+          defineField({
             name: 'news',
             title: 'News Reference',
             type: 'reference',
@@ -67,7 +67,7 @@ export default defineType({
               annotation: NewsAnnotation,
             },
             to: { type: 'news' },
-          },
+          }),
         ],
         // decorators: [],
       },
@@ -138,5 +138,6 @@ export default defineType({
     }),
 
     // * PUBLICATION BLOCK
+    // TODO: Decide whether to add a publication block or not
   ],
 })
