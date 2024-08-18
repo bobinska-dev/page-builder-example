@@ -1,4 +1,4 @@
-import type { Button as ButtonType } from '@/types'
+import type { PTEButtonType as ButtonType } from '@/types'
 import { LaunchIcon } from '@sanity/icons'
 import { Button, Card, Flex, Text, Tooltip } from '@sanity/ui'
 import { ComponentType, useCallback } from 'react'

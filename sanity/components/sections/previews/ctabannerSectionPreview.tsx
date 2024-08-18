@@ -30,6 +30,7 @@ const CtaSectionPreview: ComponentType<CtaPreviewProps> = (props) => {
   // * All buttons
   const allButtons = body
     ?.filter((item) => item._type === 'buttons')
+    //@ts-ignore
     .map((block) => block.buttons)
     .flat()
 
@@ -37,14 +38,14 @@ const CtaSectionPreview: ComponentType<CtaPreviewProps> = (props) => {
   useEffect(() => {
     if (allButtons) {
       // get all internal links with type
-      allButtons?.some((button) => button.linkInternal?._ref) &&
+      allButtons?.some((button) => button?.linkInternal?._ref) &&
         client
           .fetch(
             `*[_id in $ids]{ title, _id, _type }`,
             {
               ids: allButtons
-                ?.filter((button) => button.type === 'internal')
-                .map((button) => button.linkInternal?._ref),
+                ?.filter((button) => button?.type === 'internal')
+                .map((button) => button?.linkInternal?._ref),
             },
             { tag: 'internalLinkButtons' },
           )
@@ -54,14 +55,14 @@ const CtaSectionPreview: ComponentType<CtaPreviewProps> = (props) => {
           .catch((err) => console.error(err))
 
       // get all file buttons
-      allButtons?.some((button) => button.file?.asset?._ref) &&
+      allButtons?.some((button) => button?.file?.asset?._ref) &&
         client
           .fetch(
             `*[_id in $ids]{ title, _id }`,
             {
               ids: allButtons
-                ?.filter((button) => button.type === 'file')
-                .map((button) => button.file?.asset?._ref),
+                ?.filter((button) => button?.type === 'file')
+                .map((button) => button?.file?.asset?._ref),
             },
             { tag: 'fileButtons' },
           )
@@ -108,12 +109,12 @@ const CtaSectionPreview: ComponentType<CtaPreviewProps> = (props) => {
       <Flex gap={2}>
         {allButtons.length !== 0 &&
           allButtons.map((button) => (
-            <Card key={button._key} padding={3} radius={2} shadow={1}>
+            <Card key={button?._key} padding={3} radius={2} shadow={1}>
               <Tooltip
                 content={
                   <Box padding={2}>
                     <Text align="center" size={0} muted>
-                      {tooltipText(button)}
+                      {tooltipText(button!)}
                     </Text>
                   </Box>
                 }
@@ -122,7 +123,7 @@ const CtaSectionPreview: ComponentType<CtaPreviewProps> = (props) => {
                 portal
               >
                 <Text align="center" size={0} muted>
-                  {button.title}
+                  {button?.title}
                 </Text>
               </Tooltip>
             </Card>
