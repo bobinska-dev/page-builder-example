@@ -8,7 +8,6 @@ import { Suspense } from 'react'
 
 import { Footer } from '@/components/global/Footer'
 import { Navbar } from '@/components/global/Navbar'
-import IntroTemplate from '@/intro-template'
 import { urlForOpenGraphImage } from '@/sanity/lib/utils'
 import { loadHomePage, loadSettings } from '@/sanity/loader/loadQuery'
 
@@ -30,8 +29,8 @@ export async function generateMetadata(): Promise<Metadata> {
           default: homePage.title || 'Personal website',
         }
       : undefined,
-    description: homePage?.overview
-      ? toPlainText(homePage.overview)
+    description: homePage?.description
+      ? toPlainText(homePage.description)
       : undefined,
     openGraph: {
       images: ogImage ? [ogImage] : [],
@@ -54,15 +53,15 @@ export default async function IndexRoute({
         <Suspense>
           <Navbar />
         </Suspense>
-        <div className="mt-20 flex-grow px-4 md:px-16 lg:px-32">
+        <div className="mt-1 flex-grow px-4 md:px-16 lg:px-32">
           <Suspense>{children}</Suspense>
         </div>
         <Suspense>
           <Footer />
         </Suspense>
-        <Suspense>
+        {/*         <Suspense>
           <IntroTemplate />
-        </Suspense>
+        </Suspense> */}
       </div>
       {draftMode().isEnabled && <LiveVisualEditing />}
     </>

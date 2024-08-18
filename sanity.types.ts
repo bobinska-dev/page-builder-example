@@ -1296,7 +1296,7 @@ export type SiteSettings = {
     _weak?: boolean
     [internalGroqTypeReferenceTo]?: 'page'
   }
-  menu?: Menu
+  menu: Menu
   quickLinks?: Array<
     | {
         _ref: string
@@ -1312,7 +1312,7 @@ export type SiteSettings = {
       }
   >
   ogImage?: {
-    asset?: {
+    asset: {
       _ref: string
       _type: 'reference'
       _weak?: boolean
@@ -1324,8 +1324,8 @@ export type SiteSettings = {
     promptForImage?: string
     _type: 'aiImage'
   }
-  pageNotFound?: {
-    asset?: {
+  pageNotFound: {
+    asset: {
       _ref: string
       _type: 'reference'
       _weak?: boolean
@@ -1337,8 +1337,8 @@ export type SiteSettings = {
     promptForImage?: string
     _type: 'aiImage'
   }
-  serverError?: {
-    asset?: {
+  serverError: {
+    asset: {
       _ref: string
       _type: 'reference'
       _weak?: boolean
@@ -1683,25 +1683,6159 @@ export type AllSanitySchemaTypes =
   | PtString
 export declare const internalGroqTypeReferenceTo: unique symbol
 // Source: ./sanity/lib/queries.ts
+// Variable: IMAGE_FRAGMENT
+// Query: image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}
+export type IMAGE_FRAGMENTResult = never
+// Variable: BODY_FRAGMENT
+// Query: body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}
+export type BODY_FRAGMENTResult = never
+// Variable: CONTENT_FRAGMENT
+// Query: content[]{  ...,  _type == 'imageHeaderSection' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},  },  _type == 'textHeaderSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}  },  _type == 'textSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}  },  _type == 'accordionSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},    accordion[]{      ...,      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}    }  },  _type == 'ctaBannerSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},  },  _type == 'furtherLinkSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},    links[]{      ...,      defined(internalLink)=> {        ...internalLink->{          "slug": slug.current,          "docType": _type        }      },    }  },  _type == 'newsSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},    defined(news) && !loadAll => {news[]->{      ...,      image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},      'slug': slug.current    }},    loadAll => {'news': *[_type == 'news']{      ...,      image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},      'slug': slug.current    }},  },  _type == 'testimonialSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},  },}
+export type CONTENT_FRAGMENTResult = never
+// Variable: PAGE_FRAGMENT
+// Query: {    _id,    title,    description,    "slug": slug.current,    content[]{  ...,  _type == 'imageHeaderSection' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},  },  _type == 'textHeaderSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}  },  _type == 'textSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}  },  _type == 'accordionSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},    accordion[]{      ...,      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}    }  },  _type == 'ctaBannerSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},  },  _type == 'furtherLinkSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},    links[]{      ...,      defined(internalLink)=> {        ...internalLink->{          "slug": slug.current,          "docType": _type        }      },    }  },  _type == 'newsSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},    defined(news) && !loadAll => {news[]->{      ...,      image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},      'slug': slug.current    }},    loadAll => {'news': *[_type == 'news']{      ...,      image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},      'slug': slug.current    }},  },  _type == 'testimonialSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},  },},    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  }
+export type PAGE_FRAGMENTResult = {
+  _id: never
+  title: never
+  description: never
+  slug: never
+  content: never
+  image: never
+}
 // Variable: homePageQuery
-// Query:   *[_type == "home"][0]{    _id,    overview,    title,  }
-export type HomePageQueryResult = null
+// Query:   *[_type == "siteSettings"][0].homePage->{    _id,    title,    description,    "slug": slug.current,    content[]{  ...,  _type == 'imageHeaderSection' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},  },  _type == 'textHeaderSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}  },  _type == 'textSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}  },  _type == 'accordionSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},    accordion[]{      ...,      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}    }  },  _type == 'ctaBannerSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},  },  _type == 'furtherLinkSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},    links[]{      ...,      defined(internalLink)=> {        ...internalLink->{          "slug": slug.current,          "docType": _type        }      },    }  },  _type == 'newsSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},    defined(news) && !loadAll => {news[]->{      ...,      image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},      'slug': slug.current    }},    loadAll => {'news': *[_type == 'news']{      ...,      image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},      'slug': slug.current    }},  },  _type == 'testimonialSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},  },},    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  }
+export type HomePageQueryResult = {
+  _id: string
+  title: string
+  description: Overview
+  slug: string
+  content: Array<
+    | {
+        _key: string
+        _type: 'accordionSection'
+        title: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'normal'
+          listItem?: never
+          markDefs?: null
+          level?: number
+          _type: 'block'
+          _key: string
+        }>
+        body: Array<
+          | {
+              _ref: string
+              _type: 'reference'
+              _weak?: boolean
+              _key: string
+              markDefs: null
+            }
+          | {
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?:
+                | 'blockquote'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+                | 'small'
+              listItem?: 'bullet' | 'number'
+              markDefs: Array<
+                | {}
+                | {
+                    type: 'external' | 'internal'
+                    href:
+                      | {
+                          slug: string
+                          _type: 'page'
+                        }
+                      | null
+                      | string
+                  }
+              > | null
+              level?: number
+              _type: 'block'
+              _key: string
+            }
+          | {
+              buttons: Array<
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+              > | null
+              _type: 'buttons'
+              _key: string
+              markDefs: null
+            }
+          | {
+              asset?: {
+                _ref: string
+                _type: 'reference'
+                _weak?: boolean
+                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+              }
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              altText: string
+              promptForImage?: string
+              _type: 'imageBlock'
+              _key: string
+              markDefs: null
+              image: null
+            }
+        > | null
+        accordion: Array<{
+          _key: string
+          _type: 'accordionItem'
+          title: string
+          body: Array<{
+            children?: Array<{
+              marks?: Array<string>
+              text?: string
+              _type: 'span'
+              _key: string
+            }>
+            style?:
+              | 'blockquote'
+              | 'h3'
+              | 'h4'
+              | 'h5'
+              | 'h6'
+              | 'normal'
+              | 'small'
+            listItem?: 'bullet' | 'number'
+            markDefs: Array<{
+              type: 'external' | 'internal'
+              href:
+                | {
+                    slug: string
+                    _type: 'page'
+                  }
+                | null
+                | string
+            }> | null
+            level?: number
+            _type: 'block'
+            _key: string
+          }>
+        }>
+      }
+    | {
+        _key: string
+        _type: 'ctaBannerSection'
+        title: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'normal'
+          listItem?: never
+          markDefs?: null
+          level?: number
+          _type: 'block'
+          _key: string
+        }>
+        body: Array<
+          | {
+              _ref: string
+              _type: 'reference'
+              _weak?: boolean
+              _key: string
+              markDefs: null
+            }
+          | {
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?:
+                | 'blockquote'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+                | 'small'
+              listItem?: 'bullet' | 'number'
+              markDefs: Array<
+                | {}
+                | {
+                    type: 'external' | 'internal'
+                    href:
+                      | {
+                          slug: string
+                          _type: 'page'
+                        }
+                      | null
+                      | string
+                  }
+              > | null
+              level?: number
+              _type: 'block'
+              _key: string
+            }
+          | {
+              buttons: Array<
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+              > | null
+              _type: 'buttons'
+              _key: string
+              markDefs: null
+            }
+          | {
+              asset?: {
+                _ref: string
+                _type: 'reference'
+                _weak?: boolean
+                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+              }
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              altText: string
+              promptForImage?: string
+              _type: 'imageBlock'
+              _key: string
+              markDefs: null
+              image: null
+            }
+        >
+      }
+    | {
+        _key: string
+        _type: 'furtherLinkSection'
+        title: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'normal'
+          listItem?: never
+          markDefs?: null
+          level?: number
+          _type: 'block'
+          _key: string
+        }>
+        body: Array<
+          | {
+              _ref: string
+              _type: 'reference'
+              _weak?: boolean
+              _key: string
+              markDefs: null
+            }
+          | {
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?:
+                | 'blockquote'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+                | 'small'
+              listItem?: 'bullet' | 'number'
+              markDefs: Array<
+                | {}
+                | {
+                    type: 'external' | 'internal'
+                    href:
+                      | {
+                          slug: string
+                          _type: 'page'
+                        }
+                      | null
+                      | string
+                  }
+              > | null
+              level?: number
+              _type: 'block'
+              _key: string
+            }
+          | {
+              buttons: Array<
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+              > | null
+              _type: 'buttons'
+              _key: string
+              markDefs: null
+            }
+          | {
+              asset?: {
+                _ref: string
+                _type: 'reference'
+                _weak?: boolean
+                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+              }
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              altText: string
+              promptForImage?: string
+              _type: 'imageBlock'
+              _key: string
+              markDefs: null
+              image: null
+            }
+        > | null
+        links: Array<
+          | {
+              _key: string
+              _type: 'linkCard'
+              title: Overview
+              description: Overview
+              url?: string
+              internalLink?:
+                | {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    [internalGroqTypeReferenceTo]?: 'news'
+                  }
+                | {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    [internalGroqTypeReferenceTo]?: 'page'
+                  }
+              slug: string
+              docType: 'news'
+            }
+          | {
+              _key: string
+              _type: 'linkCard'
+              title: Overview
+              description: Overview
+              url?: string
+              internalLink?:
+                | {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    [internalGroqTypeReferenceTo]?: 'news'
+                  }
+                | {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    [internalGroqTypeReferenceTo]?: 'page'
+                  }
+              slug: string
+              docType: 'page'
+            }
+          | {
+              _key: string
+              _type: 'linkCard'
+              title: Overview
+              description: Overview
+              url?: string
+              internalLink?:
+                | {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    [internalGroqTypeReferenceTo]?: 'news'
+                  }
+                | {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    [internalGroqTypeReferenceTo]?: 'page'
+                  }
+            }
+        >
+      }
+    | {
+        _key: string
+        _type: 'imageHeaderSection'
+        title: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'normal'
+          listItem?: never
+          markDefs?: null
+          level?: number
+          _type: 'block'
+          _key: string
+        }>
+        subtitle?: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'normal'
+          listItem?: never
+          markDefs?: null
+          level?: number
+          _type: 'block'
+          _key: string
+        }>
+        image: {
+          asset: {
+            _ref: string
+            _type: 'reference'
+            _weak?: boolean
+            [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+          }
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          altText:
+            | string
+            | 'Unfortunately, we forgot to add alt text to this image. We will do better next time!'
+            | null
+          promptForImage?: string
+          _type: 'aiImage'
+          blurHashURL: string | null
+        }
+      }
+    | {
+        _key: string
+        _type: 'newsSection'
+        title: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'normal'
+          listItem?: never
+          markDefs?: null
+          level?: number
+          _type: 'block'
+          _key: string
+        }>
+        body: Array<
+          | {
+              _ref: string
+              _type: 'reference'
+              _weak?: boolean
+              _key: string
+              markDefs: null
+            }
+          | {
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?:
+                | 'blockquote'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+                | 'small'
+              listItem?: 'bullet' | 'number'
+              markDefs: Array<
+                | {}
+                | {
+                    type: 'external' | 'internal'
+                    href:
+                      | {
+                          slug: string
+                          _type: 'page'
+                        }
+                      | null
+                      | string
+                  }
+              > | null
+              level?: number
+              _type: 'block'
+              _key: string
+            }
+          | {
+              buttons: Array<
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+              > | null
+              _type: 'buttons'
+              _key: string
+              markDefs: null
+            }
+          | {
+              asset?: {
+                _ref: string
+                _type: 'reference'
+                _weak?: boolean
+                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+              }
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              altText: string
+              promptForImage?: string
+              _type: 'imageBlock'
+              _key: string
+              markDefs: null
+              image: null
+            }
+        > | null
+        loadAll?: boolean
+        news: Array<{
+          _id: string
+          _type: 'news'
+          _createdAt: string
+          _updatedAt: string
+          _rev: string
+          title: string
+          subtitle: string
+          body: Array<
+            | {
+                _ref: string
+                _type: 'reference'
+                _weak?: boolean
+                _key: string
+                markDefs: null
+              }
+            | {
+                children?: Array<{
+                  marks?: Array<string>
+                  text?: string
+                  _type: 'span'
+                  _key: string
+                }>
+                style?:
+                  | 'blockquote'
+                  | 'h2'
+                  | 'h3'
+                  | 'h4'
+                  | 'h5'
+                  | 'h6'
+                  | 'normal'
+                  | 'small'
+                listItem?: 'bullet' | 'number'
+                markDefs: Array<
+                  | {}
+                  | {
+                      type: 'external' | 'internal'
+                      href:
+                        | {
+                            slug: string
+                            _type: 'page'
+                          }
+                        | null
+                        | string
+                    }
+                > | null
+                level?: number
+                _type: 'block'
+                _key: string
+              }
+            | {
+                buttons: Array<
+                  | {
+                      _key: string
+                      title: string
+                      type: 'external' | 'file' | 'functional' | 'internal'
+                      _type: 'button'
+                      href: string | null
+                      slug: string
+                      docType: 'news'
+                      linkExternal?: string
+                      linkInternal?:
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'news'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'page'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'publication'
+                          }
+                      file?: {
+                        asset?: {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                        }
+                        _type: 'file'
+                      }
+                      functional?: 'contact' | 'subscribe'
+                    }
+                  | {
+                      _key: string
+                      title: string
+                      type: 'external' | 'file' | 'functional' | 'internal'
+                      _type: 'button'
+                      href: string | null
+                      slug: string
+                      docType: 'page'
+                      linkExternal?: string
+                      linkInternal?:
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'news'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'page'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'publication'
+                          }
+                      file?: {
+                        asset?: {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                        }
+                        _type: 'file'
+                      }
+                      functional?: 'contact' | 'subscribe'
+                    }
+                  | {
+                      _key: string
+                      title: string
+                      type: 'external' | 'file' | 'functional' | 'internal'
+                      _type: 'button'
+                      href: string | null
+                      slug: null
+                      docType: 'publication'
+                      linkExternal?: string
+                      linkInternal?:
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'news'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'page'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'publication'
+                          }
+                      file?: {
+                        asset?: {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                        }
+                        _type: 'file'
+                      }
+                      functional?: 'contact' | 'subscribe'
+                    }
+                  | {
+                      _key: string
+                      title: string
+                      type: 'external' | 'file' | 'functional' | 'internal'
+                      _type: 'button'
+                      href: string | null
+                      linkExternal?: string
+                      linkInternal?:
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'news'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'page'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'publication'
+                          }
+                      file?: {
+                        asset?: {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                        }
+                        _type: 'file'
+                      }
+                      functional?: 'contact' | 'subscribe'
+                    }
+                > | null
+                _type: 'buttons'
+                _key: string
+                markDefs: null
+              }
+            | {
+                asset?: {
+                  _ref: string
+                  _type: 'reference'
+                  _weak?: boolean
+                  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+                }
+                hotspot?: SanityImageHotspot
+                crop?: SanityImageCrop
+                altText: string
+                promptForImage?: string
+                _type: 'imageBlock'
+                _key: string
+                markDefs: null
+                image: null
+              }
+          > | null
+          slug: string
+          image: {
+            asset: {
+              _ref: string
+              _type: 'reference'
+              _weak?: boolean
+              [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+            }
+            hotspot?: SanityImageHotspot
+            crop?: SanityImageCrop
+            altText:
+              | string
+              | 'Unfortunately, we forgot to add alt text to this image. We will do better next time!'
+              | null
+            promptForImage?: string
+            _type: 'aiImage'
+            blurHashURL: string | null
+          }
+          isInMenu?: boolean
+          firstPublishedAt?: string
+        }>
+      }
+    | {
+        _key: string
+        _type: 'newsSection'
+        title: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'normal'
+          listItem?: never
+          markDefs?: null
+          level?: number
+          _type: 'block'
+          _key: string
+        }>
+        body: Array<
+          | {
+              _ref: string
+              _type: 'reference'
+              _weak?: boolean
+              _key: string
+              markDefs: null
+            }
+          | {
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?:
+                | 'blockquote'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+                | 'small'
+              listItem?: 'bullet' | 'number'
+              markDefs: Array<
+                | {}
+                | {
+                    type: 'external' | 'internal'
+                    href:
+                      | {
+                          slug: string
+                          _type: 'page'
+                        }
+                      | null
+                      | string
+                  }
+              > | null
+              level?: number
+              _type: 'block'
+              _key: string
+            }
+          | {
+              buttons: Array<
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+              > | null
+              _type: 'buttons'
+              _key: string
+              markDefs: null
+            }
+          | {
+              asset?: {
+                _ref: string
+                _type: 'reference'
+                _weak?: boolean
+                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+              }
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              altText: string
+              promptForImage?: string
+              _type: 'imageBlock'
+              _key: string
+              markDefs: null
+              image: null
+            }
+        > | null
+        loadAll?: boolean
+        news?: Array<{
+          _ref: string
+          _type: 'reference'
+          _weak?: boolean
+          _key: string
+          [internalGroqTypeReferenceTo]?: 'news'
+        }>
+      }
+    | {
+        _key: string
+        _type: 'newsSection'
+        title: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'normal'
+          listItem?: never
+          markDefs?: null
+          level?: number
+          _type: 'block'
+          _key: string
+        }>
+        body: Array<
+          | {
+              _ref: string
+              _type: 'reference'
+              _weak?: boolean
+              _key: string
+              markDefs: null
+            }
+          | {
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?:
+                | 'blockquote'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+                | 'small'
+              listItem?: 'bullet' | 'number'
+              markDefs: Array<
+                | {}
+                | {
+                    type: 'external' | 'internal'
+                    href:
+                      | {
+                          slug: string
+                          _type: 'page'
+                        }
+                      | null
+                      | string
+                  }
+              > | null
+              level?: number
+              _type: 'block'
+              _key: string
+            }
+          | {
+              buttons: Array<
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+              > | null
+              _type: 'buttons'
+              _key: string
+              markDefs: null
+            }
+          | {
+              asset?: {
+                _ref: string
+                _type: 'reference'
+                _weak?: boolean
+                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+              }
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              altText: string
+              promptForImage?: string
+              _type: 'imageBlock'
+              _key: string
+              markDefs: null
+              image: null
+            }
+        > | null
+        loadAll?: boolean
+        news: Array<{
+          _id: string
+          _type: 'news'
+          _createdAt: string
+          _updatedAt: string
+          _rev: string
+          title: string
+          subtitle: string
+          body: Array<
+            | {
+                _ref: string
+                _type: 'reference'
+                _weak?: boolean
+                _key: string
+                markDefs: null
+              }
+            | {
+                children?: Array<{
+                  marks?: Array<string>
+                  text?: string
+                  _type: 'span'
+                  _key: string
+                }>
+                style?:
+                  | 'blockquote'
+                  | 'h2'
+                  | 'h3'
+                  | 'h4'
+                  | 'h5'
+                  | 'h6'
+                  | 'normal'
+                  | 'small'
+                listItem?: 'bullet' | 'number'
+                markDefs: Array<
+                  | {}
+                  | {
+                      type: 'external' | 'internal'
+                      href:
+                        | {
+                            slug: string
+                            _type: 'page'
+                          }
+                        | null
+                        | string
+                    }
+                > | null
+                level?: number
+                _type: 'block'
+                _key: string
+              }
+            | {
+                buttons: Array<
+                  | {
+                      _key: string
+                      title: string
+                      type: 'external' | 'file' | 'functional' | 'internal'
+                      _type: 'button'
+                      href: string | null
+                      slug: string
+                      docType: 'news'
+                      linkExternal?: string
+                      linkInternal?:
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'news'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'page'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'publication'
+                          }
+                      file?: {
+                        asset?: {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                        }
+                        _type: 'file'
+                      }
+                      functional?: 'contact' | 'subscribe'
+                    }
+                  | {
+                      _key: string
+                      title: string
+                      type: 'external' | 'file' | 'functional' | 'internal'
+                      _type: 'button'
+                      href: string | null
+                      slug: string
+                      docType: 'page'
+                      linkExternal?: string
+                      linkInternal?:
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'news'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'page'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'publication'
+                          }
+                      file?: {
+                        asset?: {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                        }
+                        _type: 'file'
+                      }
+                      functional?: 'contact' | 'subscribe'
+                    }
+                  | {
+                      _key: string
+                      title: string
+                      type: 'external' | 'file' | 'functional' | 'internal'
+                      _type: 'button'
+                      href: string | null
+                      slug: null
+                      docType: 'publication'
+                      linkExternal?: string
+                      linkInternal?:
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'news'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'page'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'publication'
+                          }
+                      file?: {
+                        asset?: {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                        }
+                        _type: 'file'
+                      }
+                      functional?: 'contact' | 'subscribe'
+                    }
+                  | {
+                      _key: string
+                      title: string
+                      type: 'external' | 'file' | 'functional' | 'internal'
+                      _type: 'button'
+                      href: string | null
+                      linkExternal?: string
+                      linkInternal?:
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'news'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'page'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'publication'
+                          }
+                      file?: {
+                        asset?: {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                        }
+                        _type: 'file'
+                      }
+                      functional?: 'contact' | 'subscribe'
+                    }
+                > | null
+                _type: 'buttons'
+                _key: string
+                markDefs: null
+              }
+            | {
+                asset?: {
+                  _ref: string
+                  _type: 'reference'
+                  _weak?: boolean
+                  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+                }
+                hotspot?: SanityImageHotspot
+                crop?: SanityImageCrop
+                altText: string
+                promptForImage?: string
+                _type: 'imageBlock'
+                _key: string
+                markDefs: null
+                image: null
+              }
+          > | null
+          slug: string
+          image: {
+            asset: {
+              _ref: string
+              _type: 'reference'
+              _weak?: boolean
+              [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+            }
+            hotspot?: SanityImageHotspot
+            crop?: SanityImageCrop
+            altText:
+              | string
+              | 'Unfortunately, we forgot to add alt text to this image. We will do better next time!'
+              | null
+            promptForImage?: string
+            _type: 'aiImage'
+            blurHashURL: string | null
+          }
+          isInMenu?: boolean
+          firstPublishedAt?: string
+        }> | null
+      }
+    | {
+        _key: string
+        _type: 'testimonialSection'
+        title: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'normal'
+          listItem?: never
+          markDefs?: null
+          level?: number
+          _type: 'block'
+          _key: string
+        }>
+        body: Array<
+          | {
+              _ref: string
+              _type: 'reference'
+              _weak?: boolean
+              _key: string
+              markDefs: null
+            }
+          | {
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?:
+                | 'blockquote'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+                | 'small'
+              listItem?: 'bullet' | 'number'
+              markDefs: Array<
+                | {}
+                | {
+                    type: 'external' | 'internal'
+                    href:
+                      | {
+                          slug: string
+                          _type: 'page'
+                        }
+                      | null
+                      | string
+                  }
+              > | null
+              level?: number
+              _type: 'block'
+              _key: string
+            }
+          | {
+              buttons: Array<
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+              > | null
+              _type: 'buttons'
+              _key: string
+              markDefs: null
+            }
+          | {
+              asset?: {
+                _ref: string
+                _type: 'reference'
+                _weak?: boolean
+                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+              }
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              altText: string
+              promptForImage?: string
+              _type: 'imageBlock'
+              _key: string
+              markDefs: null
+              image: null
+            }
+        > | null
+        loadTags?: Array<string>
+        testimonials?: Array<{
+          _ref: string
+          _type: 'reference'
+          _weak?: boolean
+          _key: string
+          [internalGroqTypeReferenceTo]?: 'testimonial'
+        }>
+      }
+    | {
+        _key: string
+        _type: 'textHeaderSection'
+        title: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'normal'
+          listItem?: never
+          markDefs?: null
+          level?: number
+          _type: 'block'
+          _key: string
+        }>
+        subtitle?: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'normal'
+          listItem?: never
+          markDefs?: null
+          level?: number
+          _type: 'block'
+          _key: string
+        }>
+        body: Array<
+          | {
+              _ref: string
+              _type: 'reference'
+              _weak?: boolean
+              _key: string
+              markDefs: null
+            }
+          | {
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?:
+                | 'blockquote'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+                | 'small'
+              listItem?: 'bullet' | 'number'
+              markDefs: Array<
+                | {}
+                | {
+                    type: 'external' | 'internal'
+                    href:
+                      | {
+                          slug: string
+                          _type: 'page'
+                        }
+                      | null
+                      | string
+                  }
+              > | null
+              level?: number
+              _type: 'block'
+              _key: string
+            }
+          | {
+              buttons: Array<
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+              > | null
+              _type: 'buttons'
+              _key: string
+              markDefs: null
+            }
+          | {
+              asset?: {
+                _ref: string
+                _type: 'reference'
+                _weak?: boolean
+                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+              }
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              altText: string
+              promptForImage?: string
+              _type: 'imageBlock'
+              _key: string
+              markDefs: null
+              image: null
+            }
+        >
+      }
+    | {
+        _key: string
+        _type: 'textSection'
+        title: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'normal'
+          listItem?: never
+          markDefs?: null
+          level?: number
+          _type: 'block'
+          _key: string
+        }>
+        subtitle?: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'normal'
+          listItem?: never
+          markDefs?: null
+          level?: number
+          _type: 'block'
+          _key: string
+        }>
+        body: Array<
+          | {
+              _ref: string
+              _type: 'reference'
+              _weak?: boolean
+              _key: string
+              markDefs: null
+            }
+          | {
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?:
+                | 'blockquote'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+                | 'small'
+              listItem?: 'bullet' | 'number'
+              markDefs: Array<
+                | {}
+                | {
+                    type: 'external' | 'internal'
+                    href:
+                      | {
+                          slug: string
+                          _type: 'page'
+                        }
+                      | null
+                      | string
+                  }
+              > | null
+              level?: number
+              _type: 'block'
+              _key: string
+            }
+          | {
+              buttons: Array<
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+              > | null
+              _type: 'buttons'
+              _key: string
+              markDefs: null
+            }
+          | {
+              asset?: {
+                _ref: string
+                _type: 'reference'
+                _weak?: boolean
+                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+              }
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              altText: string
+              promptForImage?: string
+              _type: 'imageBlock'
+              _key: string
+              markDefs: null
+              image: null
+            }
+        >
+      }
+  >
+  image: {
+    asset: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    altText:
+      | string
+      | 'Unfortunately, we forgot to add alt text to this image. We will do better next time!'
+      | null
+    promptForImage?: string
+    _type: 'aiImage'
+    blurHashURL: string | null
+  }
+} | null
 // Variable: pagesBySlugQuery
-// Query:   *[_type == "page" && slug.current == $slug][0] {    _id,    body,    overview,    title,    "slug": slug.current,  }
+// Query:   *[_type == "page" && slug.current == $slug][0]{    _id,    title,    description,    "slug": slug.current,    content[]{  ...,  _type == 'imageHeaderSection' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},  },  _type == 'textHeaderSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}  },  _type == 'textSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}  },  _type == 'accordionSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},    accordion[]{      ...,      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}    }  },  _type == 'ctaBannerSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},  },  _type == 'furtherLinkSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},    links[]{      ...,      defined(internalLink)=> {        ...internalLink->{          "slug": slug.current,          "docType": _type        }      },    }  },  _type == 'newsSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},    defined(news) && !loadAll => {news[]->{      ...,      image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},      'slug': slug.current    }},    loadAll => {'news': *[_type == 'news']{      ...,      image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},      'slug': slug.current    }},  },  _type == 'testimonialSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},  },},    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  }
 export type PagesBySlugQueryResult = {
   _id: string
-  body: null
-  overview: null
   title: string
+  description: Overview
   slug: string
+  content: Array<
+    | {
+        _key: string
+        _type: 'accordionSection'
+        title: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'normal'
+          listItem?: never
+          markDefs?: null
+          level?: number
+          _type: 'block'
+          _key: string
+        }>
+        body: Array<
+          | {
+              _ref: string
+              _type: 'reference'
+              _weak?: boolean
+              _key: string
+              markDefs: null
+            }
+          | {
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?:
+                | 'blockquote'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+                | 'small'
+              listItem?: 'bullet' | 'number'
+              markDefs: Array<
+                | {}
+                | {
+                    type: 'external' | 'internal'
+                    href:
+                      | {
+                          slug: string
+                          _type: 'page'
+                        }
+                      | null
+                      | string
+                  }
+              > | null
+              level?: number
+              _type: 'block'
+              _key: string
+            }
+          | {
+              buttons: Array<
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+              > | null
+              _type: 'buttons'
+              _key: string
+              markDefs: null
+            }
+          | {
+              asset?: {
+                _ref: string
+                _type: 'reference'
+                _weak?: boolean
+                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+              }
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              altText: string
+              promptForImage?: string
+              _type: 'imageBlock'
+              _key: string
+              markDefs: null
+              image: null
+            }
+        > | null
+        accordion: Array<{
+          _key: string
+          _type: 'accordionItem'
+          title: string
+          body: Array<{
+            children?: Array<{
+              marks?: Array<string>
+              text?: string
+              _type: 'span'
+              _key: string
+            }>
+            style?:
+              | 'blockquote'
+              | 'h3'
+              | 'h4'
+              | 'h5'
+              | 'h6'
+              | 'normal'
+              | 'small'
+            listItem?: 'bullet' | 'number'
+            markDefs: Array<{
+              type: 'external' | 'internal'
+              href:
+                | {
+                    slug: string
+                    _type: 'page'
+                  }
+                | null
+                | string
+            }> | null
+            level?: number
+            _type: 'block'
+            _key: string
+          }>
+        }>
+      }
+    | {
+        _key: string
+        _type: 'ctaBannerSection'
+        title: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'normal'
+          listItem?: never
+          markDefs?: null
+          level?: number
+          _type: 'block'
+          _key: string
+        }>
+        body: Array<
+          | {
+              _ref: string
+              _type: 'reference'
+              _weak?: boolean
+              _key: string
+              markDefs: null
+            }
+          | {
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?:
+                | 'blockquote'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+                | 'small'
+              listItem?: 'bullet' | 'number'
+              markDefs: Array<
+                | {}
+                | {
+                    type: 'external' | 'internal'
+                    href:
+                      | {
+                          slug: string
+                          _type: 'page'
+                        }
+                      | null
+                      | string
+                  }
+              > | null
+              level?: number
+              _type: 'block'
+              _key: string
+            }
+          | {
+              buttons: Array<
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+              > | null
+              _type: 'buttons'
+              _key: string
+              markDefs: null
+            }
+          | {
+              asset?: {
+                _ref: string
+                _type: 'reference'
+                _weak?: boolean
+                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+              }
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              altText: string
+              promptForImage?: string
+              _type: 'imageBlock'
+              _key: string
+              markDefs: null
+              image: null
+            }
+        >
+      }
+    | {
+        _key: string
+        _type: 'furtherLinkSection'
+        title: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'normal'
+          listItem?: never
+          markDefs?: null
+          level?: number
+          _type: 'block'
+          _key: string
+        }>
+        body: Array<
+          | {
+              _ref: string
+              _type: 'reference'
+              _weak?: boolean
+              _key: string
+              markDefs: null
+            }
+          | {
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?:
+                | 'blockquote'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+                | 'small'
+              listItem?: 'bullet' | 'number'
+              markDefs: Array<
+                | {}
+                | {
+                    type: 'external' | 'internal'
+                    href:
+                      | {
+                          slug: string
+                          _type: 'page'
+                        }
+                      | null
+                      | string
+                  }
+              > | null
+              level?: number
+              _type: 'block'
+              _key: string
+            }
+          | {
+              buttons: Array<
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+              > | null
+              _type: 'buttons'
+              _key: string
+              markDefs: null
+            }
+          | {
+              asset?: {
+                _ref: string
+                _type: 'reference'
+                _weak?: boolean
+                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+              }
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              altText: string
+              promptForImage?: string
+              _type: 'imageBlock'
+              _key: string
+              markDefs: null
+              image: null
+            }
+        > | null
+        links: Array<
+          | {
+              _key: string
+              _type: 'linkCard'
+              title: Overview
+              description: Overview
+              url?: string
+              internalLink?:
+                | {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    [internalGroqTypeReferenceTo]?: 'news'
+                  }
+                | {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    [internalGroqTypeReferenceTo]?: 'page'
+                  }
+              slug: string
+              docType: 'news'
+            }
+          | {
+              _key: string
+              _type: 'linkCard'
+              title: Overview
+              description: Overview
+              url?: string
+              internalLink?:
+                | {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    [internalGroqTypeReferenceTo]?: 'news'
+                  }
+                | {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    [internalGroqTypeReferenceTo]?: 'page'
+                  }
+              slug: string
+              docType: 'page'
+            }
+          | {
+              _key: string
+              _type: 'linkCard'
+              title: Overview
+              description: Overview
+              url?: string
+              internalLink?:
+                | {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    [internalGroqTypeReferenceTo]?: 'news'
+                  }
+                | {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    [internalGroqTypeReferenceTo]?: 'page'
+                  }
+            }
+        >
+      }
+    | {
+        _key: string
+        _type: 'imageHeaderSection'
+        title: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'normal'
+          listItem?: never
+          markDefs?: null
+          level?: number
+          _type: 'block'
+          _key: string
+        }>
+        subtitle?: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'normal'
+          listItem?: never
+          markDefs?: null
+          level?: number
+          _type: 'block'
+          _key: string
+        }>
+        image: {
+          asset: {
+            _ref: string
+            _type: 'reference'
+            _weak?: boolean
+            [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+          }
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          altText:
+            | string
+            | 'Unfortunately, we forgot to add alt text to this image. We will do better next time!'
+            | null
+          promptForImage?: string
+          _type: 'aiImage'
+          blurHashURL: string | null
+        }
+      }
+    | {
+        _key: string
+        _type: 'newsSection'
+        title: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'normal'
+          listItem?: never
+          markDefs?: null
+          level?: number
+          _type: 'block'
+          _key: string
+        }>
+        body: Array<
+          | {
+              _ref: string
+              _type: 'reference'
+              _weak?: boolean
+              _key: string
+              markDefs: null
+            }
+          | {
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?:
+                | 'blockquote'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+                | 'small'
+              listItem?: 'bullet' | 'number'
+              markDefs: Array<
+                | {}
+                | {
+                    type: 'external' | 'internal'
+                    href:
+                      | {
+                          slug: string
+                          _type: 'page'
+                        }
+                      | null
+                      | string
+                  }
+              > | null
+              level?: number
+              _type: 'block'
+              _key: string
+            }
+          | {
+              buttons: Array<
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+              > | null
+              _type: 'buttons'
+              _key: string
+              markDefs: null
+            }
+          | {
+              asset?: {
+                _ref: string
+                _type: 'reference'
+                _weak?: boolean
+                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+              }
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              altText: string
+              promptForImage?: string
+              _type: 'imageBlock'
+              _key: string
+              markDefs: null
+              image: null
+            }
+        > | null
+        loadAll?: boolean
+        news: Array<{
+          _id: string
+          _type: 'news'
+          _createdAt: string
+          _updatedAt: string
+          _rev: string
+          title: string
+          subtitle: string
+          body: Array<
+            | {
+                _ref: string
+                _type: 'reference'
+                _weak?: boolean
+                _key: string
+                markDefs: null
+              }
+            | {
+                children?: Array<{
+                  marks?: Array<string>
+                  text?: string
+                  _type: 'span'
+                  _key: string
+                }>
+                style?:
+                  | 'blockquote'
+                  | 'h2'
+                  | 'h3'
+                  | 'h4'
+                  | 'h5'
+                  | 'h6'
+                  | 'normal'
+                  | 'small'
+                listItem?: 'bullet' | 'number'
+                markDefs: Array<
+                  | {}
+                  | {
+                      type: 'external' | 'internal'
+                      href:
+                        | {
+                            slug: string
+                            _type: 'page'
+                          }
+                        | null
+                        | string
+                    }
+                > | null
+                level?: number
+                _type: 'block'
+                _key: string
+              }
+            | {
+                buttons: Array<
+                  | {
+                      _key: string
+                      title: string
+                      type: 'external' | 'file' | 'functional' | 'internal'
+                      _type: 'button'
+                      href: string | null
+                      slug: string
+                      docType: 'news'
+                      linkExternal?: string
+                      linkInternal?:
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'news'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'page'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'publication'
+                          }
+                      file?: {
+                        asset?: {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                        }
+                        _type: 'file'
+                      }
+                      functional?: 'contact' | 'subscribe'
+                    }
+                  | {
+                      _key: string
+                      title: string
+                      type: 'external' | 'file' | 'functional' | 'internal'
+                      _type: 'button'
+                      href: string | null
+                      slug: string
+                      docType: 'page'
+                      linkExternal?: string
+                      linkInternal?:
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'news'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'page'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'publication'
+                          }
+                      file?: {
+                        asset?: {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                        }
+                        _type: 'file'
+                      }
+                      functional?: 'contact' | 'subscribe'
+                    }
+                  | {
+                      _key: string
+                      title: string
+                      type: 'external' | 'file' | 'functional' | 'internal'
+                      _type: 'button'
+                      href: string | null
+                      slug: null
+                      docType: 'publication'
+                      linkExternal?: string
+                      linkInternal?:
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'news'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'page'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'publication'
+                          }
+                      file?: {
+                        asset?: {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                        }
+                        _type: 'file'
+                      }
+                      functional?: 'contact' | 'subscribe'
+                    }
+                  | {
+                      _key: string
+                      title: string
+                      type: 'external' | 'file' | 'functional' | 'internal'
+                      _type: 'button'
+                      href: string | null
+                      linkExternal?: string
+                      linkInternal?:
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'news'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'page'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'publication'
+                          }
+                      file?: {
+                        asset?: {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                        }
+                        _type: 'file'
+                      }
+                      functional?: 'contact' | 'subscribe'
+                    }
+                > | null
+                _type: 'buttons'
+                _key: string
+                markDefs: null
+              }
+            | {
+                asset?: {
+                  _ref: string
+                  _type: 'reference'
+                  _weak?: boolean
+                  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+                }
+                hotspot?: SanityImageHotspot
+                crop?: SanityImageCrop
+                altText: string
+                promptForImage?: string
+                _type: 'imageBlock'
+                _key: string
+                markDefs: null
+                image: null
+              }
+          > | null
+          slug: string
+          image: {
+            asset: {
+              _ref: string
+              _type: 'reference'
+              _weak?: boolean
+              [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+            }
+            hotspot?: SanityImageHotspot
+            crop?: SanityImageCrop
+            altText:
+              | string
+              | 'Unfortunately, we forgot to add alt text to this image. We will do better next time!'
+              | null
+            promptForImage?: string
+            _type: 'aiImage'
+            blurHashURL: string | null
+          }
+          isInMenu?: boolean
+          firstPublishedAt?: string
+        }>
+      }
+    | {
+        _key: string
+        _type: 'newsSection'
+        title: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'normal'
+          listItem?: never
+          markDefs?: null
+          level?: number
+          _type: 'block'
+          _key: string
+        }>
+        body: Array<
+          | {
+              _ref: string
+              _type: 'reference'
+              _weak?: boolean
+              _key: string
+              markDefs: null
+            }
+          | {
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?:
+                | 'blockquote'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+                | 'small'
+              listItem?: 'bullet' | 'number'
+              markDefs: Array<
+                | {}
+                | {
+                    type: 'external' | 'internal'
+                    href:
+                      | {
+                          slug: string
+                          _type: 'page'
+                        }
+                      | null
+                      | string
+                  }
+              > | null
+              level?: number
+              _type: 'block'
+              _key: string
+            }
+          | {
+              buttons: Array<
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+              > | null
+              _type: 'buttons'
+              _key: string
+              markDefs: null
+            }
+          | {
+              asset?: {
+                _ref: string
+                _type: 'reference'
+                _weak?: boolean
+                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+              }
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              altText: string
+              promptForImage?: string
+              _type: 'imageBlock'
+              _key: string
+              markDefs: null
+              image: null
+            }
+        > | null
+        loadAll?: boolean
+        news?: Array<{
+          _ref: string
+          _type: 'reference'
+          _weak?: boolean
+          _key: string
+          [internalGroqTypeReferenceTo]?: 'news'
+        }>
+      }
+    | {
+        _key: string
+        _type: 'newsSection'
+        title: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'normal'
+          listItem?: never
+          markDefs?: null
+          level?: number
+          _type: 'block'
+          _key: string
+        }>
+        body: Array<
+          | {
+              _ref: string
+              _type: 'reference'
+              _weak?: boolean
+              _key: string
+              markDefs: null
+            }
+          | {
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?:
+                | 'blockquote'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+                | 'small'
+              listItem?: 'bullet' | 'number'
+              markDefs: Array<
+                | {}
+                | {
+                    type: 'external' | 'internal'
+                    href:
+                      | {
+                          slug: string
+                          _type: 'page'
+                        }
+                      | null
+                      | string
+                  }
+              > | null
+              level?: number
+              _type: 'block'
+              _key: string
+            }
+          | {
+              buttons: Array<
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+              > | null
+              _type: 'buttons'
+              _key: string
+              markDefs: null
+            }
+          | {
+              asset?: {
+                _ref: string
+                _type: 'reference'
+                _weak?: boolean
+                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+              }
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              altText: string
+              promptForImage?: string
+              _type: 'imageBlock'
+              _key: string
+              markDefs: null
+              image: null
+            }
+        > | null
+        loadAll?: boolean
+        news: Array<{
+          _id: string
+          _type: 'news'
+          _createdAt: string
+          _updatedAt: string
+          _rev: string
+          title: string
+          subtitle: string
+          body: Array<
+            | {
+                _ref: string
+                _type: 'reference'
+                _weak?: boolean
+                _key: string
+                markDefs: null
+              }
+            | {
+                children?: Array<{
+                  marks?: Array<string>
+                  text?: string
+                  _type: 'span'
+                  _key: string
+                }>
+                style?:
+                  | 'blockquote'
+                  | 'h2'
+                  | 'h3'
+                  | 'h4'
+                  | 'h5'
+                  | 'h6'
+                  | 'normal'
+                  | 'small'
+                listItem?: 'bullet' | 'number'
+                markDefs: Array<
+                  | {}
+                  | {
+                      type: 'external' | 'internal'
+                      href:
+                        | {
+                            slug: string
+                            _type: 'page'
+                          }
+                        | null
+                        | string
+                    }
+                > | null
+                level?: number
+                _type: 'block'
+                _key: string
+              }
+            | {
+                buttons: Array<
+                  | {
+                      _key: string
+                      title: string
+                      type: 'external' | 'file' | 'functional' | 'internal'
+                      _type: 'button'
+                      href: string | null
+                      slug: string
+                      docType: 'news'
+                      linkExternal?: string
+                      linkInternal?:
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'news'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'page'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'publication'
+                          }
+                      file?: {
+                        asset?: {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                        }
+                        _type: 'file'
+                      }
+                      functional?: 'contact' | 'subscribe'
+                    }
+                  | {
+                      _key: string
+                      title: string
+                      type: 'external' | 'file' | 'functional' | 'internal'
+                      _type: 'button'
+                      href: string | null
+                      slug: string
+                      docType: 'page'
+                      linkExternal?: string
+                      linkInternal?:
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'news'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'page'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'publication'
+                          }
+                      file?: {
+                        asset?: {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                        }
+                        _type: 'file'
+                      }
+                      functional?: 'contact' | 'subscribe'
+                    }
+                  | {
+                      _key: string
+                      title: string
+                      type: 'external' | 'file' | 'functional' | 'internal'
+                      _type: 'button'
+                      href: string | null
+                      slug: null
+                      docType: 'publication'
+                      linkExternal?: string
+                      linkInternal?:
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'news'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'page'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'publication'
+                          }
+                      file?: {
+                        asset?: {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                        }
+                        _type: 'file'
+                      }
+                      functional?: 'contact' | 'subscribe'
+                    }
+                  | {
+                      _key: string
+                      title: string
+                      type: 'external' | 'file' | 'functional' | 'internal'
+                      _type: 'button'
+                      href: string | null
+                      linkExternal?: string
+                      linkInternal?:
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'news'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'page'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'publication'
+                          }
+                      file?: {
+                        asset?: {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                        }
+                        _type: 'file'
+                      }
+                      functional?: 'contact' | 'subscribe'
+                    }
+                > | null
+                _type: 'buttons'
+                _key: string
+                markDefs: null
+              }
+            | {
+                asset?: {
+                  _ref: string
+                  _type: 'reference'
+                  _weak?: boolean
+                  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+                }
+                hotspot?: SanityImageHotspot
+                crop?: SanityImageCrop
+                altText: string
+                promptForImage?: string
+                _type: 'imageBlock'
+                _key: string
+                markDefs: null
+                image: null
+              }
+          > | null
+          slug: string
+          image: {
+            asset: {
+              _ref: string
+              _type: 'reference'
+              _weak?: boolean
+              [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+            }
+            hotspot?: SanityImageHotspot
+            crop?: SanityImageCrop
+            altText:
+              | string
+              | 'Unfortunately, we forgot to add alt text to this image. We will do better next time!'
+              | null
+            promptForImage?: string
+            _type: 'aiImage'
+            blurHashURL: string | null
+          }
+          isInMenu?: boolean
+          firstPublishedAt?: string
+        }> | null
+      }
+    | {
+        _key: string
+        _type: 'testimonialSection'
+        title: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'normal'
+          listItem?: never
+          markDefs?: null
+          level?: number
+          _type: 'block'
+          _key: string
+        }>
+        body: Array<
+          | {
+              _ref: string
+              _type: 'reference'
+              _weak?: boolean
+              _key: string
+              markDefs: null
+            }
+          | {
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?:
+                | 'blockquote'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+                | 'small'
+              listItem?: 'bullet' | 'number'
+              markDefs: Array<
+                | {}
+                | {
+                    type: 'external' | 'internal'
+                    href:
+                      | {
+                          slug: string
+                          _type: 'page'
+                        }
+                      | null
+                      | string
+                  }
+              > | null
+              level?: number
+              _type: 'block'
+              _key: string
+            }
+          | {
+              buttons: Array<
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+              > | null
+              _type: 'buttons'
+              _key: string
+              markDefs: null
+            }
+          | {
+              asset?: {
+                _ref: string
+                _type: 'reference'
+                _weak?: boolean
+                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+              }
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              altText: string
+              promptForImage?: string
+              _type: 'imageBlock'
+              _key: string
+              markDefs: null
+              image: null
+            }
+        > | null
+        loadTags?: Array<string>
+        testimonials?: Array<{
+          _ref: string
+          _type: 'reference'
+          _weak?: boolean
+          _key: string
+          [internalGroqTypeReferenceTo]?: 'testimonial'
+        }>
+      }
+    | {
+        _key: string
+        _type: 'textHeaderSection'
+        title: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'normal'
+          listItem?: never
+          markDefs?: null
+          level?: number
+          _type: 'block'
+          _key: string
+        }>
+        subtitle?: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'normal'
+          listItem?: never
+          markDefs?: null
+          level?: number
+          _type: 'block'
+          _key: string
+        }>
+        body: Array<
+          | {
+              _ref: string
+              _type: 'reference'
+              _weak?: boolean
+              _key: string
+              markDefs: null
+            }
+          | {
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?:
+                | 'blockquote'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+                | 'small'
+              listItem?: 'bullet' | 'number'
+              markDefs: Array<
+                | {}
+                | {
+                    type: 'external' | 'internal'
+                    href:
+                      | {
+                          slug: string
+                          _type: 'page'
+                        }
+                      | null
+                      | string
+                  }
+              > | null
+              level?: number
+              _type: 'block'
+              _key: string
+            }
+          | {
+              buttons: Array<
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+              > | null
+              _type: 'buttons'
+              _key: string
+              markDefs: null
+            }
+          | {
+              asset?: {
+                _ref: string
+                _type: 'reference'
+                _weak?: boolean
+                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+              }
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              altText: string
+              promptForImage?: string
+              _type: 'imageBlock'
+              _key: string
+              markDefs: null
+              image: null
+            }
+        >
+      }
+    | {
+        _key: string
+        _type: 'textSection'
+        title: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'normal'
+          listItem?: never
+          markDefs?: null
+          level?: number
+          _type: 'block'
+          _key: string
+        }>
+        subtitle?: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'normal'
+          listItem?: never
+          markDefs?: null
+          level?: number
+          _type: 'block'
+          _key: string
+        }>
+        body: Array<
+          | {
+              _ref: string
+              _type: 'reference'
+              _weak?: boolean
+              _key: string
+              markDefs: null
+            }
+          | {
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?:
+                | 'blockquote'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+                | 'small'
+              listItem?: 'bullet' | 'number'
+              markDefs: Array<
+                | {}
+                | {
+                    type: 'external' | 'internal'
+                    href:
+                      | {
+                          slug: string
+                          _type: 'page'
+                        }
+                      | null
+                      | string
+                  }
+              > | null
+              level?: number
+              _type: 'block'
+              _key: string
+            }
+          | {
+              buttons: Array<
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string
+                    type: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+              > | null
+              _type: 'buttons'
+              _key: string
+              markDefs: null
+            }
+          | {
+              asset?: {
+                _ref: string
+                _type: 'reference'
+                _weak?: boolean
+                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+              }
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              altText: string
+              promptForImage?: string
+              _type: 'imageBlock'
+              _key: string
+              markDefs: null
+              image: null
+            }
+        >
+      }
+  >
+  image: {
+    asset: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    altText:
+      | string
+      | 'Unfortunately, we forgot to add alt text to this image. We will do better next time!'
+      | null
+    promptForImage?: string
+    _type: 'aiImage'
+    blurHashURL: string | null
+  }
 } | null
 // Variable: settingsQuery
-// Query:   *[_type == "settings"][0]{    footer,    menuItems[]->{      _type,      "slug": slug.current,      title    },    ogImage,  }
-export type SettingsQueryResult = null
-// Source: ./sanity/components/inspector/TableOfContents.tsx
+// Query:   *[_type == "siteSettings"][0]{  menu[]{    title,    _key,    !isNested => {      ...link->{ 'slug': slug.current, 'docType': _type }    },    isNested => {      menuItems[]{        title,        _key,         ...link->{ 'slug': slug.current, 'docType': _type }      }    }  },  quickLinks[]{    _key,    ...@->{ 'slug': slug.current, 'docType': _type }  },  logos,  ogImage,  serverError,  pageNotFound,}
+export type SettingsQueryResult = {
+  menu: Array<
+    | {
+        title: string
+        _key: string
+        slug: string
+        docType: 'page'
+        menuItems: Array<{
+          title: string
+          _key: string
+          slug: string
+          docType: 'page'
+        }> | null
+      }
+    | {
+        title: string
+        _key: string
+        slug: string
+        docType: 'page'
+      }
+    | {
+        title: string
+        _key: string
+        menuItems: Array<{
+          title: string
+          _key: string
+          slug: string
+          docType: 'page'
+        }> | null
+      }
+    | {
+        title: string
+        _key: string
+      }
+  >
+  quickLinks: Array<
+    | {
+        _key: null
+        slug: string
+        docType: 'news'
+      }
+    | {
+        _key: null
+        slug: string
+        docType: 'page'
+      }
+  > | null
+  logos: {
+    logoColor: {
+      asset: {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+      }
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      altText: string
+      promptForImage?: string
+      _type: 'aiImage'
+    }
+    logoWhite?: {
+      asset?: {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+      }
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      altText: string
+      promptForImage?: string
+      _type: 'aiImage'
+    }
+    logoBlack?: {
+      asset?: {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+      }
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      altText: string
+      promptForImage?: string
+      _type: 'aiImage'
+    }
+  } | null
+  ogImage: {
+    asset: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    altText: string
+    promptForImage?: string
+    _type: 'aiImage'
+  } | null
+  serverError: {
+    asset: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    altText: string
+    promptForImage?: string
+    _type: 'aiImage'
+  }
+  pageNotFound: {
+    asset: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    altText: string
+    promptForImage?: string
+    _type: 'aiImage'
+  }
+} | null
+// Variable: allNewsQuery
+// Query: *[ _type == 'news' && defined(slug.current) && defined(firstPublishedAt)]{  _id,  _type,  title,   description,  'slug': slug.current,  firstPublishedAt,  content[]{  ...,  _type == 'imageHeaderSection' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},  },  _type == 'textHeaderSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}  },  _type == 'textSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}  },  _type == 'accordionSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},    accordion[]{      ...,      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}    }  },  _type == 'ctaBannerSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},  },  _type == 'furtherLinkSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},    links[]{      ...,      defined(internalLink)=> {        ...internalLink->{          "slug": slug.current,          "docType": _type        }      },    }  },  _type == 'newsSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},    defined(news) && !loadAll => {news[]->{      ...,      image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},      'slug': slug.current    }},    loadAll => {'news': *[_type == 'news']{      ...,      image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},      'slug': slug.current    }},  },  _type == 'testimonialSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},  },},  image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}} | order(firstPublishedAt desc)
+export type AllNewsQueryResult = Array<{
+  _id: string
+  _type: 'news'
+  title: string
+  description: null
+  slug: string
+  firstPublishedAt: string | null
+  content: null
+  image: {
+    asset: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    altText:
+      | string
+      | 'Unfortunately, we forgot to add alt text to this image. We will do better next time!'
+      | null
+    promptForImage?: string
+    _type: 'aiImage'
+    blurHashURL: string | null
+  }
+}>
+// Variable: newsBySlugQuery
+// Query: *[ _type == 'news' && slug.current == $slug][0]{  _id,  _type,  title,   description,  'slug': slug.current,  firstPublishedAt,  content[]{  ...,  _type == 'imageHeaderSection' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},  },  _type == 'textHeaderSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}  },  _type == 'textSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}  },  _type == 'accordionSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},    accordion[]{      ...,      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}    }  },  _type == 'ctaBannerSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},  },  _type == 'furtherLinkSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},    links[]{      ...,      defined(internalLink)=> {        ...internalLink->{          "slug": slug.current,          "docType": _type        }      },    }  },  _type == 'newsSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},    defined(news) && !loadAll => {news[]->{      ...,      image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},      'slug': slug.current    }},    loadAll => {'news': *[_type == 'news']{      ...,      image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},      'slug': slug.current    }},  },  _type == 'testimonialSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},  },},  image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}}
+export type NewsBySlugQueryResult = {
+  _id: string
+  _type: 'news'
+  title: string
+  description: null
+  slug: string
+  firstPublishedAt: string | null
+  content: null
+  image: {
+    asset: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    altText:
+      | string
+      | 'Unfortunately, we forgot to add alt text to this image. We will do better next time!'
+      | null
+    promptForImage?: string
+    _type: 'aiImage'
+    blurHashURL: string | null
+  }
+} | null
+// Source: ./sanity/components/inspector/MultipleBodyTableOfContents.tsx
+// Variable: BODY_HEADING_FRAGMENT
+// Query: body[style != 'normal'] {  _key, _type, style, "text": array::join(children[].text, ' ')}
+export type BODY_HEADING_FRAGMENTResult = never
 // Variable: query
-// Query: *[_id == $documentId && _type == 'news'][0]{      body[style != 'normal'] {          _key, _type, style, "text": array::join(children[].text, ' ')        },        _type,        "bodyPath": "body",    }
+// Query: *[_id == $documentId && _type == 'page'][0]{      content[]{        _type == 'imageHeaderSection' => {          title,          _key,          _type        },        _type == "textHeaderSection" => {          title,          _key,          _type,          body[style != 'normal'] {  _key, _type, style, "text": array::join(children[].text, ' ')}        },        _type == "textSection" => {          title,          _key,          _type,          body[style != 'normal'] {  _key, _type, style, "text": array::join(children[].text, ' ')}        },        _type == 'accordionSection' => {          'title':pt::text(title),          _key,          body[style != 'normal'] {  _key, _type, style, "text": array::join(children[].text, ' ')},          _type,          accordion[]{            title,            _key,            body[style != 'normal'] {  _key, _type, style, "text": array::join(children[].text, ' ')}          }        },        _type == 'ctaBannerSection'=> {          'title':pt::text(title),          _key,          _type,          body[style != 'normal'] {  _key, _type, style, "text": array::join(children[].text, ' ')}        },        _type == 'furtherLinkSection' => {          'title':pt::text(title),          _key,          _type,          links[]{            'title':pt::text(title),            _key,          }        },        _type == 'testimonialSection'=> {          'title':pt::text(title),          _key,          _type,          body[style != 'normal'] {  _key, _type, style, "text": array::join(children[].text, ' ')}        },        _type == 'newsSection' => {          'title':pt::text(title),          _key,          _type,          body[style != 'normal'] {  _key, _type, style, "text": array::join(children[].text, ' ')}        },      } // end of content    }
 export type QueryResult = {
+  content: Array<
+    | {
+        title: string
+        _key: string
+        body: Array<
+          | {
+              _key: string
+              _type: 'buttons'
+              style: null
+              text: null
+            }
+          | {
+              _key: string
+              _type: 'imageBlock'
+              style: null
+              text: null
+            }
+          | {
+              _key: string
+              _type: 'reference'
+              style: null
+              text: null
+            }
+        > | null
+        _type: 'accordionSection'
+        accordion: Array<{
+          title: string
+          _key: string
+          body: Array<never>
+        }>
+      }
+    | {
+        title: string
+        _key: string
+        _type: 'ctaBannerSection'
+        body: Array<
+          | {
+              _key: string
+              _type: 'buttons'
+              style: null
+              text: null
+            }
+          | {
+              _key: string
+              _type: 'imageBlock'
+              style: null
+              text: null
+            }
+          | {
+              _key: string
+              _type: 'reference'
+              style: null
+              text: null
+            }
+        >
+      }
+    | {
+        title: string
+        _key: string
+        _type: 'furtherLinkSection'
+        links: Array<{
+          title: string
+          _key: string
+        }>
+      }
+    | {
+        title: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'normal'
+          listItem?: never
+          markDefs?: null
+          level?: number
+          _type: 'block'
+          _key: string
+        }>
+        _key: string
+        _type: 'imageHeaderSection'
+      }
+    | {
+        title: string
+        _key: string
+        _type: 'newsSection'
+        body: Array<
+          | {
+              _key: string
+              _type: 'buttons'
+              style: null
+              text: null
+            }
+          | {
+              _key: string
+              _type: 'imageBlock'
+              style: null
+              text: null
+            }
+          | {
+              _key: string
+              _type: 'reference'
+              style: null
+              text: null
+            }
+        > | null
+      }
+    | {
+        title: string
+        _key: string
+        _type: 'testimonialSection'
+        body: Array<
+          | {
+              _key: string
+              _type: 'buttons'
+              style: null
+              text: null
+            }
+          | {
+              _key: string
+              _type: 'imageBlock'
+              style: null
+              text: null
+            }
+          | {
+              _key: string
+              _type: 'reference'
+              style: null
+              text: null
+            }
+        > | null
+      }
+    | {
+        title: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'normal'
+          listItem?: never
+          markDefs?: null
+          level?: number
+          _type: 'block'
+          _key: string
+        }>
+        _key: string
+        _type: 'textHeaderSection'
+        body: Array<
+          | {
+              _key: string
+              _type: 'buttons'
+              style: null
+              text: null
+            }
+          | {
+              _key: string
+              _type: 'imageBlock'
+              style: null
+              text: null
+            }
+          | {
+              _key: string
+              _type: 'reference'
+              style: null
+              text: null
+            }
+        >
+      }
+    | {
+        title: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'normal'
+          listItem?: never
+          markDefs?: null
+          level?: number
+          _type: 'block'
+          _key: string
+        }>
+        _key: string
+        _type: 'textSection'
+        body: Array<
+          | {
+              _key: string
+              _type: 'buttons'
+              style: null
+              text: null
+            }
+          | {
+              _key: string
+              _type: 'imageBlock'
+              style: null
+              text: null
+            }
+          | {
+              _key: string
+              _type: 'reference'
+              style: null
+              text: null
+            }
+        >
+      }
+  >
+} | null
+// Source: ./sanity/components/inspector/TableOfContents.tsx
+// Variable: tableOfContentQuery
+// Query: *[_id == $documentId && _type == 'news'][0]{      body[style != 'normal'] {          _key, _type, style, "text": array::join(children[].text, ' ')        },        _type,        "bodyPath": "body",    }
+export type TableOfContentQueryResult = {
   body: Array<
     | {
         _key: string

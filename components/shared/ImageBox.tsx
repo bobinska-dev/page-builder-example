@@ -37,6 +37,7 @@ export default function ImageBox({
           height={height}
           sizes={size}
           src={imageUrl}
+          style={{ objectFit: 'cover' }}
         />
       )}
     </div>

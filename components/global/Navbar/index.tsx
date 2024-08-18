@@ -4,6 +4,7 @@ import { draftMode } from 'next/headers'
 import { loadSettings } from '@/sanity/loader/loadQuery'
 
 import NavbarLayout from './NavbarLayout'
+
 const NavbarPreview = dynamic(() => import('./NavbarPreview'))
 
 export async function Navbar() {

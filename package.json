@@ -16,7 +16,9 @@
     "singleQuote": true
   },
   "dependencies": {
+    "@headlessui/react": "^2.1.2",
     "@next/env": "14.2.4",
+    "@radix-ui/react-accordion": "^1.2.0",
     "@sanity/assist": "^3.0.5",
     "@sanity/cli": "^3.53.0",
     "@sanity/demo": "2.0.0",

@@ -10,7 +10,7 @@ import {
   settingsQuery,
 } from '@/sanity/lib/queries'
 import { token } from '@/sanity/lib/token'
-import { HomePagePayload, PagePayload, SettingsPayload } from '@/types'
+import { PagePayload, SettingsPayload } from '@/types'
 
 const serverClient = client.withConfig({
   token,
@@ -65,7 +65,7 @@ export function loadSettings() {
 }
 
 export function loadHomePage() {
-  return loadQuery<HomePagePayload | null>(
+  return loadQuery<PagePayload | null>(
     homePageQuery,
     {},
     { next: { tags: ['home'] } },

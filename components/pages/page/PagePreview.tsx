@@ -4,8 +4,8 @@ import { type QueryResponseInitial } from '@sanity/react-loader'
 
 import { pagesBySlugQuery } from '@/sanity/lib/queries'
 import { useQuery } from '@/sanity/loader/useQuery'
-import { PagePayload } from '@/types'
 
+import { PagePayload } from '@/types'
 import Page from './Page'
 
 type Props = {

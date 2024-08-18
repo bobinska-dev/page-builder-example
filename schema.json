@@ -7677,7 +7677,7 @@
           "type": "inline",
           "name": "menu"
         },
-        "optional": true
+        "optional": false
       },
       "quickLinks": {
         "type": "objectAttribute",
@@ -7776,7 +7776,7 @@
                 },
                 "dereferencesTo": "sanity.imageAsset"
               },
-              "optional": true
+              "optional": false
             },
             "hotspot": {
               "type": "objectAttribute",
@@ -7852,7 +7852,7 @@
                 },
                 "dereferencesTo": "sanity.imageAsset"
               },
-              "optional": true
+              "optional": false
             },
             "hotspot": {
               "type": "objectAttribute",
@@ -7893,7 +7893,7 @@
             }
           }
         },
-        "optional": true
+        "optional": false
       },
       "serverError": {
         "type": "objectAttribute",
@@ -7928,7 +7928,7 @@
                 },
                 "dereferencesTo": "sanity.imageAsset"
               },
-              "optional": true
+              "optional": false
             },
             "hotspot": {
               "type": "objectAttribute",
@@ -7969,7 +7969,7 @@
             }
           }
         },
-        "optional": true
+        "optional": false
       },
       "logos": {
         "type": "objectAttribute",

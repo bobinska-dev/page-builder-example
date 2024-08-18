@@ -15,6 +15,30 @@ module.exports = {
       sans: 'var(--font-sans)',
       serif: 'var(--font-serif)',
     },
+    extend: {
+      keyframes: {
+        slideDown: {
+          from: { height: '0px' },
+          to: { height: 'var(--radix-accordion-content-height)' },
+        },
+        slideUp: {
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0px' },
+        },
+      },
+      animation: {
+        slideDown: 'slideDown 300ms cubic-bezier(0.87, 0, 0.13, 1)',
+        slideUp: 'slideUp 300ms cubic-bezier(0.87, 0, 0.13, 1)',
+      },
+      boxShadow: {
+        1: '0 10px 30px -12px rgba(0, 0, 0, 0.04), 0 4px 25px 0px rgba(0, 0, 0, 0.012), 0 8px 10px -5px rgba(0, 0, 0, 0.1)',
+        2: '0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)',
+        3: '0 5px 5px rgba(66, 109, 137, 0.12), 0 -5px 5px rgba(66, 109, 137, 0.12)',
+        small: '0 5px 10px rgba(0, 0, 0, 0.1)',
+        medium: '0 2px 10px rgba(1, 84, 55, 0.3)',
+        white: '0 7px 10px -5px rgba(255, 255, 255, 0.14)',
+      },
+    },
   },
   plugins: [require('@tailwindcss/typography')],
 }

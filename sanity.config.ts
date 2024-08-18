@@ -74,6 +74,7 @@ export default defineConfig({
       }
       return prev
     },
+    // TODO: Add document actions
   },
 
   beta: {
