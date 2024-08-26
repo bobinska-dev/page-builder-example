@@ -69,7 +69,7 @@ export const renderContent = async (content: PagePayload['content']) =>
                     ),
                   },
                 }}
-                value={section.title}
+                value={section.subtitle}
               />
             )}
           </div>

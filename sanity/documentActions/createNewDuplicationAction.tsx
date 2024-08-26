@@ -5,7 +5,7 @@ import { DocumentActionComponent, DocumentActionProps, useClient } from 'sanity'
 import { useRouter } from 'sanity/router'
 
 /** This is a custom action that will be used instead of the default duplication action
- * you can also add the DocumentActionsContext to `createDuplicateWithoutPublishedAtAction` as a prop if you want to get the `currentUser` etc. passed down as well.
+ * you can also add the DocumentActionsContext to `createNewDuplicateAction` as a prop if you want to get the `currentUser` etc. passed down as well.
  *
  * Add this to your sanity.config.ts
  *
@@ -13,7 +13,7 @@ import { useRouter } from 'sanity/router'
  *   if (['page', 'landingPage', 'news', 'job'].includes(context.schemaType)) {
  *     return prev.map((originalAction) =>
  *       originalAction.action === 'duplicate'
- *         ? createDuplicateWithoutPublishedAtAction(originalAction)
+ *         ? createNewDuplicateAction(originalAction)
  *         : originalAction,
  *     )
  *   }
@@ -60,11 +60,12 @@ export function createNewDuplicateAction(
     const duplicateItem = () => {
       // create the new document
       client.create(newDocument)
+
       // navigate to the new document
       navigateIntent('edit', {
         id: newDraftId,
         type: schemaType,
-        template: 'page-duplication-template',
+        template: schemaType,
       })
     }
 

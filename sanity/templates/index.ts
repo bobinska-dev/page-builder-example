@@ -1,7 +1,10 @@
 import { TemplateResolver } from 'sanity'
-import { pageDuplicationTemplate } from './pageDuplicationTemplate'
 
-export const templates: TemplateResolver = (prev) => [
-  ...prev,
-  pageDuplicationTemplate,
-]
+/** ### templates for the studio
+ *
+ * This file is used to customize the templates in the studio.
+ *
+ * @param prev
+ * @returns Array of templates
+ */
+export const templates: TemplateResolver = (prev) => [...prev]

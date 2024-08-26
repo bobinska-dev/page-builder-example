@@ -14,8 +14,7 @@ export const documentActions = (
   if (['page', 'news'].includes(context.schemaType)) {
     return prev.map((originalAction) =>
       originalAction.action === 'duplicate'
-        ? // ? createCustomDuplicateAction(originalAction)
-          createNewDuplicateAction(originalAction)
+        ? createNewDuplicateAction(originalAction)
         : originalAction.action === 'publish'
           ? createFirstPublishedAtAction(originalAction)
           : originalAction,
