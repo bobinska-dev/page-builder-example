@@ -1,5 +1,6 @@
 import './globals.css'
 
+import * as Tooltip from '@radix-ui/react-tooltip'
 import { IBM_Plex_Mono, Inter, PT_Serif } from 'next/font/google'
 
 const serif = PT_Serif({
@@ -30,7 +31,9 @@ export default async function RootLayout({
       lang="en"
       className={`${mono.variable} ${sans.variable} ${serif.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <Tooltip.Provider>{children}</Tooltip.Provider>
+      </body>
     </html>
   )
 }

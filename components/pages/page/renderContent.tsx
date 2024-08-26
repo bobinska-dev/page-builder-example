@@ -1,17 +1,18 @@
 import AccordionComponent from '@/components/shared/Accordion'
+import NewsCarousel from '@/components/shared/carousel/NewsCarousel'
 import { CustomPortableText } from '@/components/shared/CustomPortableText'
 import {
   HeaderPortableText,
   HeaderXPortableText,
 } from '@/components/shared/HeaderPortableText'
-import NewsCard from '@/components/shared/NewsCard'
+import TestimonialCard from '@/components/shared/TestimonialCard'
 import { urlForImage } from '@/sanity/lib/utils'
-import { NewsPayload, PagePayload } from '@/types'
+import { PagePayload, TestimonialPayload } from '@/types'
 import { PortableText } from 'next-sanity'
 import Link from 'next/link'
 import { Image as ImageType } from 'sanity'
 
-export const renderContent = (content: PagePayload['content']) =>
+export const renderContent = async (content: PagePayload['content']) =>
   content.map((section) => {
     if (section._type === 'imageHeaderSection') {
       const imageUrl =
@@ -110,6 +111,12 @@ export const renderContent = (content: PagePayload['content']) =>
       return (
         <div className="mb-10 ">
           {section.title && <HeaderPortableText value={section.title} />}
+          {section.subtitle && (
+            <CustomPortableText
+              paragraphClasses="italic font-bold pb-5"
+              value={section.subtitle}
+            />
+          )}
           {section.body && (
             <CustomPortableText paragraphClasses="" value={section.body} />
           )}
@@ -179,7 +186,6 @@ export const renderContent = (content: PagePayload['content']) =>
     }
     if (section._type === 'testimonialSection') {
       // console.log('VALUE', section)
-      // TODO: add missing testimonialSection inclusive fetching data -> server component? or fetch data in the component
       return (
         <div className="mb-10 ">
           {section.title && <HeaderPortableText value={section.title} />}
@@ -189,12 +195,19 @@ export const renderContent = (content: PagePayload['content']) =>
               value={section.body}
             />
           )}
-          {/* MISSING: testimonials */}
-          <div>
-            <p className="italic font-semibold text-red-400">
-              ... Testimonials missing
-            </p>
-          </div>
+
+          {section.testimonials && (
+            <div className="flex flex-col ">
+              {section.testimonials.map(
+                (testimonial: TestimonialPayload & { _key?: string }) => (
+                  <TestimonialCard
+                    {...testimonial}
+                    key={testimonial._key ?? testimonial._id}
+                  />
+                ),
+              )}
+            </div>
+          )}
         </div>
       )
     }
@@ -209,13 +222,14 @@ export const renderContent = (content: PagePayload['content']) =>
               value={section.body}
             />
           )}
-          {section.news && (
+          {/*           {section.news && (
             <div className="flex ">
               {section.news.map((newsItem: NewsPayload & { _key: string }) => (
                 <NewsCard key={newsItem._key} {...newsItem} />
               ))}
             </div>
-          )}
+          )} */}
+          {section.news && <NewsCarousel list={section.news} />}
         </div>
       )
     }

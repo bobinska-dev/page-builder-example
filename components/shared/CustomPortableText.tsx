@@ -7,9 +7,12 @@ import type { Image } from 'sanity'
 
 import ImageBox from '@/components/shared/ImageBox'
 import { Overview, ReducedBody } from '@/sanity.types'
+import { domainOrigin } from '@/sanity/lib/constants'
 import { resolveHref } from '@/sanity/lib/utils'
 import { BodyPayload, PTEButtonType } from '@/types'
 import Link from 'next/link'
+import TestimonialCard from './TestimonialCard'
+import InfoTooltip from './Tooltip'
 
 export function CustomPortableText({
   paragraphClasses,
@@ -61,14 +64,42 @@ export function CustomPortableText({
     },
     marks: {
       link: ({ children, value }) => {
+        const tooltipInfo =
+          value.type === 'external'
+            ? value.href
+            : value.type === 'internal'
+              ? `${domainOrigin}${resolveHref(value.docType, value.slug)}`
+              : value.type
         return (
-          <a
-            className="underline transition hover:opacity-50"
-            href={value?.href}
-            rel="noreferrer noopener"
+          <InfoTooltip
+            content={
+              <span>
+                Link to:
+                <span className="italic"> {tooltipInfo}</span>
+              </span>
+            }
           >
-            {children}
-          </a>
+            <span>
+              {value?.type === 'external' && (
+                <a
+                  className="underline transition hover:opacity-50"
+                  href={value?.href}
+                  rel="noreferrer noopener"
+                  target="_blank"
+                >
+                  {children}
+                </a>
+              )}
+              {value?.type === 'internal' && (
+                <Link
+                  href={resolveHref(value.docType, value.slug) ?? ''}
+                  className="underline transition hover:opacity-50"
+                >
+                  {children}
+                </Link>
+              )}
+            </span>
+          </InfoTooltip>
         )
       },
     },
@@ -130,16 +161,7 @@ export function CustomPortableText({
         )
       },
       testimonial: ({ value }) => {
-        return (
-          <div className={`my-6 space-y-2 border shadow px-4 pb-3 pt-5`}>
-            <div className="font-serif text-lg text-gray-600">
-              <CustomPortableText value={value.body} />
-            </div>
-            <div className="flex justify-end font-sans text-sm text-gray-400">
-              {value.title}
-            </div>
-          </div>
-        )
+        return <TestimonialCard {...value} />
       },
     },
   }

@@ -63,7 +63,7 @@ export interface TestimonialPayload {
   _type: 'testimonial'
   _id: string
   title: string
-  body: PortableTextBlock[]
+  body: BodyPayload
   tags?: Array<string>
 }
 

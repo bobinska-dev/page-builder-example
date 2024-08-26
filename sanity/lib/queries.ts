@@ -22,7 +22,8 @@ export const IMAGE_FRAGMENT = groq`image{
         'blurHashURL': metadata.lqip,
     }
 }`
-/** ### BODY QUERY
+
+/** ### BODY QUERY FRAGMENT
  *
  * This query is used to query the body of a document. It returns the body with the following properties:
  *
@@ -38,14 +39,12 @@ export const BODY_FRAGMENT = groq`body[]{
   markDefs[]{
     // * LINK ANNOTATION
     _type == "link" => { 
-      type,
-      'href': select( 
-        type == 'internal' => @.reference->{   
+      ...,
+      ...reference->{   
           'slug': slug.current,
-          _type
-        }, 
-        type == 'external' => href 
-      ) 
+          'docType': _type,
+          title,
+      }
     },
     // * PUBLICATION ANNOTATION
     _type == "publication" =>  { 
@@ -74,7 +73,7 @@ export const BODY_FRAGMENT = groq`body[]{
       },
       type == 'internal' => {
         // TODO: Add logic for publication
-        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }
+        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }
       },
       type == 'file' => {
         ...file.asset-> { 'href': url + '?dl' }
@@ -85,7 +84,22 @@ export const BODY_FRAGMENT = groq`body[]{
     }
   },
   // * TESTIMONIAL BLOCK
-  _type == 'testimonial' => @->,
+  _type == 'testimonial' => @->{
+    ...,
+    body[]{
+      ...,
+      markDefs[]{
+        _type == "link" => { 
+          ...,
+          ...reference->{   
+              'slug': slug.current,
+              'docType': _type,
+              title,
+          }
+        },
+      }
+    }
+  },
 
 }`
 
@@ -148,9 +162,29 @@ export const CONTENT_FRAGMENT = groq`content[]{
   _type == 'testimonialSection' => {
     ...,
     ${BODY_FRAGMENT},
+    // Specific testimonials selected by editors
+    defined(testimonials) && !loadTags => {testimonials[]->{
+      ...,
+      ${BODY_FRAGMENT},
+    }},
+    // All testimonials
+    !defined(testimonials) && 'loadAll' in loadTags =>{
+      'testimonials': *[_type == 'testimonial'] {
+        ...,
+        ${BODY_FRAGMENT}
+      }
+    },
+    // Specific testimonials by tags
+    !defined(testimonials) && !('loadAll' in loadTags) => {
+      'testimonials': *[_type == 'testimonial' && count(tags[@ in ^.^.loadTags]) > 0]{
+        ...,
+        ${BODY_FRAGMENT},
+      }
+    },
+
   },
 }`
-
+// * * * PAGE FRAGMENT * * *
 export const PAGE_FRAGMENT = groq`{
     _id,
     title,

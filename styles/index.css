@@ -16,3 +16,24 @@ ul {
 ol {
   list-style-type: disc;
 }
+
+/* Carousel Changes */
+
+.carousel-dots {
+  .react-multi-carousel-dot {
+    color: #426d89 !important;
+    list-style: none;
+    list-style-type: none !important;
+  }
+  .react-multi-carousel-dot--active button {
+    background-color: #426d89 !important;
+  }
+}
+.react-multiple-carousel__arrow {
+  background-color: #2e4b5f86 !important;
+  &:active {
+    transform: scale(1.2);
+    background-color: #426d89b9 !important;
+    transition: all 0.3s ease-in-out;
+  }
+}

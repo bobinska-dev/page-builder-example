@@ -16,6 +16,7 @@ import { singletonPlugin } from '@/sanity/plugins/settings'
 import { media } from 'sanity-plugin-media'
 import { ptString } from 'sanity-plugin-pt-string'
 import { tableOfContentsInspector } from './sanity/components/inspector'
+import { documentActions } from './sanity/documentActions'
 import { previewDocumentNode } from './sanity/plugins/previewPane'
 import { structure } from './sanity/plugins/structure'
 import { schema } from './sanity/schemas/schemas'
@@ -74,7 +75,7 @@ export default defineConfig({
       }
       return prev
     },
-    // TODO: Add document actions
+    actions: (prev, context) => documentActions(prev, context),
   },
 
   beta: {
