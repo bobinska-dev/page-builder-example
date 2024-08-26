@@ -1,6 +1,7 @@
 import { SchemaTypeDefinition, TemplateResolver } from 'sanity'
 import page from './documents/page'
 
+import { templates } from '../templates'
 import news from './documents/news'
 import publication from './documents/publication'
 import testimonial from './documents/testimonial '
@@ -23,7 +24,6 @@ import reducedBody from './objects/portableText/reducedBody'
 import { deletedDocBinDocument } from './singletons/bin-solution/deletedDocBinDocument'
 import siteSettings from './singletons/siteSettings'
 import contentArray from './specialFields/contentArray'
-import { templates } from './templates'
 
 export const schema: {
   types: SchemaTypeDefinition[]
