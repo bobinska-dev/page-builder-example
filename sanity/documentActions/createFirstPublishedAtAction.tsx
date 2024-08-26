@@ -7,7 +7,9 @@ import {
   useValidationStatus,
 } from 'sanity'
 
-/** This is a custom action that will be used instead of the default publish action
+/** ### publish action with patch of `firstPublishedAt` value
+ *
+ * This is a custom action that will be used instead of the default publish action
  * you can also add the DocumentActionsContext to `createFirstPublishedAtAction` as a prop if you want to get the `currentUser` etc. passed down as well.
  *
  * Add this to your sanity.config.ts

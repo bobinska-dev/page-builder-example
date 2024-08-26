@@ -4,7 +4,9 @@ import { omit } from 'lodash'
 import { DocumentActionComponent, DocumentActionProps, useClient } from 'sanity'
 import { useRouter } from 'sanity/router'
 
-/** This is a custom action that will be used instead of the default duplication action
+/** ### custom duplication without `firstPublishedAt` values
+ *
+ * This is a custom action that will be used instead of the default duplication action
  * you can also add the DocumentActionsContext to `createNewDuplicateAction` as a prop if you want to get the `currentUser` etc. passed down as well.
  *
  * Add this to your sanity.config.ts
