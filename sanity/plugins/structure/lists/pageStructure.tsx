@@ -38,7 +38,12 @@ export const pageStructure = async (
               S.documentTypeList('page')
                 .title('Live Pages')
                 .filter('_type == "page" && defined(firstPublishedAt)')
-                .apiVersion(apiVersion),
+                .apiVersion(apiVersion)
+                .canHandleIntent(
+                  (intentName, params) =>
+                    intentName === 'edit' &&
+                    params.firstPublishedAt !== undefined,
+                ),
             ),
 
           // * All Pages with changes
@@ -52,7 +57,13 @@ export const pageStructure = async (
                 .filter(
                   `_type == "page" && (_id in path("drafts.**")) && defined(firstPublishedAt)`,
                 )
-                .apiVersion(apiVersion),
+                .apiVersion(apiVersion)
+                .canHandleIntent(
+                  (intentName, params) =>
+                    intentName === 'edit' &&
+                    params.id.startsWith('drafts.') &&
+                    params.firstPublishedAt !== undefined,
+                ),
             ),
 
           S.divider(),

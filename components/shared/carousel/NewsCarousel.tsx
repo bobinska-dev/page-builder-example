@@ -34,7 +34,7 @@ const responsiveSettings = {
 
 const NewsCarousel: ComponentType<{ list: NewsPayload[] }> = (props) => {
   const { list } = props
-  console.log(list)
+
   return (
     <>
       <Carousel

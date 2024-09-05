@@ -15,9 +15,13 @@ type Props = {
 
 export default function PagePreview(props: Props) {
   const { params, initial } = props
-  const { data } = useQuery<PagePayload | null>(pagesBySlugQuery, params, {
-    initial,
-  })
+  const { data, encodeDataAttribute } = useQuery<PagePayload | null>(
+    pagesBySlugQuery,
+    params,
+    {
+      initial,
+    },
+  )
 
-  return <Page data={data!} />
+  return <Page data={data!} encodeDataAttribute={encodeDataAttribute} />
 }

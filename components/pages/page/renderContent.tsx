@@ -1,5 +1,4 @@
 import AccordionComponent from '@/components/shared/Accordion'
-import NewsCarousel from '@/components/shared/carousel/NewsCarousel'
 import { CustomPortableText } from '@/components/shared/CustomPortableText'
 import {
   HeaderPortableText,
@@ -12,6 +11,13 @@ import { PortableText } from 'next-sanity'
 import Link from 'next/link'
 import { Image as ImageType } from 'sanity'
 
+import NewsCarousel from '@/components/shared/carousel/NewsCarousel'
+import dynamic from 'next/dynamic'
+
+const NewsCarouselNoSSR = dynamic(
+  () => import('@/components/shared/carousel/NewsCarousel'),
+  { ssr: false },
+)
 export const renderContent = async (content: PagePayload['content']) =>
   content.map((section) => {
     if (section._type === 'imageHeaderSection') {
@@ -77,11 +83,14 @@ export const renderContent = async (content: PagePayload['content']) =>
       )
     }
     if (section._type === 'textHeaderSection') {
-      // TODO: finish textHeaderSection
       return (
-        <div className="mb-10 ">
+        <div className="mb-12 ">
           {section.title && (
-            <HeaderXPortableText value={section.title} level={1} />
+            <HeaderXPortableText
+              paragraphClasses="text-3xl font-extrabold tracking-tight md:text-5xl py-3 leading-relaxed"
+              value={section.title}
+              level={1}
+            />
           )}
           {section.subtitle && (
             <PortableText
@@ -90,7 +99,7 @@ export const renderContent = async (content: PagePayload['content']) =>
                   normal: ({ children }) => (
                     <p
                       className={
-                        'text-lg font-semibold tracking-tight md:text-xl py-3'
+                        'text-lg font-semibold tracking-tight md:text-xl py-3 italic'
                       }
                     >
                       {children}
@@ -98,9 +107,10 @@ export const renderContent = async (content: PagePayload['content']) =>
                   ),
                 },
               }}
-              value={section.title}
+              value={section.subtitle}
             />
           )}
+          <div className="mb-10" />
           {section.body && (
             <CustomPortableText paragraphClasses="" value={section.body} />
           )}
@@ -212,13 +222,13 @@ export const renderContent = async (content: PagePayload['content']) =>
       )
     }
     if (section._type === 'newsSection') {
-      console.log('VALUE', section)
+      // console.log('VALUE', section)
       return (
         <div className="mb-10 ">
           {section.title && <HeaderPortableText value={section.title} />}
           {section.body && (
             <CustomPortableText
-              paragraphClasses="font-serif max-w-3xl text-gray-600 text-lg"
+              paragraphClasses="max-w-3xl text-gray-600 text-lg"
               value={section.body}
             />
           )}
