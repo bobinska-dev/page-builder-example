@@ -18,7 +18,8 @@ const FilteredSectionsArrayInput: ComponentType<
   const hasHeader = value
     ? value.some(
         (item) =>
-          item._type === 'heroSection' || item._type === 'headerSection',
+          item._type === 'textHeaderSection' ||
+          item._type === 'imageHeaderSection',
       )
     : false
 
@@ -29,7 +30,8 @@ const FilteredSectionsArrayInput: ComponentType<
       // filter out the header section from the array of possible SchemaTypes that can be added to the Content Array, IF the array already has a header section
       of: hasHeader
         ? props.schemaType.of.filter(
-            ({ name }) => name !== 'headerSection' && name !== 'heroSection',
+            ({ name }) =>
+              name !== 'textHeaderSection' && name !== 'imageHeaderSection',
           )
         : props.schemaType.of,
     },
