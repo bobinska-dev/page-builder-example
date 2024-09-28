@@ -7,6 +7,7 @@ import { ComponentType, useState } from 'react'
 import { ArrayOfObjectsInputProps, useClient, useFormValue } from 'sanity'
 import { LogItem } from './deletedDocBinDocument'
 
+// TODO: Make deletion of restored document logs work
 /** ### Array Input Component with Button to clean up the log
  *
  * removes restored documents from the logs array
@@ -33,7 +34,7 @@ export const DeletionLogInputComponent: ComponentType<
   // that fetches all document ids that are in the logs and check if they exist
   const [logs, setLogs] = useState<{ docId: string }[]>([])
   const checkDocumentQuery = groq`*[_id in $docIds]{
-              'docId': _id,
+              'docId': _originalId,
             }`
   const params = { docIds: ids }
 
@@ -53,6 +54,7 @@ export const DeletionLogInputComponent: ComponentType<
   const itemsToUnset = logs.map(
     (item) => `deletedDocLogs[docId == "${item.docId}"]`,
   )
+  console.log(itemsToUnset, logs, ids)
   // * Function to handle the cleanup of restored documents
   /** simple function to check document IDs for existence and unset existing items if there is a `documentID` via the client */
   const handleCleanUp = () => {
@@ -63,7 +65,8 @@ export const DeletionLogInputComponent: ComponentType<
         client
           .patch(documentID)
           .unset(itemsToUnset)
-          .commit()
+          .commit({ dryRun: false })
+          .then(console.log)
           .catch(console.error),
       )
   }
