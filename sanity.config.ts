@@ -15,10 +15,10 @@ import { singletonPlugin } from '@/sanity/plugins/settings'
 
 import { media } from 'sanity-plugin-media'
 import { ptString } from 'sanity-plugin-pt-string'
-import { tableOfContentsInspector } from './sanity/components/inspector'
 import { documentActions } from './sanity/documentActions'
 import { previewDocumentNode } from './sanity/plugins/previewPane'
 import { structure } from './sanity/plugins/structure'
+import tableOfContentsPlugin from './sanity/plugins/tableOfContents'
 import { schema } from './sanity/schemas/schemas'
 import { allSingletonTypeNames } from './sanity/schemas/singletons'
 
@@ -64,23 +64,22 @@ export default defineConfig({
 
     media(),
 
+    tableOfContentsPlugin({
+      fieldNames: ['content', 'body', 'accordion', 'links'],
+      documentTypes: ['page', 'news'],
+    }),
+
     // Vision lets you query your content with GROQ in the studio
     // https://www.sanity.io/docs/the-vision-plugin
     visionTool({ defaultApiVersion: apiVersion }),
   ],
   document: {
-    inspectors: (prev, context) => {
-      if (context.documentType === 'page' || context.documentType === 'news') {
-        return [tableOfContentsInspector, ...prev]
-      }
-      return prev
-    },
+    // inspectors: (prev, context) => {
+    //   /*       if (context.documentType === 'page' || context.documentType === 'news') {
+    //     return [tableOfContentsInspector, ...prev]
+    //   } */
+    //   return prev
+    // },
     actions: (prev, context) => documentActions(prev, context),
-  },
-
-  beta: {
-    treeArrayEditing: {
-      enabled: true,
-    },
   },
 })
