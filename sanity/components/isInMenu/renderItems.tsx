@@ -1,15 +1,18 @@
 import { FooterQuickLink, MenuItemValue } from '@/types'
-import { Card, Flex, Stack, Text } from '@sanity/ui'
-import { IntentButton, ReferenceValue } from 'sanity'
+import { AddCircleIcon, EditIcon } from '@sanity/icons'
+import { Button, Card, Flex, Stack, Text } from '@sanity/ui'
+import { Path, ReferenceValue } from 'sanity'
 
 export const renderItems = ({
   path,
   items,
   title,
+  openPane,
 }: {
-  path: string
+  path: Path
   items: MenuItemValue[] | FooterQuickLink[] | undefined
   title: string
+  openPane: (path: Path) => void
 }) => {
   return (
     <Stack space={3} paddingX={3}>
@@ -30,20 +33,12 @@ export const renderItems = ({
             <Card>
               <Text size={1}>This page is not part of the {title}</Text>
             </Card>
-            <IntentButton
-              intent="edit"
-              mode="ghost"
-              replace={false}
-              params={{
-                id: 'siteSettings',
-                type: 'siteSettings',
-                path: path,
-              }}
+            <Button
               text={`Add to the ${title}`}
-              tooltipProps={{
-                placement: 'top',
-                content: `Edit the ${title} in the overall Site Settings`,
-              }}
+              onClick={() => openPane(path)}
+              icon={AddCircleIcon}
+              mode="ghost"
+              padding={2}
             />
           </Flex>
         </Card>
@@ -72,31 +67,12 @@ export const renderItems = ({
                           ? 'This page is set as the Home Page'
                           : `This page is part of the Quick Links array as the ${index + 1}. item`}
                     </Text>
-                    <IntentButton
-                      intent="edit"
+                    <Button
+                      text={`Edit in ${title}`}
+                      onClick={() => openPane(path)}
+                      icon={EditIcon}
                       mode="ghost"
-                      replace={false}
-                      params={{
-                        id: 'siteSettings',
-                        type: 'siteSettings',
-                        path:
-                          item._type === 'menuItem'
-                            ? (item as MenuItemValue).isNested
-                              ? // @ts-ignore
-                                `menu.menuItems[_key == "${item._key}"].menuItems[_key == "${item.menuItems[0]?._key}"].title`
-                              : `menu.menuItems[_key == "${item._key}"].title`
-                            : item._type === 'reference'
-                              ? `homePage`
-                              : `quickLinks[_key == "${item._key}"]`,
-                      }}
-                      text="Edit in Settings"
-                      tooltipProps={{
-                        placement: 'top',
-                        content:
-                          item._type === 'menuItem'
-                            ? 'Edit the menu item in the overall Site Settings'
-                            : 'Edit the Quick Links array in the overall Site Settings',
-                      }}
+                      padding={2}
                     />
                   </Flex>
                 </Card>

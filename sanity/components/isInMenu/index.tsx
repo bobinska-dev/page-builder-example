@@ -2,9 +2,18 @@ import { Card, Stack, Text } from '@sanity/ui'
 
 import { apiVersion } from '@/sanity/lib/api'
 import { FooterQuickLink, MenuItemValue } from '@/types'
-import { ComponentType, useEffect, useState } from 'react'
-import { BooleanInputProps, getIdPair, useClient, useFormValue } from 'sanity'
+import { ComponentType, useEffect, useMemo, useState } from 'react'
+import {
+  BooleanInputProps,
+  Path,
+  getIdPair,
+  useClient,
+  useFormValue,
+} from 'sanity'
 import { renderItems } from './renderItems'
+
+import { useRouter, useRouterState } from 'sanity/router'
+import { RouterPanes } from 'sanity/structure'
 
 // TODO: Add new menu items to the settings doc query
 /** ## InMenuInput
@@ -19,6 +28,36 @@ const InMenuInput: ComponentType<BooleanInputProps> = (props) => {
   const documentId = useFormValue(['_id']) as string
   const documentType = useFormValue(['_type']) as string
 
+  // * Router states for panes and navigation functions
+  const { navigate } = useRouter()
+  const routerState = useRouterState()
+  // * Get the current router pane groups that are open
+  const routerPaneGroups = useMemo<RouterPanes>(
+    () => (routerState?.panes || []) as RouterPanes,
+    [routerState?.panes],
+  )
+  console.log(routerPaneGroups) // * Open a new pane with the settings document to the right of current routerState
+  const openPane = (path: Path) => {
+    const nextPanes: RouterPanes = [
+      // keep existing panes
+      ...routerPaneGroups.filter((group) => group[0].id !== 'siteSettings'),
+      [
+        {
+          id: 'siteSettings',
+          params: {
+            type: 'siteSettings',
+          },
+        },
+      ],
+    ]
+
+    navigate(
+      {
+        panes: nextPanes,
+      },
+      { replace: true },
+    )
+  }
   const [loading, setLoading] = useState(true)
   const [menuItems, setMenuItems] = useState<MenuItemValue[] | undefined>()
   const [footerQuickLinks, setFooterQuickLinks] = useState<
@@ -64,7 +103,7 @@ const InMenuInput: ComponentType<BooleanInputProps> = (props) => {
         {loading && (
           <Card padding={3}>
             <Text style={{ fontStyle: 'italic' }} size={1} muted>
-              Loading
+              Loading...
             </Text>
           </Card>
         )}
@@ -73,13 +112,15 @@ const InMenuInput: ComponentType<BooleanInputProps> = (props) => {
           renderItems({
             title: 'Menu',
             items: menuItems,
-            path: 'menu.menuItems',
+            openPane: openPane,
+            path: ['menu', 'menuItems'],
           })}
         {!loading &&
           renderItems({
             title: 'Footer Quick Links',
             items: footerQuickLinks,
-            path: 'quickLinks',
+            openPane: openPane,
+            path: ['quickLinks'],
           })}
       </Stack>
     </Card>
