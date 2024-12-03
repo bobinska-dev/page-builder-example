@@ -36,7 +36,8 @@ const InMenuInput: ComponentType<BooleanInputProps> = (props) => {
     () => (routerState?.panes || []) as RouterPanes,
     [routerState?.panes],
   )
-  console.log(routerPaneGroups) // * Open a new pane with the settings document to the right of current routerState
+
+  // * Open a new pane with the settings document to the right of current routerState
   const openPane = (path: Path) => {
     const nextPanes: RouterPanes = [
       // keep existing panes
