@@ -77,10 +77,4 @@ export default defineConfig({
     },
     actions: (prev, context) => documentActions(prev, context),
   },
-
-  beta: {
-    treeArrayEditing: {
-      enabled: true,
-    },
-  },
 })
