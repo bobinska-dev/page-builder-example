@@ -55,6 +55,19 @@ export const BODY_FRAGMENT = groq`body[]{
       ...@->{ "slug":slug.current, title, subtitle } },
     
   },
+  _type == 'block' => {
+    ..., 
+    children[]{
+      ...,
+      // * INLINE BLOCKS
+      _type == 'placeholder' => {
+        ...,
+        "siblingMarks": ^.children[]{
+          _key, marks
+        }
+      },
+    },
+  },
   // * IMAGE BLOCK
   _type == 'imageBlock' => {
     ...,

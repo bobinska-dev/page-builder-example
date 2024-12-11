@@ -40,6 +40,36 @@ export default defineType({
     defineArrayMember({
       type: 'block',
       validation: (rule) => [warnWhenHeadingOrBlockIsAllBold(rule)],
+      of: [
+        defineArrayMember({
+          name: 'placeholder',
+          type: 'object',
+          fields: [
+            defineField({
+              type: 'string',
+              name: 'code',
+              title: 'Code',
+              options: {
+                list: [
+                  { title: 'placeholder 1', value: 'placeholder1' },
+                  { title: 'placeholder 2', value: 'placeholder2' },
+                ],
+              },
+              validation: (Rule) => Rule.required(),
+            }),
+          ],
+          title: 'Placeholder',
+          // icon: CodeIcon,
+          preview: {
+            select: { title: 'code' },
+            prepare: (selection) => {
+              return {
+                title: selection.title ? `${selection.title}` : '(empty)',
+              }
+            },
+          },
+        }),
+      ],
       marks: {
         annotations: [
           // Link annotation to external and internal pages

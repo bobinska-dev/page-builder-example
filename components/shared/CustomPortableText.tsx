@@ -104,6 +104,33 @@ export function CustomPortableText({
       },
     },
     types: {
+      placeholder: ({ value }) => {
+        console.log('placeholder', value)
+        const wrappingMarks = () => {
+          // check if value.siblingMarks if item with same _key value as the placeholder has direct siblings before and after the placeholder which have marks defined on them. If this is true, return the marks array from the sibling
+          if (!value.siblingMarks) return console.log('no sibling marks')
+          const indexOfPlaceholder = value.siblingMarks.findIndex(
+            (item: any) => item._key === value._key,
+          )
+          const previousSibling = value.siblingMarks[indexOfPlaceholder - 1]
+          const nextSibling = value.siblingMarks[indexOfPlaceholder + 1]
+          const compareArrays = (a, b) =>
+            a.length === b.length &&
+            a.every((element, index) => element === b[index])
+          if (
+            previousSibling.marks &&
+            nextSibling.marks &&
+            compareArrays(previousSibling.marks, nextSibling.marks)
+          ) {
+            return previousSibling.marks
+          }
+          return console.log('no wrapping marks')
+        }
+
+        // ADD YOUR OWN RENDER INSTRUCTIONS HERE based on the marks here ...
+
+        return <span>{value?.code}</span>
+      },
       imageBlock: ({
         value,
       }: {

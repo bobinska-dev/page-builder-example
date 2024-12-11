@@ -2,7 +2,7 @@ import { createClient } from 'next-sanity'
 
 import {
   apiVersion,
-  dataset,
+  datasetDemo,
   projectId,
   revalidateSecret,
   studioUrl,
@@ -10,7 +10,7 @@ import {
 
 export const client = createClient({
   projectId,
-  dataset,
+  dataset: datasetDemo,
   apiVersion,
   // If webhook revalidation is setup we want the freshest content, if not then it's best to use the speedy CDN
   useCdn: revalidateSecret ? false : true,
