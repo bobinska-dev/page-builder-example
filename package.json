@@ -45,6 +45,7 @@
     "sanity-plugin-iframe-pane": "^3.1.6",
     "sanity-plugin-media": "^2.3.2",
     "sanity-plugin-pt-string": "^0.0.5",
+    "sanity-plugin-table-of-contents": "^1.0.1",
     "server-only": "0.0.1",
     "styled-components": "^6.1.11"
   },

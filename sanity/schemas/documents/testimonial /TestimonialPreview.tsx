@@ -9,7 +9,6 @@ const TestimonialPreview: ComponentType<PreviewProps> = (props) => {
   return (
     <>
       <Box>
-        {/*  */}
         {renderDefault({
           ...props,
           title: 'Testimonial',

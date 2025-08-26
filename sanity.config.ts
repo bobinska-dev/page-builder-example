@@ -5,9 +5,12 @@
 import { assist } from '@sanity/assist'
 import { visionTool } from '@sanity/vision'
 import { defineConfig } from 'sanity'
-import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash'
 import { presentationTool } from 'sanity/presentation'
 import { structureTool } from 'sanity/structure'
+import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash'
+import { media } from 'sanity-plugin-media'
+import { ptString } from 'sanity-plugin-pt-string'
+import { tableOfContentsPlugin } from 'sanity-plugin-table-of-contents'
 
 import {
   apiVersion,
@@ -19,14 +22,13 @@ import {
 import * as resolve from '@/sanity/plugins/resolve'
 import { singletonPlugin } from '@/sanity/plugins/settings'
 
-import { media } from 'sanity-plugin-media'
-import { ptString } from 'sanity-plugin-pt-string'
-import { tableOfContentsInspector } from './sanity/components/inspector'
 import { documentActions } from './sanity/documentActions'
 import { previewDocumentNode } from './sanity/plugins/previewPane'
 import { structure } from './sanity/plugins/structure'
 import { schema } from './sanity/schemas/schemas'
 import { allSingletonTypeNames } from './sanity/schemas/singletons'
+
+
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE ||
@@ -75,17 +77,13 @@ export default defineConfig([
       // Vision lets you query your content with GROQ in the studio
       // https://www.sanity.io/docs/the-vision-plugin
       visionTool({ defaultApiVersion: apiVersion }),
+      tableOfContentsPlugin({
+        fieldNames: ['content', 'body'],
+        documentTypes: ['page', 'news'],
+      })
     ],
     document: {
-      inspectors: (prev, context) => {
-        if (
-          context.documentType === 'page' ||
-          context.documentType === 'news'
-        ) {
-          return [tableOfContentsInspector, ...prev]
-        }
-        return prev
-      },
+
       actions: (prev, context) => documentActions(prev, context),
     },
   },
@@ -131,17 +129,13 @@ export default defineConfig([
       // Vision lets you query your content with GROQ in the studio
       // https://www.sanity.io/docs/the-vision-plugin
       visionTool({ defaultApiVersion: apiVersion }),
+
+      tableOfContentsPlugin({
+        fieldNames: ['content', 'body'],
+        documentTypes: ['page', 'news'],
+      })
     ],
     document: {
-      inspectors: (prev, context) => {
-        if (
-          context.documentType === 'page' ||
-          context.documentType === 'news'
-        ) {
-          return [tableOfContentsInspector, ...prev]
-        }
-        return prev
-      },
       actions: (prev, context) => documentActions(prev, context),
     },
   },

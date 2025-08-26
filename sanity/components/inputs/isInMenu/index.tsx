@@ -1,21 +1,23 @@
 import { Card, Stack, Text } from '@sanity/ui'
-
+import { Subscription } from 'rxjs'
 import { apiVersion } from '@/sanity/lib/api'
-import { FooterQuickLink, MenuItemValue } from '@/types'
+
 import { ComponentType, useEffect, useMemo, useState } from 'react'
-import {
-  BooleanInputProps,
-  Path,
-  getIdPair,
-  useClient,
-  useFormValue,
-} from 'sanity'
+import { BooleanInputProps, Path, getIdPair, useClient, useFormValue } from 'sanity'
 import { renderItems } from './renderItems'
 
 import { useRouter, useRouterState } from 'sanity/router'
 import { RouterPanes } from 'sanity/structure'
+import { SiteSettings as Settings } from '@/sanity.types'
+import { sleep } from '@/sanity/lib/utils/sleep'
+import { SiteSettings } from '@/sanity.types'
 
-// TODO: Add new menu items to the settings doc query
+export interface HomeDummy {
+  _ref: string
+  _type: 'home'
+  _key: string
+}
+
 /** ## InMenuInput
  *
  * This component is used to render the input for the `isInMenu` field in the Sanity Studio.
@@ -41,12 +43,12 @@ const InMenuInput: ComponentType<BooleanInputProps> = (props) => {
   const openPane = (path: Path) => {
     const nextPanes: RouterPanes = [
       // keep existing panes
-      ...routerPaneGroups.filter((group) => group[0].id !== 'siteSettings'),
+      ...routerPaneGroups.filter((group) => group[0].id !== 'settings'),
       [
         {
-          id: 'siteSettings',
+          id: 'settings',
           params: {
-            type: 'siteSettings',
+            type: 'settings',
           },
         },
       ],
@@ -60,15 +62,16 @@ const InMenuInput: ComponentType<BooleanInputProps> = (props) => {
     )
   }
   const [loading, setLoading] = useState(true)
-  const [menuItems, setMenuItems] = useState<MenuItemValue[] | undefined>()
-  const [footerQuickLinks, setFooterQuickLinks] = useState<
-    FooterQuickLink[] | undefined
-  >()
+  const [menuItems, setMenuItems] = useState<Settings['menu'] | HomeDummy[] | undefined>()
+  const [footerQuickLinks, setFooterQuickLinks] = useState<Settings['quickLinks'] | undefined>()
   const { publishedId } = getIdPair(documentId)
-  // fetch siteSettings doc and get menuItems
+
+  let subscription: Subscription
+  // fetch settings doc and get menu
   useEffect(() => {
     setLoading(true)
-    const settingsQuery = `*[_type == "siteSettings"][0]{
+
+    const settingsQuery = `*[_type == "settings"][0]{
       homePage._ref == $documentId => { "homePage": { "_ref": homePage._ref, "_type": 'home' } },
       "firstMenuItems": menu[link._ref == $documentId],
       "nestedMenuItems": menu[]{
@@ -80,22 +83,39 @@ const InMenuInput: ComponentType<BooleanInputProps> = (props) => {
         "menuItems": array::compact([homePage, ...firstMenuItems, ...nestedMenuItems]), footerQuickLinks,
       }`
     const params = { documentId: publishedId }
+    const fetchSettings = async (listening = false) => {
+      listening && (await sleep(1500)) // chances are the data isn't query-able yet, so we wait a bit
 
-    client
-      .fetch(settingsQuery, params)
-      .then((res) => {
-        res.menuItems.length > 0 && setMenuItems(res.menuItems)
-        res.footerQuickLinks.length > 0 &&
-          setFooterQuickLinks(res.footerQuickLinks)
-        setLoading(false)
-      })
-      .catch(console.error)
+      await client
+        .fetch(settingsQuery, params)
+        .then((res) => {
+          res.menuItems.length > 0 && setMenuItems(res.menuItems)
+          res.footerQuickLinks.length > 0 && setFooterQuickLinks(res.footerQuickLinks)
+          setLoading(false)
+        })
+        .catch(console.error)
+        .finally(() => setLoading(false))
+    }
+    // since we store our referenced data in a state we need to make sure, we also listen to changes
+    const listen = () => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      subscription = client
+        .listen(settingsQuery, params, { visibility: 'query' })
+        .subscribe(() => fetchSettings(true))
+    }
+    publishedId ? fetchSettings().then(listen) : null
+
+    // and then we need to cleanup after ourselves, so we don't get any memory leaks
+    return function cleanup() {
+      if (subscription) {
+        subscription.unsubscribe()
+      }
+    }
   }, [])
 
   return (
     <Card>
       <Stack space={2}>
-        {/* <Card>{renderDefault(props)}</Card> */}
         <Card>
           <Text weight="semibold" as={'h2'} size={1} id="pagePlacement">
             Page Placement Settings

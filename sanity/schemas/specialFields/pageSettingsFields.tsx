@@ -1,4 +1,4 @@
-import InMenuInput from '@/sanity/components/isInMenu'
+import InMenuInput from '@/sanity/components/inputs/isInMenu'
 import { defineField } from 'sanity'
 
 /** ## Page Settings fields
