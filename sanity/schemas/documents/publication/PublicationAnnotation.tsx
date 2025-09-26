@@ -4,6 +4,7 @@ import { ComponentType, useEffect, useState } from 'react'
 import { Subscription } from 'rxjs'
 import { BlockAnnotationProps, useClient } from 'sanity'
 import styled from 'styled-components'
+import { sleep } from '@/sanity/lib/utils/sleep'
 
 const PublicationAnnotation: ComponentType<BlockAnnotationProps> = (props) => {
   const { value, renderDefault } = props
@@ -13,10 +14,10 @@ const PublicationAnnotation: ComponentType<BlockAnnotationProps> = (props) => {
   })
   const [reference, setReference] = useState<any>({})
 
-  // we need to initialise the subscription
-  let subscription: Subscription
   // then get the data from the referenced document
   useEffect(() => {
+  // we need to initialise the subscription
+  let subscription: Subscription
     // so let's setup the query and params to fetch the values we need.
     const query = `*[_id == $ref]{title, description}[0]`
     const params = { ref: value?._ref }
@@ -82,7 +83,8 @@ const InlineAnnotation = styled.span`
   padding-right: 0.2em;
 `
 const Icon = styled(BookIcon)`
-  color: ${(props) => props.theme.sanity.color.base.border};
+    // @ts-ignore
+  color: ${(props) => props.theme.sanity?.color.base.border};
   padding-right: 5px;
 `
 export default PublicationAnnotation

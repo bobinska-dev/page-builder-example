@@ -5,7 +5,7 @@ import {
   type PortableTextBlock,
   type PortableTextComponents,
 } from 'next-sanity'
-import { ComponentType } from 'react'
+import { ComponentType, JSX } from 'react'
 
 export function HeaderPortableText({
   paragraphClasses,

@@ -1,4 +1,4 @@
-const { theme } = require('@sanity/demo/tailwind')
+
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -8,7 +8,7 @@ module.exports = {
     './intro-template/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    ...theme,
+
     // Overriding fontFamily to use @next/font loaded families
     fontFamily: {
       mono: 'var(--font-mono)',

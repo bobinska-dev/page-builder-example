@@ -4,6 +4,7 @@ import { ComponentType, useEffect, useState } from 'react'
 import { Subscription } from 'rxjs'
 import { BlockAnnotationProps, useClient } from 'sanity'
 import styled from 'styled-components'
+import { sleep } from '@/sanity/lib/utils/sleep'
 
 // We need to extend the value of our BlockAnnotationProps, so we can add the value types for later use
 export type BlockAnnotationPropsWithValueTypes = BlockAnnotationProps & {

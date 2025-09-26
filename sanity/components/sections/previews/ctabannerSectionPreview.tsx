@@ -103,11 +103,11 @@ const CtaSectionPreview: ComponentType<CtaPreviewProps> = (props) => {
     <ContentArrayPreviewContainer
       type="CTA Banner Section"
       title={title as string}
-      body={body}
+      body={body!}
       icon={<InfoOutlineIcon />}
     >
       <Flex gap={2}>
-        {allButtons.length !== 0 &&
+        {allButtons && allButtons.length !== 0 &&
           allButtons.map((button) => (
             <Card key={button?._key} padding={3} radius={2} shadow={1}>
               <Tooltip

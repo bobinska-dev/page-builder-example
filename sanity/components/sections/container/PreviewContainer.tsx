@@ -7,7 +7,7 @@ import styled from 'styled-components'
 import MediaIcon from './IconContainer'
 
 type ArrayItemContainerProps = {
-  body: Body | string | PortableTextBlock[]
+  body: Body | any[] |string | PortableTextBlock[]
   icon: IconType | any
   children?: any
   type: string
@@ -93,6 +93,7 @@ const ContentArrayPreviewContainer: ComponentType<ArrayItemContainerProps> = ({
 const CardFullWidth = styled(Card)`
   width: 100%;
   &:hover {
+      //@ts-ignore
     background: var(--card-bg-hover);
   }
 `

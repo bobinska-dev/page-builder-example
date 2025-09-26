@@ -60,6 +60,7 @@ const InlineAnnotation = styled.span`
   padding-right: 0.2em;
 `
 const Icon = styled(BellIcon)`
+    // @ts-ignore
   color: ${(props) => props.theme.sanity.color.base.border};
   padding-right: 5px;
 `

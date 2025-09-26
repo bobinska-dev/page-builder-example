@@ -6,7 +6,8 @@ import { useDocumentPane } from 'sanity/structure'
 export const BodyFieldWithActions: ComponentType<FieldProps> = (props) => {
   return props.renderDefault({
     ...props,
-    actions: [
+/*  TODO: FIX ISSUE WITH RERENDERS
+        actions: [
       {
         name: 'tableOfContents',
         useAction: () => {
@@ -27,6 +28,6 @@ export const BodyFieldWithActions: ComponentType<FieldProps> = (props) => {
         },
       },
       ...(props.actions ?? []),
-    ],
+    ],*/
   })
 }

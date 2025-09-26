@@ -11,7 +11,7 @@ const TextSectionPreview: ComponentType<TextSectionPreviewProps> = (props) => {
     <ContentArrayPreviewContainer
       type="Text Section"
       title={props.title as string}
-      body={props.body}
+      body={props.body!}
       icon={<BlockContentIcon />}
     />
   )

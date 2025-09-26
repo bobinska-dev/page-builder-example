@@ -13,7 +13,7 @@ const TextHeaderSectionPreview: ComponentType<TextHeaderSectionPreviewProps> = (
     <ContentArrayPreviewContainer
       type="Text Header Section"
       title={props.title as string}
-      body={props.body}
+      body={props.body!}
       icon={<TextIcon />}
     />
   )

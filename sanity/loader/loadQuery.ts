@@ -8,7 +8,7 @@ import {
   homePageQuery,
   pagesBySlugQuery,
   settingsQuery,
-  testimonialsQuery,
+
 } from '@/sanity/lib/queries'
 import { token } from '@/sanity/lib/token'
 import { PagePayload, SettingsPayload, TestimonialPayload } from '@/types'
@@ -29,9 +29,9 @@ queryStore.setServerClient(serverClient)
 
 const usingCdn = serverClient.config().useCdn
 // Automatically handle draft mode
-export const loadQuery = ((query, params = {}, options = {}) => {
+export const loadQuery = (async (query, params = {}, options = {}) => {
   const {
-    perspective = draftMode().isEnabled ? 'previewDrafts' : 'published',
+    perspective = (await draftMode()).isEnabled ? 'drafts' : 'published',
   } = options
   // Don't cache by default
   let revalidate: NextFetchRequestConfig['revalidate'] = 0
@@ -49,7 +49,7 @@ export const loadQuery = ((query, params = {}, options = {}) => {
     },
     perspective,
     // Enable stega if in Draft Mode, to enable overlays when outside Sanity Studio
-    stega: draftMode().isEnabled,
+    stega: (await draftMode()).isEnabled,
   })
 }) satisfies typeof queryStore.loadQuery
 
@@ -81,10 +81,10 @@ export function loadPage(slug: string) {
   )
 }
 
-export function loadTestimonials(tags: string[] = []) {
+/*export function loadTestimonials(tags: string[] = []) {
   return loadQuery<TestimonialPayload[] | null>(
     testimonialsQuery,
     { tags },
     { next: { tags: ['home', 'page'] } },
   )
-}
+}*/
