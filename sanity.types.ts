@@ -13,39 +13,6 @@
  */
 
 // Source: schema.json
-export type SanityImagePaletteSwatch = {
-  _type: 'sanity.imagePaletteSwatch'
-  background?: string
-  foreground?: string
-  population?: number
-  title?: string
-}
-
-export type SanityImagePalette = {
-  _type: 'sanity.imagePalette'
-  darkMuted?: SanityImagePaletteSwatch
-  lightVibrant?: SanityImagePaletteSwatch
-  darkVibrant?: SanityImagePaletteSwatch
-  vibrant?: SanityImagePaletteSwatch
-  dominant?: SanityImagePaletteSwatch
-  lightMuted?: SanityImagePaletteSwatch
-  muted?: SanityImagePaletteSwatch
-}
-
-export type SanityImageDimensions = {
-  _type: 'sanity.imageDimensions'
-  height?: number
-  width?: number
-  aspectRatio?: number
-}
-
-export type Geopoint = {
-  _type: 'geopoint'
-  lat?: number
-  lng?: number
-  alt?: number
-}
-
 export type Content = Array<
   | ({
       _key: string
@@ -75,7 +42,7 @@ export type Content = Array<
 
 export type NewsSection = {
   _type: 'newsSection'
-  title: Array<{
+  title?: Array<{
     children?: Array<{
       marks?: Array<string>
       text?: string
@@ -91,12 +58,19 @@ export type NewsSection = {
   }>
   body?: Array<
     | {
-        children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: 'span'
-          _key: string
-        }>
+        children?: Array<
+          | {
+              marks?: Array<string>
+              text?: string
+              _type: 'span'
+              _key: string
+            }
+          | {
+              code?: 'placeholder1' | 'placeholder2'
+              _type: 'placeholder'
+              _key: string
+            }
+        >
         style?:
           | 'normal'
           | 'h2'
@@ -109,7 +83,7 @@ export type NewsSection = {
         listItem?: 'bullet' | 'number'
         markDefs?: Array<
           | {
-              type: 'external' | 'internal'
+              type?: 'external' | 'internal'
               href?: string
               reference?: {
                 _ref: string
@@ -146,9 +120,10 @@ export type NewsSection = {
           _weak?: boolean
           [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
         }
+        media?: unknown
         hotspot?: SanityImageHotspot
         crop?: SanityImageCrop
-        altText: string
+        altText?: string
         promptForImage?: string
         _type: 'imageBlock'
         _key: string
@@ -182,7 +157,7 @@ export type NewsSection = {
 
 export type FurtherLinkSection = {
   _type: 'furtherLinkSection'
-  title: Array<{
+  title?: Array<{
     children?: Array<{
       marks?: Array<string>
       text?: string
@@ -198,12 +173,19 @@ export type FurtherLinkSection = {
   }>
   body?: Array<
     | {
-        children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: 'span'
-          _key: string
-        }>
+        children?: Array<
+          | {
+              marks?: Array<string>
+              text?: string
+              _type: 'span'
+              _key: string
+            }
+          | {
+              code?: 'placeholder1' | 'placeholder2'
+              _type: 'placeholder'
+              _key: string
+            }
+        >
         style?:
           | 'normal'
           | 'h2'
@@ -216,7 +198,7 @@ export type FurtherLinkSection = {
         listItem?: 'bullet' | 'number'
         markDefs?: Array<
           | {
-              type: 'external' | 'internal'
+              type?: 'external' | 'internal'
               href?: string
               reference?: {
                 _ref: string
@@ -253,9 +235,10 @@ export type FurtherLinkSection = {
           _weak?: boolean
           [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
         }
+        media?: unknown
         hotspot?: SanityImageHotspot
         crop?: SanityImageCrop
-        altText: string
+        altText?: string
         promptForImage?: string
         _type: 'imageBlock'
         _key: string
@@ -277,7 +260,7 @@ export type FurtherLinkSection = {
         [internalGroqTypeReferenceTo]?: 'testimonial'
       }
   >
-  links: Array<
+  links?: Array<
     {
       _key: string
     } & LinkCard
@@ -286,7 +269,7 @@ export type FurtherLinkSection = {
 
 export type CtaBannerSection = {
   _type: 'ctaBannerSection'
-  title: Array<{
+  title?: Array<{
     children?: Array<{
       marks?: Array<string>
       text?: string
@@ -300,14 +283,21 @@ export type CtaBannerSection = {
     _type: 'block'
     _key: string
   }>
-  body: Array<
+  body?: Array<
     | {
-        children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: 'span'
-          _key: string
-        }>
+        children?: Array<
+          | {
+              marks?: Array<string>
+              text?: string
+              _type: 'span'
+              _key: string
+            }
+          | {
+              code?: 'placeholder1' | 'placeholder2'
+              _type: 'placeholder'
+              _key: string
+            }
+        >
         style?:
           | 'normal'
           | 'h2'
@@ -320,7 +310,7 @@ export type CtaBannerSection = {
         listItem?: 'bullet' | 'number'
         markDefs?: Array<
           | {
-              type: 'external' | 'internal'
+              type?: 'external' | 'internal'
               href?: string
               reference?: {
                 _ref: string
@@ -357,9 +347,10 @@ export type CtaBannerSection = {
           _weak?: boolean
           [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
         }
+        media?: unknown
         hotspot?: SanityImageHotspot
         crop?: SanityImageCrop
-        altText: string
+        altText?: string
         promptForImage?: string
         _type: 'imageBlock'
         _key: string
@@ -385,7 +376,7 @@ export type CtaBannerSection = {
 
 export type TextSection = {
   _type: 'textSection'
-  title: Array<{
+  title?: Array<{
     children?: Array<{
       marks?: Array<string>
       text?: string
@@ -413,14 +404,21 @@ export type TextSection = {
     _type: 'block'
     _key: string
   }>
-  body: Array<
+  body?: Array<
     | {
-        children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: 'span'
-          _key: string
-        }>
+        children?: Array<
+          | {
+              marks?: Array<string>
+              text?: string
+              _type: 'span'
+              _key: string
+            }
+          | {
+              code?: 'placeholder1' | 'placeholder2'
+              _type: 'placeholder'
+              _key: string
+            }
+        >
         style?:
           | 'normal'
           | 'h2'
@@ -433,7 +431,7 @@ export type TextSection = {
         listItem?: 'bullet' | 'number'
         markDefs?: Array<
           | {
-              type: 'external' | 'internal'
+              type?: 'external' | 'internal'
               href?: string
               reference?: {
                 _ref: string
@@ -470,9 +468,10 @@ export type TextSection = {
           _weak?: boolean
           [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
         }
+        media?: unknown
         hotspot?: SanityImageHotspot
         crop?: SanityImageCrop
-        altText: string
+        altText?: string
         promptForImage?: string
         _type: 'imageBlock'
         _key: string
@@ -498,7 +497,7 @@ export type TextSection = {
 
 export type TestimonialSection = {
   _type: 'testimonialSection'
-  title: Array<{
+  title?: Array<{
     children?: Array<{
       marks?: Array<string>
       text?: string
@@ -514,12 +513,19 @@ export type TestimonialSection = {
   }>
   body?: Array<
     | {
-        children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: 'span'
-          _key: string
-        }>
+        children?: Array<
+          | {
+              marks?: Array<string>
+              text?: string
+              _type: 'span'
+              _key: string
+            }
+          | {
+              code?: 'placeholder1' | 'placeholder2'
+              _type: 'placeholder'
+              _key: string
+            }
+        >
         style?:
           | 'normal'
           | 'h2'
@@ -532,7 +538,7 @@ export type TestimonialSection = {
         listItem?: 'bullet' | 'number'
         markDefs?: Array<
           | {
-              type: 'external' | 'internal'
+              type?: 'external' | 'internal'
               href?: string
               reference?: {
                 _ref: string
@@ -569,9 +575,10 @@ export type TestimonialSection = {
           _weak?: boolean
           [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
         }
+        media?: unknown
         hotspot?: SanityImageHotspot
         crop?: SanityImageCrop
-        altText: string
+        altText?: string
         promptForImage?: string
         _type: 'imageBlock'
         _key: string
@@ -605,7 +612,7 @@ export type TestimonialSection = {
 
 export type AccordionSection = {
   _type: 'accordionSection'
-  title: Array<{
+  title?: Array<{
     children?: Array<{
       marks?: Array<string>
       text?: string
@@ -621,12 +628,19 @@ export type AccordionSection = {
   }>
   body?: Array<
     | {
-        children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: 'span'
-          _key: string
-        }>
+        children?: Array<
+          | {
+              marks?: Array<string>
+              text?: string
+              _type: 'span'
+              _key: string
+            }
+          | {
+              code?: 'placeholder1' | 'placeholder2'
+              _type: 'placeholder'
+              _key: string
+            }
+        >
         style?:
           | 'normal'
           | 'h2'
@@ -639,7 +653,7 @@ export type AccordionSection = {
         listItem?: 'bullet' | 'number'
         markDefs?: Array<
           | {
-              type: 'external' | 'internal'
+              type?: 'external' | 'internal'
               href?: string
               reference?: {
                 _ref: string
@@ -676,9 +690,10 @@ export type AccordionSection = {
           _weak?: boolean
           [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
         }
+        media?: unknown
         hotspot?: SanityImageHotspot
         crop?: SanityImageCrop
-        altText: string
+        altText?: string
         promptForImage?: string
         _type: 'imageBlock'
         _key: string
@@ -700,7 +715,7 @@ export type AccordionSection = {
         [internalGroqTypeReferenceTo]?: 'testimonial'
       }
   >
-  accordion: Array<
+  accordion?: Array<
     {
       _key: string
     } & AccordionItem
@@ -709,7 +724,7 @@ export type AccordionSection = {
 
 export type ImageHeaderSection = {
   _type: 'imageHeaderSection'
-  title: Array<{
+  title?: Array<{
     children?: Array<{
       marks?: Array<string>
       text?: string
@@ -737,16 +752,17 @@ export type ImageHeaderSection = {
     _type: 'block'
     _key: string
   }>
-  image: {
+  image?: {
     asset: {
       _ref: string
       _type: 'reference'
       _weak?: boolean
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
     }
+    media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
-    altText: string
+    altText?: string
     promptForImage?: string
     _type: 'aiImage'
   }
@@ -754,7 +770,7 @@ export type ImageHeaderSection = {
 
 export type TextHeaderSection = {
   _type: 'textHeaderSection'
-  title: Array<{
+  title?: Array<{
     children?: Array<{
       marks?: Array<string>
       text?: string
@@ -782,14 +798,21 @@ export type TextHeaderSection = {
     _type: 'block'
     _key: string
   }>
-  body: Array<
+  body?: Array<
     | {
-        children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: 'span'
-          _key: string
-        }>
+        children?: Array<
+          | {
+              marks?: Array<string>
+              text?: string
+              _type: 'span'
+              _key: string
+            }
+          | {
+              code?: 'placeholder1' | 'placeholder2'
+              _type: 'placeholder'
+              _key: string
+            }
+        >
         style?:
           | 'normal'
           | 'h2'
@@ -802,7 +825,7 @@ export type TextHeaderSection = {
         listItem?: 'bullet' | 'number'
         markDefs?: Array<
           | {
-              type: 'external' | 'internal'
+              type?: 'external' | 'internal'
               href?: string
               reference?: {
                 _ref: string
@@ -839,9 +862,10 @@ export type TextHeaderSection = {
           _weak?: boolean
           [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
         }
+        media?: unknown
         hotspot?: SanityImageHotspot
         crop?: SanityImageCrop
-        altText: string
+        altText?: string
         promptForImage?: string
         _type: 'imageBlock'
         _key: string
@@ -867,8 +891,8 @@ export type TextHeaderSection = {
 
 export type Button = {
   _type: 'button'
-  title: string
-  type: 'internal' | 'external' | 'functional' | 'file'
+  title?: string
+  type?: 'internal' | 'external' | 'functional' | 'file'
   linkExternal?: string
   linkInternal?:
     | {
@@ -896,6 +920,7 @@ export type Button = {
       _weak?: boolean
       [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
     }
+    media?: unknown
     _type: 'file'
   }
   functional?: 'contact' | 'subscribe'
@@ -911,7 +936,7 @@ export type ReducedBody = Array<{
   style?: 'normal' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote' | 'small'
   listItem?: 'bullet' | 'number'
   markDefs?: Array<{
-    type: 'external' | 'internal'
+    type?: 'external' | 'internal'
     href?: string
     reference?: {
       _ref: string
@@ -944,12 +969,19 @@ export type Overview = Array<{
 
 export type Body = Array<
   | {
-      children?: Array<{
-        marks?: Array<string>
-        text?: string
-        _type: 'span'
-        _key: string
-      }>
+      children?: Array<
+        | {
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }
+        | {
+            code?: 'placeholder1' | 'placeholder2'
+            _type: 'placeholder'
+            _key: string
+          }
+      >
       style?:
         | 'normal'
         | 'h2'
@@ -962,7 +994,7 @@ export type Body = Array<
       listItem?: 'bullet' | 'number'
       markDefs?: Array<
         | {
-            type: 'external' | 'internal'
+            type?: 'external' | 'internal'
             href?: string
             reference?: {
               _ref: string
@@ -999,9 +1031,10 @@ export type Body = Array<
         _weak?: boolean
         [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
       }
+      media?: unknown
       hotspot?: SanityImageHotspot
       crop?: SanityImageCrop
-      altText: string
+      altText?: string
       promptForImage?: string
       _type: 'imageBlock'
       _key: string
@@ -1026,8 +1059,8 @@ export type Body = Array<
 
 export type LinkCard = {
   _type: 'linkCard'
-  title: Overview
-  description: Overview
+  title?: Overview
+  description?: Overview
   url?: string
   internalLink?:
     | {
@@ -1046,62 +1079,12 @@ export type LinkCard = {
 
 export type AccordionItem = {
   _type: 'accordionItem'
-  title: string
-  body: ReducedBody
-}
-
-export type SanityImageCrop = {
-  _type: 'sanity.imageCrop'
-  top?: number
-  bottom?: number
-  left?: number
-  right?: number
-}
-
-export type SanityImageHotspot = {
-  _type: 'sanity.imageHotspot'
-  x?: number
-  y?: number
-  height?: number
-  width?: number
-}
-
-export type SanityImageAsset = {
-  _id: string
-  _type: 'sanity.imageAsset'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  originalFilename?: string
-  label?: string
   title?: string
-  description?: string
-  altText?: string
-  sha1hash?: string
-  extension?: string
-  mimeType?: string
-  size?: number
-  assetId?: string
-  uploadId?: string
-  path?: string
-  url?: string
-  metadata?: SanityImageMetadata
-  source?: SanityAssetSourceData
-}
-
-export type SanityImageMetadata = {
-  _type: 'sanity.imageMetadata'
-  location?: Geopoint
-  dimensions?: SanityImageDimensions
-  palette?: SanityImagePalette
-  lqip?: string
-  blurHash?: string
-  hasAlpha?: boolean
-  isOpaque?: boolean
+  body?: ReducedBody
 }
 
 export type Menu = Array<{
-  title: string
+  title?: string
   isNested?: boolean
   link?: {
     _ref: string
@@ -1110,8 +1093,8 @@ export type Menu = Array<{
     [internalGroqTypeReferenceTo]?: 'page'
   }
   menuItems?: Array<{
-    title: string
-    link: {
+    title?: string
+    link?: {
       _ref: string
       _type: 'reference'
       _weak?: boolean
@@ -1130,20 +1113,21 @@ export type News = {
   _createdAt: string
   _updatedAt: string
   _rev: string
-  title: string
-  subtitle: string
+  title?: string
+  subtitle?: string
   body?: Body
-  slug: Slug
-  image: {
+  slug?: Slug
+  image?: {
     asset: {
       _ref: string
       _type: 'reference'
       _weak?: boolean
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
     }
+    media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
-    altText: string
+    altText?: string
     promptForImage?: string
     _type: 'aiImage'
   }
@@ -1157,10 +1141,11 @@ export type Publication = {
   _createdAt: string
   _updatedAt: string
   _rev: string
-  title: string
-  authors: string
-  description: ReducedBody
-  pubYear:
+  title?: string
+  authors?: string
+  description?: ReducedBody
+  pubYear?:
+    | 2055
     | 2054
     | 2053
     | 2052
@@ -1240,7 +1225,6 @@ export type Publication = {
     | 1978
     | 1977
     | 1976
-    | 1975
   tags?: Array<string>
   url?: string
   file?: {
@@ -1250,6 +1234,7 @@ export type Publication = {
       _weak?: boolean
       [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
     }
+    media?: unknown
     _type: 'file'
   }
 }
@@ -1260,8 +1245,8 @@ export type Testimonial = {
   _createdAt: string
   _updatedAt: string
   _rev: string
-  title: string
-  body: ReducedBody
+  title?: string
+  body?: ReducedBody
   tags?: Array<string>
 }
 
@@ -1272,15 +1257,15 @@ export type DeletedDocsBin = {
   _updatedAt: string
   _rev: string
   deletedDocLogs?: Array<{
-    docId: string
-    deletedAt: string
-    type: string
-    documentTitle: string
+    docId?: string
+    deletedAt?: string
+    type?: string
+    documentTitle?: string
     _type: 'log'
     _key: string
   }>
   deletedDocIds?: Array<string>
-  title: string
+  title?: string
 }
 
 export type SiteSettings = {
@@ -1290,13 +1275,13 @@ export type SiteSettings = {
   _updatedAt: string
   _rev: string
   title?: string
-  homePage: {
+  homePage?: {
     _ref: string
     _type: 'reference'
     _weak?: boolean
     [internalGroqTypeReferenceTo]?: 'page'
   }
-  menu: Menu
+  menu?: Menu
   quickLinks?: Array<
     | {
         _ref: string
@@ -1318,49 +1303,53 @@ export type SiteSettings = {
       _weak?: boolean
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
     }
+    media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
-    altText: string
+    altText?: string
     promptForImage?: string
     _type: 'aiImage'
   }
-  pageNotFound: {
+  pageNotFound?: {
     asset: {
       _ref: string
       _type: 'reference'
       _weak?: boolean
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
     }
+    media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
-    altText: string
+    altText?: string
     promptForImage?: string
     _type: 'aiImage'
   }
-  serverError: {
+  serverError?: {
     asset: {
       _ref: string
       _type: 'reference'
       _weak?: boolean
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
     }
+    media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
-    altText: string
+    altText?: string
     promptForImage?: string
     _type: 'aiImage'
   }
   logos?: {
-    logoColor: {
+    logoColor?: {
       asset: {
         _ref: string
         _type: 'reference'
         _weak?: boolean
         [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
       }
+      media?: unknown
       hotspot?: SanityImageHotspot
       crop?: SanityImageCrop
-      altText: string
+      altText?: string
       promptForImage?: string
       _type: 'aiImage'
     }
@@ -1371,9 +1360,10 @@ export type SiteSettings = {
         _weak?: boolean
         [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
       }
+      media?: unknown
       hotspot?: SanityImageHotspot
       crop?: SanityImageCrop
-      altText: string
+      altText?: string
       promptForImage?: string
       _type: 'aiImage'
     }
@@ -1384,9 +1374,10 @@ export type SiteSettings = {
         _weak?: boolean
         [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
       }
+      media?: unknown
       hotspot?: SanityImageHotspot
       crop?: SanityImageCrop
-      altText: string
+      altText?: string
       promptForImage?: string
       _type: 'aiImage'
     }
@@ -1399,54 +1390,26 @@ export type Page = {
   _createdAt: string
   _updatedAt: string
   _rev: string
-  title: string
-  slug: Slug
-  description: Overview
-  image: {
+  title?: string
+  slug?: Slug
+  description?: Overview
+  image?: {
     asset: {
       _ref: string
       _type: 'reference'
       _weak?: boolean
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
     }
+    media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
-    altText: string
+    altText?: string
     promptForImage?: string
     _type: 'aiImage'
   }
-  content: Content
+  content?: Content
   isInMenu?: boolean
   firstPublishedAt?: string
-}
-
-export type SanityFileAsset = {
-  _id: string
-  _type: 'sanity.fileAsset'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  originalFilename?: string
-  label?: string
-  title?: string
-  description?: string
-  altText?: string
-  sha1hash?: string
-  extension?: string
-  mimeType?: string
-  size?: number
-  assetId?: string
-  uploadId?: string
-  path?: string
-  url?: string
-  source?: SanityAssetSourceData
-}
-
-export type SanityAssetSourceData = {
-  _type: 'sanity.assetSourceData'
-  name?: string
-  id?: string
-  url?: string
 }
 
 export type AiImage = {
@@ -1457,9 +1420,10 @@ export type AiImage = {
     _weak?: boolean
     [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
   }
+  media?: unknown
   hotspot?: SanityImageHotspot
   crop?: SanityImageCrop
-  altText: string
+  altText?: string
   promptForImage?: string
 }
 
@@ -1470,12 +1434,6 @@ export type MediaTag = {
   _updatedAt: string
   _rev: string
   name?: Slug
-}
-
-export type Slug = {
-  _type: 'slug'
-  current: string
-  source?: string
 }
 
 export type SanityAssistInstructionTask = {
@@ -1518,7 +1476,7 @@ export type SanityAssistOutputField = {
 
 export type SanityAssistInstructionContext = {
   _type: 'sanity.assist.instruction.context'
-  reference: {
+  reference?: {
     _ref: string
     _type: 'reference'
     _weak?: boolean
@@ -1551,7 +1509,7 @@ export type AssistInstructionContext = {
 
 export type SanityAssistInstructionUserInput = {
   _type: 'sanity.assist.instruction.userInput'
-  message: string
+  message?: string
   description?: string
 }
 
@@ -1632,11 +1590,125 @@ export type PtString = Array<{
   _key: string
 }>
 
+export type SanityImagePaletteSwatch = {
+  _type: 'sanity.imagePaletteSwatch'
+  background?: string
+  foreground?: string
+  population?: number
+  title?: string
+}
+
+export type SanityImagePalette = {
+  _type: 'sanity.imagePalette'
+  darkMuted?: SanityImagePaletteSwatch
+  lightVibrant?: SanityImagePaletteSwatch
+  darkVibrant?: SanityImagePaletteSwatch
+  vibrant?: SanityImagePaletteSwatch
+  dominant?: SanityImagePaletteSwatch
+  lightMuted?: SanityImagePaletteSwatch
+  muted?: SanityImagePaletteSwatch
+}
+
+export type SanityImageDimensions = {
+  _type: 'sanity.imageDimensions'
+  height?: number
+  width?: number
+  aspectRatio?: number
+}
+
+export type SanityImageHotspot = {
+  _type: 'sanity.imageHotspot'
+  x?: number
+  y?: number
+  height?: number
+  width?: number
+}
+
+export type SanityImageCrop = {
+  _type: 'sanity.imageCrop'
+  top?: number
+  bottom?: number
+  left?: number
+  right?: number
+}
+
+export type SanityFileAsset = {
+  _id: string
+  _type: 'sanity.fileAsset'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  originalFilename?: string
+  label?: string
+  title?: string
+  description?: string
+  altText?: string
+  sha1hash?: string
+  extension?: string
+  mimeType?: string
+  size?: number
+  assetId?: string
+  uploadId?: string
+  path?: string
+  url?: string
+  source?: SanityAssetSourceData
+}
+
+export type SanityImageAsset = {
+  _id: string
+  _type: 'sanity.imageAsset'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  originalFilename?: string
+  label?: string
+  title?: string
+  description?: string
+  altText?: string
+  sha1hash?: string
+  extension?: string
+  mimeType?: string
+  size?: number
+  assetId?: string
+  uploadId?: string
+  path?: string
+  url?: string
+  metadata?: SanityImageMetadata
+  source?: SanityAssetSourceData
+}
+
+export type SanityImageMetadata = {
+  _type: 'sanity.imageMetadata'
+  location?: Geopoint
+  dimensions?: SanityImageDimensions
+  palette?: SanityImagePalette
+  lqip?: string
+  blurHash?: string
+  hasAlpha?: boolean
+  isOpaque?: boolean
+}
+
+export type Geopoint = {
+  _type: 'geopoint'
+  lat?: number
+  lng?: number
+  alt?: number
+}
+
+export type Slug = {
+  _type: 'slug'
+  current?: string
+  source?: string
+}
+
+export type SanityAssetSourceData = {
+  _type: 'sanity.assetSourceData'
+  name?: string
+  id?: string
+  url?: string
+}
+
 export type AllSanitySchemaTypes =
-  | SanityImagePaletteSwatch
-  | SanityImagePalette
-  | SanityImageDimensions
-  | Geopoint
   | Content
   | NewsSection
   | FurtherLinkSection
@@ -1652,10 +1724,6 @@ export type AllSanitySchemaTypes =
   | Body
   | LinkCard
   | AccordionItem
-  | SanityImageCrop
-  | SanityImageHotspot
-  | SanityImageAsset
-  | SanityImageMetadata
   | Menu
   | News
   | Publication
@@ -1663,11 +1731,8 @@ export type AllSanitySchemaTypes =
   | DeletedDocsBin
   | SiteSettings
   | Page
-  | SanityFileAsset
-  | SanityAssetSourceData
   | AiImage
   | MediaTag
-  | Slug
   | SanityAssistInstructionTask
   | SanityAssistTaskStatus
   | SanityAssistSchemaTypeAnnotations
@@ -1681,19 +1746,30 @@ export type AllSanitySchemaTypes =
   | SanityAssistInstruction
   | SanityAssistSchemaTypeField
   | PtString
+  | SanityImagePaletteSwatch
+  | SanityImagePalette
+  | SanityImageDimensions
+  | SanityImageHotspot
+  | SanityImageCrop
+  | SanityFileAsset
+  | SanityImageAsset
+  | SanityImageMetadata
+  | Geopoint
+  | Slug
+  | SanityAssetSourceData
 export declare const internalGroqTypeReferenceTo: unique symbol
 // Source: ./sanity/lib/queries.ts
 // Variable: IMAGE_FRAGMENT
 // Query: image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}
 export type IMAGE_FRAGMENTResult = never
 // Variable: BODY_FRAGMENT
-// Query: body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}
+// Query: body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },}
 export type BODY_FRAGMENTResult = never
 // Variable: CONTENT_FRAGMENT
-// Query: content[]{  ...,  _type == 'imageHeaderSection' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},  },  _type == 'textHeaderSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}  },  _type == 'textSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}  },  _type == 'accordionSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},    accordion[]{      ...,      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}    }  },  _type == 'ctaBannerSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},  },  _type == 'furtherLinkSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},    links[]{      ...,      defined(internalLink)=> {        ...internalLink->{          "slug": slug.current,          "docType": _type        }      },    }  },  _type == 'newsSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},    defined(news) && !loadAll => {news[]->{      ...,      image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},      'slug': slug.current    }},    loadAll => {'news': *[_type == 'news']{      ...,      image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},      'slug': slug.current    }},  },  _type == 'testimonialSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},  },}
+// Query: content[]{  ...,  _type == 'imageHeaderSection' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},  },  _type == 'textHeaderSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },}  },  _type == 'textSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },}  },  _type == 'accordionSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},    accordion[]{      ...,      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },}    }  },  _type == 'ctaBannerSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},  },  _type == 'furtherLinkSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},    links[]{      ...,      defined(internalLink)=> {        ...internalLink->{          "slug": slug.current,          "docType": _type        }      },    }  },  _type == 'newsSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},    defined(news) && !loadAll => {news[]->{      ...,      image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},      'slug': slug.current    }},    loadAll => {'news': *[_type == 'news']{      ...,      image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},      'slug': slug.current    }},  },  _type == 'testimonialSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},    // Specific testimonials selected by editors    defined(testimonials) && !loadTags => {testimonials[]->{      ...,      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},    }},    // All testimonials    !defined(testimonials) && 'loadAll' in loadTags =>{      'testimonials': *[_type == 'testimonial'] {        ...,        body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },}      }    },    // Specific testimonials by tags    !defined(testimonials) && !('loadAll' in loadTags) => {      'testimonials': *[_type == 'testimonial' && count(tags[@ in ^.^.loadTags]) > 0]{        ...,        body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},      }    },  },}
 export type CONTENT_FRAGMENTResult = never
 // Variable: PAGE_FRAGMENT
-// Query: {    _id,    title,    description,    "slug": slug.current,    content[]{  ...,  _type == 'imageHeaderSection' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},  },  _type == 'textHeaderSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}  },  _type == 'textSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}  },  _type == 'accordionSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},    accordion[]{      ...,      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}    }  },  _type == 'ctaBannerSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},  },  _type == 'furtherLinkSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},    links[]{      ...,      defined(internalLink)=> {        ...internalLink->{          "slug": slug.current,          "docType": _type        }      },    }  },  _type == 'newsSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},    defined(news) && !loadAll => {news[]->{      ...,      image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},      'slug': slug.current    }},    loadAll => {'news': *[_type == 'news']{      ...,      image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},      'slug': slug.current    }},  },  _type == 'testimonialSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},  },},    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  }
+// Query: {    _id,    title,    description,    "slug": slug.current,    content[]{  ...,  _type == 'imageHeaderSection' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},  },  _type == 'textHeaderSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },}  },  _type == 'textSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },}  },  _type == 'accordionSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},    accordion[]{      ...,      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },}    }  },  _type == 'ctaBannerSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},  },  _type == 'furtherLinkSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},    links[]{      ...,      defined(internalLink)=> {        ...internalLink->{          "slug": slug.current,          "docType": _type        }      },    }  },  _type == 'newsSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},    defined(news) && !loadAll => {news[]->{      ...,      image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},      'slug': slug.current    }},    loadAll => {'news': *[_type == 'news']{      ...,      image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},      'slug': slug.current    }},  },  _type == 'testimonialSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},    // Specific testimonials selected by editors    defined(testimonials) && !loadTags => {testimonials[]->{      ...,      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},    }},    // All testimonials    !defined(testimonials) && 'loadAll' in loadTags =>{      'testimonials': *[_type == 'testimonial'] {        ...,        body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },}      }    },    // Specific testimonials by tags    !defined(testimonials) && !('loadAll' in loadTags) => {      'testimonials': *[_type == 'testimonial' && count(tags[@ in ^.^.loadTags]) > 0]{        ...,        body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},      }    },  },},    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  }
 export type PAGE_FRAGMENTResult = {
   _id: never
   title: never
@@ -1703,17 +1779,17 @@ export type PAGE_FRAGMENTResult = {
   image: never
 }
 // Variable: homePageQuery
-// Query:   *[_type == "siteSettings"][0].homePage->{    _id,    title,    description,    "slug": slug.current,    content[]{  ...,  _type == 'imageHeaderSection' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},  },  _type == 'textHeaderSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}  },  _type == 'textSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}  },  _type == 'accordionSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},    accordion[]{      ...,      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}    }  },  _type == 'ctaBannerSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},  },  _type == 'furtherLinkSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},    links[]{      ...,      defined(internalLink)=> {        ...internalLink->{          "slug": slug.current,          "docType": _type        }      },    }  },  _type == 'newsSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},    defined(news) && !loadAll => {news[]->{      ...,      image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},      'slug': slug.current    }},    loadAll => {'news': *[_type == 'news']{      ...,      image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},      'slug': slug.current    }},  },  _type == 'testimonialSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},  },},    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  }
+// Query: *[_type == "siteSettings"][0].homePage->{    _id,    title,    description,    "slug": slug.current,    content[]{  ...,  _type == 'imageHeaderSection' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},  },  _type == 'textHeaderSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },}  },  _type == 'textSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },}  },  _type == 'accordionSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},    accordion[]{      ...,      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },}    }  },  _type == 'ctaBannerSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},  },  _type == 'furtherLinkSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},    links[]{      ...,      defined(internalLink)=> {        ...internalLink->{          "slug": slug.current,          "docType": _type        }      },    }  },  _type == 'newsSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},    defined(news) && !loadAll => {news[]->{      ...,      image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},      'slug': slug.current    }},    loadAll => {'news': *[_type == 'news']{      ...,      image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},      'slug': slug.current    }},  },  _type == 'testimonialSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},    // Specific testimonials selected by editors    defined(testimonials) && !loadTags => {testimonials[]->{      ...,      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},    }},    // All testimonials    !defined(testimonials) && 'loadAll' in loadTags =>{      'testimonials': *[_type == 'testimonial'] {        ...,        body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },}      }    },    // Specific testimonials by tags    !defined(testimonials) && !('loadAll' in loadTags) => {      'testimonials': *[_type == 'testimonial' && count(tags[@ in ^.^.loadTags]) > 0]{        ...,        body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},      }    },  },},    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  }
 export type HomePageQueryResult = {
   _id: string
-  title: string
-  description: Overview
-  slug: string
+  title: string | null
+  description: Overview | null
+  slug: string | null
   content: Array<
     | {
         _key: string
         _type: 'accordionSection'
-        title: Array<{
+        title?: Array<{
           children?: Array<{
             marks?: Array<string>
             text?: string
@@ -1736,12 +1812,29 @@ export type HomePageQueryResult = {
               markDefs: null
             }
           | {
-              children?: Array<{
-                marks?: Array<string>
-                text?: string
-                _type: 'span'
-                _key: string
-              }>
+              children: Array<
+                | {
+                    code?: 'placeholder1' | 'placeholder2'
+                    _type: 'placeholder'
+                    _key: string
+                    siblingMarks: Array<
+                      | {
+                          _key: string
+                          marks: null
+                        }
+                      | {
+                          _key: string
+                          marks: Array<string> | null
+                        }
+                    > | null
+                  }
+                | {
+                    marks?: Array<string>
+                    text?: string
+                    _type: 'span'
+                    _key: string
+                  }
+              > | null
               style?:
                 | 'blockquote'
                 | 'h2'
@@ -1752,19 +1845,34 @@ export type HomePageQueryResult = {
                 | 'normal'
                 | 'small'
               listItem?: 'bullet' | 'number'
-              markDefs: Array<
-                | {}
+              markDefs?: Array<
                 | {
-                    type: 'external' | 'internal'
-                    href:
-                      | {
-                          slug: string
-                          _type: 'page'
-                        }
-                      | null
-                      | string
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'news'
                   }
-              > | null
+                | {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'publication'
+                  }
+                | {
+                    type?: 'external' | 'internal'
+                    href?: string
+                    reference?: {
+                      _ref: string
+                      _type: 'reference'
+                      _weak?: boolean
+                      [internalGroqTypeReferenceTo]?: 'page'
+                    }
+                    _type: 'link'
+                    _key: string
+                  }
+              >
               level?: number
               _type: 'block'
               _key: string
@@ -1773,11 +1881,11 @@ export type HomePageQueryResult = {
               buttons: Array<
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
-                    slug: string
+                    slug: string | null
                     docType: 'news'
                     linkExternal?: string
                     linkInternal?:
@@ -1806,17 +1914,74 @@ export type HomePageQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
-                    slug: string
+                    slug: string | null
                     docType: 'page'
                     linkExternal?: string
                     linkInternal?:
@@ -1845,14 +2010,71 @@ export type HomePageQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
                     slug: null
@@ -1884,14 +2106,71 @@ export type HomePageQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
                     linkExternal?: string
@@ -1921,9 +2200,60 @@ export type HomePageQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
                   }
               > | null
               _type: 'buttons'
@@ -1937,9 +2267,10 @@ export type HomePageQueryResult = {
                 _weak?: boolean
                 [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
               }
+              media?: unknown
               hotspot?: SanityImageHotspot
               crop?: SanityImageCrop
-              altText: string
+              altText?: string
               promptForImage?: string
               _type: 'imageBlock'
               _key: string
@@ -1950,14 +2281,14 @@ export type HomePageQueryResult = {
         accordion: Array<{
           _key: string
           _type: 'accordionItem'
-          title: string
+          title?: string
           body: Array<{
-            children?: Array<{
+            children: Array<{
               marks?: Array<string>
               text?: string
               _type: 'span'
               _key: string
-            }>
+            }> | null
             style?:
               | 'blockquote'
               | 'h3'
@@ -1967,26 +2298,28 @@ export type HomePageQueryResult = {
               | 'normal'
               | 'small'
             listItem?: 'bullet' | 'number'
-            markDefs: Array<{
-              type: 'external' | 'internal'
-              href:
-                | {
-                    slug: string
-                    _type: 'page'
-                  }
-                | null
-                | string
-            }> | null
+            markDefs?: Array<{
+              type?: 'external' | 'internal'
+              href?: string
+              reference?: {
+                _ref: string
+                _type: 'reference'
+                _weak?: boolean
+                [internalGroqTypeReferenceTo]?: 'page'
+              }
+              _type: 'link'
+              _key: string
+            }>
             level?: number
             _type: 'block'
             _key: string
-          }>
-        }>
+          }> | null
+        }> | null
       }
     | {
         _key: string
         _type: 'ctaBannerSection'
-        title: Array<{
+        title?: Array<{
           children?: Array<{
             marks?: Array<string>
             text?: string
@@ -2009,12 +2342,29 @@ export type HomePageQueryResult = {
               markDefs: null
             }
           | {
-              children?: Array<{
-                marks?: Array<string>
-                text?: string
-                _type: 'span'
-                _key: string
-              }>
+              children: Array<
+                | {
+                    code?: 'placeholder1' | 'placeholder2'
+                    _type: 'placeholder'
+                    _key: string
+                    siblingMarks: Array<
+                      | {
+                          _key: string
+                          marks: null
+                        }
+                      | {
+                          _key: string
+                          marks: Array<string> | null
+                        }
+                    > | null
+                  }
+                | {
+                    marks?: Array<string>
+                    text?: string
+                    _type: 'span'
+                    _key: string
+                  }
+              > | null
               style?:
                 | 'blockquote'
                 | 'h2'
@@ -2025,19 +2375,34 @@ export type HomePageQueryResult = {
                 | 'normal'
                 | 'small'
               listItem?: 'bullet' | 'number'
-              markDefs: Array<
-                | {}
+              markDefs?: Array<
                 | {
-                    type: 'external' | 'internal'
-                    href:
-                      | {
-                          slug: string
-                          _type: 'page'
-                        }
-                      | null
-                      | string
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'news'
                   }
-              > | null
+                | {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'publication'
+                  }
+                | {
+                    type?: 'external' | 'internal'
+                    href?: string
+                    reference?: {
+                      _ref: string
+                      _type: 'reference'
+                      _weak?: boolean
+                      [internalGroqTypeReferenceTo]?: 'page'
+                    }
+                    _type: 'link'
+                    _key: string
+                  }
+              >
               level?: number
               _type: 'block'
               _key: string
@@ -2046,11 +2411,11 @@ export type HomePageQueryResult = {
               buttons: Array<
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
-                    slug: string
+                    slug: string | null
                     docType: 'news'
                     linkExternal?: string
                     linkInternal?:
@@ -2079,17 +2444,74 @@ export type HomePageQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
-                    slug: string
+                    slug: string | null
                     docType: 'page'
                     linkExternal?: string
                     linkInternal?:
@@ -2118,14 +2540,71 @@ export type HomePageQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
                     slug: null
@@ -2157,14 +2636,71 @@ export type HomePageQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
                     linkExternal?: string
@@ -2194,9 +2730,60 @@ export type HomePageQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
                   }
               > | null
               _type: 'buttons'
@@ -2210,21 +2797,22 @@ export type HomePageQueryResult = {
                 _weak?: boolean
                 [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
               }
+              media?: unknown
               hotspot?: SanityImageHotspot
               crop?: SanityImageCrop
-              altText: string
+              altText?: string
               promptForImage?: string
               _type: 'imageBlock'
               _key: string
               markDefs: null
               image: null
             }
-        >
+        > | null
       }
     | {
         _key: string
         _type: 'furtherLinkSection'
-        title: Array<{
+        title?: Array<{
           children?: Array<{
             marks?: Array<string>
             text?: string
@@ -2247,12 +2835,29 @@ export type HomePageQueryResult = {
               markDefs: null
             }
           | {
-              children?: Array<{
-                marks?: Array<string>
-                text?: string
-                _type: 'span'
-                _key: string
-              }>
+              children: Array<
+                | {
+                    code?: 'placeholder1' | 'placeholder2'
+                    _type: 'placeholder'
+                    _key: string
+                    siblingMarks: Array<
+                      | {
+                          _key: string
+                          marks: null
+                        }
+                      | {
+                          _key: string
+                          marks: Array<string> | null
+                        }
+                    > | null
+                  }
+                | {
+                    marks?: Array<string>
+                    text?: string
+                    _type: 'span'
+                    _key: string
+                  }
+              > | null
               style?:
                 | 'blockquote'
                 | 'h2'
@@ -2263,19 +2868,34 @@ export type HomePageQueryResult = {
                 | 'normal'
                 | 'small'
               listItem?: 'bullet' | 'number'
-              markDefs: Array<
-                | {}
+              markDefs?: Array<
                 | {
-                    type: 'external' | 'internal'
-                    href:
-                      | {
-                          slug: string
-                          _type: 'page'
-                        }
-                      | null
-                      | string
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'news'
                   }
-              > | null
+                | {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'publication'
+                  }
+                | {
+                    type?: 'external' | 'internal'
+                    href?: string
+                    reference?: {
+                      _ref: string
+                      _type: 'reference'
+                      _weak?: boolean
+                      [internalGroqTypeReferenceTo]?: 'page'
+                    }
+                    _type: 'link'
+                    _key: string
+                  }
+              >
               level?: number
               _type: 'block'
               _key: string
@@ -2284,11 +2904,11 @@ export type HomePageQueryResult = {
               buttons: Array<
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
-                    slug: string
+                    slug: string | null
                     docType: 'news'
                     linkExternal?: string
                     linkInternal?:
@@ -2317,17 +2937,74 @@ export type HomePageQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
-                    slug: string
+                    slug: string | null
                     docType: 'page'
                     linkExternal?: string
                     linkInternal?:
@@ -2356,14 +3033,71 @@ export type HomePageQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
                     slug: null
@@ -2395,14 +3129,71 @@ export type HomePageQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
                     linkExternal?: string
@@ -2432,9 +3223,60 @@ export type HomePageQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
                   }
               > | null
               _type: 'buttons'
@@ -2448,9 +3290,10 @@ export type HomePageQueryResult = {
                 _weak?: boolean
                 [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
               }
+              media?: unknown
               hotspot?: SanityImageHotspot
               crop?: SanityImageCrop
-              altText: string
+              altText?: string
               promptForImage?: string
               _type: 'imageBlock'
               _key: string
@@ -2462,8 +3305,8 @@ export type HomePageQueryResult = {
           | {
               _key: string
               _type: 'linkCard'
-              title: Overview
-              description: Overview
+              title?: Overview
+              description?: Overview
               url?: string
               internalLink?:
                 | {
@@ -2478,14 +3321,14 @@ export type HomePageQueryResult = {
                     _weak?: boolean
                     [internalGroqTypeReferenceTo]?: 'page'
                   }
-              slug: string
+              slug: string | null
               docType: 'news'
             }
           | {
               _key: string
               _type: 'linkCard'
-              title: Overview
-              description: Overview
+              title?: Overview
+              description?: Overview
               url?: string
               internalLink?:
                 | {
@@ -2500,14 +3343,14 @@ export type HomePageQueryResult = {
                     _weak?: boolean
                     [internalGroqTypeReferenceTo]?: 'page'
                   }
-              slug: string
+              slug: string | null
               docType: 'page'
             }
           | {
               _key: string
               _type: 'linkCard'
-              title: Overview
-              description: Overview
+              title?: Overview
+              description?: Overview
               url?: string
               internalLink?:
                 | {
@@ -2523,12 +3366,12 @@ export type HomePageQueryResult = {
                     [internalGroqTypeReferenceTo]?: 'page'
                   }
             }
-        >
+        > | null
       }
     | {
         _key: string
         _type: 'imageHeaderSection'
-        title: Array<{
+        title?: Array<{
           children?: Array<{
             marks?: Array<string>
             text?: string
@@ -2563,6 +3406,7 @@ export type HomePageQueryResult = {
             _weak?: boolean
             [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
           }
+          media?: unknown
           hotspot?: SanityImageHotspot
           crop?: SanityImageCrop
           altText:
@@ -2572,12 +3416,12 @@ export type HomePageQueryResult = {
           promptForImage?: string
           _type: 'aiImage'
           blurHashURL: string | null
-        }
+        } | null
       }
     | {
         _key: string
         _type: 'newsSection'
-        title: Array<{
+        title?: Array<{
           children?: Array<{
             marks?: Array<string>
             text?: string
@@ -2600,12 +3444,29 @@ export type HomePageQueryResult = {
               markDefs: null
             }
           | {
-              children?: Array<{
-                marks?: Array<string>
-                text?: string
-                _type: 'span'
-                _key: string
-              }>
+              children: Array<
+                | {
+                    code?: 'placeholder1' | 'placeholder2'
+                    _type: 'placeholder'
+                    _key: string
+                    siblingMarks: Array<
+                      | {
+                          _key: string
+                          marks: null
+                        }
+                      | {
+                          _key: string
+                          marks: Array<string> | null
+                        }
+                    > | null
+                  }
+                | {
+                    marks?: Array<string>
+                    text?: string
+                    _type: 'span'
+                    _key: string
+                  }
+              > | null
               style?:
                 | 'blockquote'
                 | 'h2'
@@ -2616,19 +3477,34 @@ export type HomePageQueryResult = {
                 | 'normal'
                 | 'small'
               listItem?: 'bullet' | 'number'
-              markDefs: Array<
-                | {}
+              markDefs?: Array<
                 | {
-                    type: 'external' | 'internal'
-                    href:
-                      | {
-                          slug: string
-                          _type: 'page'
-                        }
-                      | null
-                      | string
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'news'
                   }
-              > | null
+                | {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'publication'
+                  }
+                | {
+                    type?: 'external' | 'internal'
+                    href?: string
+                    reference?: {
+                      _ref: string
+                      _type: 'reference'
+                      _weak?: boolean
+                      [internalGroqTypeReferenceTo]?: 'page'
+                    }
+                    _type: 'link'
+                    _key: string
+                  }
+              >
               level?: number
               _type: 'block'
               _key: string
@@ -2637,11 +3513,11 @@ export type HomePageQueryResult = {
               buttons: Array<
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
-                    slug: string
+                    slug: string | null
                     docType: 'news'
                     linkExternal?: string
                     linkInternal?:
@@ -2670,17 +3546,74 @@ export type HomePageQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
-                    slug: string
+                    slug: string | null
                     docType: 'page'
                     linkExternal?: string
                     linkInternal?:
@@ -2709,14 +3642,71 @@ export type HomePageQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
                     slug: null
@@ -2748,14 +3738,71 @@ export type HomePageQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
                     linkExternal?: string
@@ -2785,9 +3832,60 @@ export type HomePageQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
                   }
               > | null
               _type: 'buttons'
@@ -2801,9 +3899,10 @@ export type HomePageQueryResult = {
                 _weak?: boolean
                 [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
               }
+              media?: unknown
               hotspot?: SanityImageHotspot
               crop?: SanityImageCrop
-              altText: string
+              altText?: string
               promptForImage?: string
               _type: 'imageBlock'
               _key: string
@@ -2818,8 +3917,8 @@ export type HomePageQueryResult = {
           _createdAt: string
           _updatedAt: string
           _rev: string
-          title: string
-          subtitle: string
+          title?: string
+          subtitle?: string
           body: Array<
             | {
                 _ref: string
@@ -2829,12 +3928,29 @@ export type HomePageQueryResult = {
                 markDefs: null
               }
             | {
-                children?: Array<{
-                  marks?: Array<string>
-                  text?: string
-                  _type: 'span'
-                  _key: string
-                }>
+                children: Array<
+                  | {
+                      code?: 'placeholder1' | 'placeholder2'
+                      _type: 'placeholder'
+                      _key: string
+                      siblingMarks: Array<
+                        | {
+                            _key: string
+                            marks: null
+                          }
+                        | {
+                            _key: string
+                            marks: Array<string> | null
+                          }
+                      > | null
+                    }
+                  | {
+                      marks?: Array<string>
+                      text?: string
+                      _type: 'span'
+                      _key: string
+                    }
+                > | null
                 style?:
                   | 'blockquote'
                   | 'h2'
@@ -2845,19 +3961,34 @@ export type HomePageQueryResult = {
                   | 'normal'
                   | 'small'
                 listItem?: 'bullet' | 'number'
-                markDefs: Array<
-                  | {}
+                markDefs?: Array<
                   | {
-                      type: 'external' | 'internal'
-                      href:
-                        | {
-                            slug: string
-                            _type: 'page'
-                          }
-                        | null
-                        | string
+                      _ref: string
+                      _type: 'reference'
+                      _weak?: boolean
+                      _key: string
+                      [internalGroqTypeReferenceTo]?: 'news'
                     }
-                > | null
+                  | {
+                      _ref: string
+                      _type: 'reference'
+                      _weak?: boolean
+                      _key: string
+                      [internalGroqTypeReferenceTo]?: 'publication'
+                    }
+                  | {
+                      type?: 'external' | 'internal'
+                      href?: string
+                      reference?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'page'
+                      }
+                      _type: 'link'
+                      _key: string
+                    }
+                >
                 level?: number
                 _type: 'block'
                 _key: string
@@ -2866,11 +3997,11 @@ export type HomePageQueryResult = {
                 buttons: Array<
                   | {
                       _key: string
-                      title: string
-                      type: 'external' | 'file' | 'functional' | 'internal'
+                      title?: string
+                      type?: 'external' | 'file' | 'functional' | 'internal'
                       _type: 'button'
                       href: string | null
-                      slug: string
+                      slug: string | null
                       docType: 'news'
                       linkExternal?: string
                       linkInternal?:
@@ -2899,17 +4030,84 @@ export type HomePageQueryResult = {
                           _weak?: boolean
                           [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                         }
+                        media?: unknown
                         _type: 'file'
                       }
                       functional?: 'contact' | 'subscribe'
                     }
                   | {
                       _key: string
-                      title: string
-                      type: 'external' | 'file' | 'functional' | 'internal'
+                      title?: string
+                      type?: 'external' | 'file' | 'functional' | 'internal'
+                      _type: 'button'
+                      slug: string | null
+                      docType: 'news'
+                      linkExternal?: string
+                      linkInternal?:
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'news'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'page'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'publication'
+                          }
+                      file?: {
+                        asset?: {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                        }
+                        media?: unknown
+                        _type: 'file'
+                      }
+                      functional?: 'contact' | 'subscribe'
+                    }
+                  | {
+                      _key: string
+                      title: string | null
+                      type:
+                        | 'external'
+                        | 'file'
+                        | 'functional'
+                        | 'internal'
+                        | null
+                      _type: 'button'
+                      slug: string | null
+                      docType: 'news'
+                      href: string | null
+                    }
+                  | {
+                      _key: string
+                      title: string | null
+                      type:
+                        | 'external'
+                        | 'file'
+                        | 'functional'
+                        | 'internal'
+                        | null
+                      _type: 'button'
+                      slug: string | null
+                      docType: 'news'
+                    }
+                  | {
+                      _key: string
+                      title?: string
+                      type?: 'external' | 'file' | 'functional' | 'internal'
                       _type: 'button'
                       href: string | null
-                      slug: string
+                      slug: string | null
                       docType: 'page'
                       linkExternal?: string
                       linkInternal?:
@@ -2938,14 +4136,81 @@ export type HomePageQueryResult = {
                           _weak?: boolean
                           [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                         }
+                        media?: unknown
                         _type: 'file'
                       }
                       functional?: 'contact' | 'subscribe'
                     }
                   | {
                       _key: string
-                      title: string
-                      type: 'external' | 'file' | 'functional' | 'internal'
+                      title?: string
+                      type?: 'external' | 'file' | 'functional' | 'internal'
+                      _type: 'button'
+                      slug: string | null
+                      docType: 'page'
+                      linkExternal?: string
+                      linkInternal?:
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'news'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'page'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'publication'
+                          }
+                      file?: {
+                        asset?: {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                        }
+                        media?: unknown
+                        _type: 'file'
+                      }
+                      functional?: 'contact' | 'subscribe'
+                    }
+                  | {
+                      _key: string
+                      title: string | null
+                      type:
+                        | 'external'
+                        | 'file'
+                        | 'functional'
+                        | 'internal'
+                        | null
+                      _type: 'button'
+                      slug: string | null
+                      docType: 'page'
+                      href: string | null
+                    }
+                  | {
+                      _key: string
+                      title: string | null
+                      type:
+                        | 'external'
+                        | 'file'
+                        | 'functional'
+                        | 'internal'
+                        | null
+                      _type: 'button'
+                      slug: string | null
+                      docType: 'page'
+                    }
+                  | {
+                      _key: string
+                      title?: string
+                      type?: 'external' | 'file' | 'functional' | 'internal'
                       _type: 'button'
                       href: string | null
                       slug: null
@@ -2977,14 +4242,81 @@ export type HomePageQueryResult = {
                           _weak?: boolean
                           [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                         }
+                        media?: unknown
                         _type: 'file'
                       }
                       functional?: 'contact' | 'subscribe'
                     }
                   | {
                       _key: string
-                      title: string
-                      type: 'external' | 'file' | 'functional' | 'internal'
+                      title?: string
+                      type?: 'external' | 'file' | 'functional' | 'internal'
+                      _type: 'button'
+                      slug: null
+                      docType: 'publication'
+                      linkExternal?: string
+                      linkInternal?:
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'news'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'page'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'publication'
+                          }
+                      file?: {
+                        asset?: {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                        }
+                        media?: unknown
+                        _type: 'file'
+                      }
+                      functional?: 'contact' | 'subscribe'
+                    }
+                  | {
+                      _key: string
+                      title: string | null
+                      type:
+                        | 'external'
+                        | 'file'
+                        | 'functional'
+                        | 'internal'
+                        | null
+                      _type: 'button'
+                      slug: null
+                      docType: 'publication'
+                      href: string | null
+                    }
+                  | {
+                      _key: string
+                      title: string | null
+                      type:
+                        | 'external'
+                        | 'file'
+                        | 'functional'
+                        | 'internal'
+                        | null
+                      _type: 'button'
+                      slug: null
+                      docType: 'publication'
+                    }
+                  | {
+                      _key: string
+                      title?: string
+                      type?: 'external' | 'file' | 'functional' | 'internal'
                       _type: 'button'
                       href: string | null
                       linkExternal?: string
@@ -3014,9 +4346,70 @@ export type HomePageQueryResult = {
                           _weak?: boolean
                           [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                         }
+                        media?: unknown
                         _type: 'file'
                       }
                       functional?: 'contact' | 'subscribe'
+                    }
+                  | {
+                      _key: string
+                      title?: string
+                      type?: 'external' | 'file' | 'functional' | 'internal'
+                      _type: 'button'
+                      linkExternal?: string
+                      linkInternal?:
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'news'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'page'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'publication'
+                          }
+                      file?: {
+                        asset?: {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                        }
+                        media?: unknown
+                        _type: 'file'
+                      }
+                      functional?: 'contact' | 'subscribe'
+                    }
+                  | {
+                      _key: string
+                      title: string | null
+                      type:
+                        | 'external'
+                        | 'file'
+                        | 'functional'
+                        | 'internal'
+                        | null
+                      _type: 'button'
+                      href: string | null
+                    }
+                  | {
+                      _key: string
+                      title: string | null
+                      type:
+                        | 'external'
+                        | 'file'
+                        | 'functional'
+                        | 'internal'
+                        | null
+                      _type: 'button'
                     }
                 > | null
                 _type: 'buttons'
@@ -3030,9 +4423,10 @@ export type HomePageQueryResult = {
                   _weak?: boolean
                   [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
                 }
+                media?: unknown
                 hotspot?: SanityImageHotspot
                 crop?: SanityImageCrop
-                altText: string
+                altText?: string
                 promptForImage?: string
                 _type: 'imageBlock'
                 _key: string
@@ -3040,7 +4434,7 @@ export type HomePageQueryResult = {
                 image: null
               }
           > | null
-          slug: string
+          slug: string | null
           image: {
             asset: {
               _ref: string
@@ -3048,6 +4442,7 @@ export type HomePageQueryResult = {
               _weak?: boolean
               [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
             }
+            media?: unknown
             hotspot?: SanityImageHotspot
             crop?: SanityImageCrop
             altText:
@@ -3057,7 +4452,7 @@ export type HomePageQueryResult = {
             promptForImage?: string
             _type: 'aiImage'
             blurHashURL: string | null
-          }
+          } | null
           isInMenu?: boolean
           firstPublishedAt?: string
         }>
@@ -3065,7 +4460,7 @@ export type HomePageQueryResult = {
     | {
         _key: string
         _type: 'newsSection'
-        title: Array<{
+        title?: Array<{
           children?: Array<{
             marks?: Array<string>
             text?: string
@@ -3088,12 +4483,29 @@ export type HomePageQueryResult = {
               markDefs: null
             }
           | {
-              children?: Array<{
-                marks?: Array<string>
-                text?: string
-                _type: 'span'
-                _key: string
-              }>
+              children: Array<
+                | {
+                    code?: 'placeholder1' | 'placeholder2'
+                    _type: 'placeholder'
+                    _key: string
+                    siblingMarks: Array<
+                      | {
+                          _key: string
+                          marks: null
+                        }
+                      | {
+                          _key: string
+                          marks: Array<string> | null
+                        }
+                    > | null
+                  }
+                | {
+                    marks?: Array<string>
+                    text?: string
+                    _type: 'span'
+                    _key: string
+                  }
+              > | null
               style?:
                 | 'blockquote'
                 | 'h2'
@@ -3104,19 +4516,34 @@ export type HomePageQueryResult = {
                 | 'normal'
                 | 'small'
               listItem?: 'bullet' | 'number'
-              markDefs: Array<
-                | {}
+              markDefs?: Array<
                 | {
-                    type: 'external' | 'internal'
-                    href:
-                      | {
-                          slug: string
-                          _type: 'page'
-                        }
-                      | null
-                      | string
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'news'
                   }
-              > | null
+                | {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'publication'
+                  }
+                | {
+                    type?: 'external' | 'internal'
+                    href?: string
+                    reference?: {
+                      _ref: string
+                      _type: 'reference'
+                      _weak?: boolean
+                      [internalGroqTypeReferenceTo]?: 'page'
+                    }
+                    _type: 'link'
+                    _key: string
+                  }
+              >
               level?: number
               _type: 'block'
               _key: string
@@ -3125,11 +4552,11 @@ export type HomePageQueryResult = {
               buttons: Array<
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
-                    slug: string
+                    slug: string | null
                     docType: 'news'
                     linkExternal?: string
                     linkInternal?:
@@ -3158,17 +4585,74 @@ export type HomePageQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
-                    slug: string
+                    slug: string | null
                     docType: 'page'
                     linkExternal?: string
                     linkInternal?:
@@ -3197,14 +4681,71 @@ export type HomePageQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
                     slug: null
@@ -3236,14 +4777,71 @@ export type HomePageQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
                     linkExternal?: string
@@ -3273,9 +4871,60 @@ export type HomePageQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
                   }
               > | null
               _type: 'buttons'
@@ -3289,9 +4938,10 @@ export type HomePageQueryResult = {
                 _weak?: boolean
                 [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
               }
+              media?: unknown
               hotspot?: SanityImageHotspot
               crop?: SanityImageCrop
-              altText: string
+              altText?: string
               promptForImage?: string
               _type: 'imageBlock'
               _key: string
@@ -3311,7 +4961,7 @@ export type HomePageQueryResult = {
     | {
         _key: string
         _type: 'newsSection'
-        title: Array<{
+        title?: Array<{
           children?: Array<{
             marks?: Array<string>
             text?: string
@@ -3334,12 +4984,29 @@ export type HomePageQueryResult = {
               markDefs: null
             }
           | {
-              children?: Array<{
-                marks?: Array<string>
-                text?: string
-                _type: 'span'
-                _key: string
-              }>
+              children: Array<
+                | {
+                    code?: 'placeholder1' | 'placeholder2'
+                    _type: 'placeholder'
+                    _key: string
+                    siblingMarks: Array<
+                      | {
+                          _key: string
+                          marks: null
+                        }
+                      | {
+                          _key: string
+                          marks: Array<string> | null
+                        }
+                    > | null
+                  }
+                | {
+                    marks?: Array<string>
+                    text?: string
+                    _type: 'span'
+                    _key: string
+                  }
+              > | null
               style?:
                 | 'blockquote'
                 | 'h2'
@@ -3350,19 +5017,34 @@ export type HomePageQueryResult = {
                 | 'normal'
                 | 'small'
               listItem?: 'bullet' | 'number'
-              markDefs: Array<
-                | {}
+              markDefs?: Array<
                 | {
-                    type: 'external' | 'internal'
-                    href:
-                      | {
-                          slug: string
-                          _type: 'page'
-                        }
-                      | null
-                      | string
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'news'
                   }
-              > | null
+                | {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'publication'
+                  }
+                | {
+                    type?: 'external' | 'internal'
+                    href?: string
+                    reference?: {
+                      _ref: string
+                      _type: 'reference'
+                      _weak?: boolean
+                      [internalGroqTypeReferenceTo]?: 'page'
+                    }
+                    _type: 'link'
+                    _key: string
+                  }
+              >
               level?: number
               _type: 'block'
               _key: string
@@ -3371,11 +5053,11 @@ export type HomePageQueryResult = {
               buttons: Array<
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
-                    slug: string
+                    slug: string | null
                     docType: 'news'
                     linkExternal?: string
                     linkInternal?:
@@ -3404,17 +5086,74 @@ export type HomePageQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
-                    slug: string
+                    slug: string | null
                     docType: 'page'
                     linkExternal?: string
                     linkInternal?:
@@ -3443,14 +5182,71 @@ export type HomePageQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
                     slug: null
@@ -3482,14 +5278,71 @@ export type HomePageQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
                     linkExternal?: string
@@ -3519,9 +5372,60 @@ export type HomePageQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
                   }
               > | null
               _type: 'buttons'
@@ -3535,9 +5439,10 @@ export type HomePageQueryResult = {
                 _weak?: boolean
                 [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
               }
+              media?: unknown
               hotspot?: SanityImageHotspot
               crop?: SanityImageCrop
-              altText: string
+              altText?: string
               promptForImage?: string
               _type: 'imageBlock'
               _key: string
@@ -3552,8 +5457,8 @@ export type HomePageQueryResult = {
           _createdAt: string
           _updatedAt: string
           _rev: string
-          title: string
-          subtitle: string
+          title?: string
+          subtitle?: string
           body: Array<
             | {
                 _ref: string
@@ -3563,12 +5468,29 @@ export type HomePageQueryResult = {
                 markDefs: null
               }
             | {
-                children?: Array<{
-                  marks?: Array<string>
-                  text?: string
-                  _type: 'span'
-                  _key: string
-                }>
+                children: Array<
+                  | {
+                      code?: 'placeholder1' | 'placeholder2'
+                      _type: 'placeholder'
+                      _key: string
+                      siblingMarks: Array<
+                        | {
+                            _key: string
+                            marks: null
+                          }
+                        | {
+                            _key: string
+                            marks: Array<string> | null
+                          }
+                      > | null
+                    }
+                  | {
+                      marks?: Array<string>
+                      text?: string
+                      _type: 'span'
+                      _key: string
+                    }
+                > | null
                 style?:
                   | 'blockquote'
                   | 'h2'
@@ -3579,19 +5501,34 @@ export type HomePageQueryResult = {
                   | 'normal'
                   | 'small'
                 listItem?: 'bullet' | 'number'
-                markDefs: Array<
-                  | {}
+                markDefs?: Array<
                   | {
-                      type: 'external' | 'internal'
-                      href:
-                        | {
-                            slug: string
-                            _type: 'page'
-                          }
-                        | null
-                        | string
+                      _ref: string
+                      _type: 'reference'
+                      _weak?: boolean
+                      _key: string
+                      [internalGroqTypeReferenceTo]?: 'news'
                     }
-                > | null
+                  | {
+                      _ref: string
+                      _type: 'reference'
+                      _weak?: boolean
+                      _key: string
+                      [internalGroqTypeReferenceTo]?: 'publication'
+                    }
+                  | {
+                      type?: 'external' | 'internal'
+                      href?: string
+                      reference?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'page'
+                      }
+                      _type: 'link'
+                      _key: string
+                    }
+                >
                 level?: number
                 _type: 'block'
                 _key: string
@@ -3600,11 +5537,11 @@ export type HomePageQueryResult = {
                 buttons: Array<
                   | {
                       _key: string
-                      title: string
-                      type: 'external' | 'file' | 'functional' | 'internal'
+                      title?: string
+                      type?: 'external' | 'file' | 'functional' | 'internal'
                       _type: 'button'
                       href: string | null
-                      slug: string
+                      slug: string | null
                       docType: 'news'
                       linkExternal?: string
                       linkInternal?:
@@ -3633,17 +5570,84 @@ export type HomePageQueryResult = {
                           _weak?: boolean
                           [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                         }
+                        media?: unknown
                         _type: 'file'
                       }
                       functional?: 'contact' | 'subscribe'
                     }
                   | {
                       _key: string
-                      title: string
-                      type: 'external' | 'file' | 'functional' | 'internal'
+                      title?: string
+                      type?: 'external' | 'file' | 'functional' | 'internal'
+                      _type: 'button'
+                      slug: string | null
+                      docType: 'news'
+                      linkExternal?: string
+                      linkInternal?:
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'news'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'page'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'publication'
+                          }
+                      file?: {
+                        asset?: {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                        }
+                        media?: unknown
+                        _type: 'file'
+                      }
+                      functional?: 'contact' | 'subscribe'
+                    }
+                  | {
+                      _key: string
+                      title: string | null
+                      type:
+                        | 'external'
+                        | 'file'
+                        | 'functional'
+                        | 'internal'
+                        | null
+                      _type: 'button'
+                      slug: string | null
+                      docType: 'news'
+                      href: string | null
+                    }
+                  | {
+                      _key: string
+                      title: string | null
+                      type:
+                        | 'external'
+                        | 'file'
+                        | 'functional'
+                        | 'internal'
+                        | null
+                      _type: 'button'
+                      slug: string | null
+                      docType: 'news'
+                    }
+                  | {
+                      _key: string
+                      title?: string
+                      type?: 'external' | 'file' | 'functional' | 'internal'
                       _type: 'button'
                       href: string | null
-                      slug: string
+                      slug: string | null
                       docType: 'page'
                       linkExternal?: string
                       linkInternal?:
@@ -3672,14 +5676,81 @@ export type HomePageQueryResult = {
                           _weak?: boolean
                           [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                         }
+                        media?: unknown
                         _type: 'file'
                       }
                       functional?: 'contact' | 'subscribe'
                     }
                   | {
                       _key: string
-                      title: string
-                      type: 'external' | 'file' | 'functional' | 'internal'
+                      title?: string
+                      type?: 'external' | 'file' | 'functional' | 'internal'
+                      _type: 'button'
+                      slug: string | null
+                      docType: 'page'
+                      linkExternal?: string
+                      linkInternal?:
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'news'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'page'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'publication'
+                          }
+                      file?: {
+                        asset?: {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                        }
+                        media?: unknown
+                        _type: 'file'
+                      }
+                      functional?: 'contact' | 'subscribe'
+                    }
+                  | {
+                      _key: string
+                      title: string | null
+                      type:
+                        | 'external'
+                        | 'file'
+                        | 'functional'
+                        | 'internal'
+                        | null
+                      _type: 'button'
+                      slug: string | null
+                      docType: 'page'
+                      href: string | null
+                    }
+                  | {
+                      _key: string
+                      title: string | null
+                      type:
+                        | 'external'
+                        | 'file'
+                        | 'functional'
+                        | 'internal'
+                        | null
+                      _type: 'button'
+                      slug: string | null
+                      docType: 'page'
+                    }
+                  | {
+                      _key: string
+                      title?: string
+                      type?: 'external' | 'file' | 'functional' | 'internal'
                       _type: 'button'
                       href: string | null
                       slug: null
@@ -3711,14 +5782,81 @@ export type HomePageQueryResult = {
                           _weak?: boolean
                           [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                         }
+                        media?: unknown
                         _type: 'file'
                       }
                       functional?: 'contact' | 'subscribe'
                     }
                   | {
                       _key: string
-                      title: string
-                      type: 'external' | 'file' | 'functional' | 'internal'
+                      title?: string
+                      type?: 'external' | 'file' | 'functional' | 'internal'
+                      _type: 'button'
+                      slug: null
+                      docType: 'publication'
+                      linkExternal?: string
+                      linkInternal?:
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'news'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'page'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'publication'
+                          }
+                      file?: {
+                        asset?: {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                        }
+                        media?: unknown
+                        _type: 'file'
+                      }
+                      functional?: 'contact' | 'subscribe'
+                    }
+                  | {
+                      _key: string
+                      title: string | null
+                      type:
+                        | 'external'
+                        | 'file'
+                        | 'functional'
+                        | 'internal'
+                        | null
+                      _type: 'button'
+                      slug: null
+                      docType: 'publication'
+                      href: string | null
+                    }
+                  | {
+                      _key: string
+                      title: string | null
+                      type:
+                        | 'external'
+                        | 'file'
+                        | 'functional'
+                        | 'internal'
+                        | null
+                      _type: 'button'
+                      slug: null
+                      docType: 'publication'
+                    }
+                  | {
+                      _key: string
+                      title?: string
+                      type?: 'external' | 'file' | 'functional' | 'internal'
                       _type: 'button'
                       href: string | null
                       linkExternal?: string
@@ -3748,9 +5886,70 @@ export type HomePageQueryResult = {
                           _weak?: boolean
                           [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                         }
+                        media?: unknown
                         _type: 'file'
                       }
                       functional?: 'contact' | 'subscribe'
+                    }
+                  | {
+                      _key: string
+                      title?: string
+                      type?: 'external' | 'file' | 'functional' | 'internal'
+                      _type: 'button'
+                      linkExternal?: string
+                      linkInternal?:
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'news'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'page'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'publication'
+                          }
+                      file?: {
+                        asset?: {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                        }
+                        media?: unknown
+                        _type: 'file'
+                      }
+                      functional?: 'contact' | 'subscribe'
+                    }
+                  | {
+                      _key: string
+                      title: string | null
+                      type:
+                        | 'external'
+                        | 'file'
+                        | 'functional'
+                        | 'internal'
+                        | null
+                      _type: 'button'
+                      href: string | null
+                    }
+                  | {
+                      _key: string
+                      title: string | null
+                      type:
+                        | 'external'
+                        | 'file'
+                        | 'functional'
+                        | 'internal'
+                        | null
+                      _type: 'button'
                     }
                 > | null
                 _type: 'buttons'
@@ -3764,9 +5963,10 @@ export type HomePageQueryResult = {
                   _weak?: boolean
                   [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
                 }
+                media?: unknown
                 hotspot?: SanityImageHotspot
                 crop?: SanityImageCrop
-                altText: string
+                altText?: string
                 promptForImage?: string
                 _type: 'imageBlock'
                 _key: string
@@ -3774,7 +5974,7 @@ export type HomePageQueryResult = {
                 image: null
               }
           > | null
-          slug: string
+          slug: string | null
           image: {
             asset: {
               _ref: string
@@ -3782,6 +5982,7 @@ export type HomePageQueryResult = {
               _weak?: boolean
               [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
             }
+            media?: unknown
             hotspot?: SanityImageHotspot
             crop?: SanityImageCrop
             altText:
@@ -3791,7 +5992,7 @@ export type HomePageQueryResult = {
             promptForImage?: string
             _type: 'aiImage'
             blurHashURL: string | null
-          }
+          } | null
           isInMenu?: boolean
           firstPublishedAt?: string
         }> | null
@@ -3799,7 +6000,7 @@ export type HomePageQueryResult = {
     | {
         _key: string
         _type: 'testimonialSection'
-        title: Array<{
+        title?: Array<{
           children?: Array<{
             marks?: Array<string>
             text?: string
@@ -3822,12 +6023,29 @@ export type HomePageQueryResult = {
               markDefs: null
             }
           | {
-              children?: Array<{
-                marks?: Array<string>
-                text?: string
-                _type: 'span'
-                _key: string
-              }>
+              children: Array<
+                | {
+                    code?: 'placeholder1' | 'placeholder2'
+                    _type: 'placeholder'
+                    _key: string
+                    siblingMarks: Array<
+                      | {
+                          _key: string
+                          marks: null
+                        }
+                      | {
+                          _key: string
+                          marks: Array<string> | null
+                        }
+                    > | null
+                  }
+                | {
+                    marks?: Array<string>
+                    text?: string
+                    _type: 'span'
+                    _key: string
+                  }
+              > | null
               style?:
                 | 'blockquote'
                 | 'h2'
@@ -3838,19 +6056,34 @@ export type HomePageQueryResult = {
                 | 'normal'
                 | 'small'
               listItem?: 'bullet' | 'number'
-              markDefs: Array<
-                | {}
+              markDefs?: Array<
                 | {
-                    type: 'external' | 'internal'
-                    href:
-                      | {
-                          slug: string
-                          _type: 'page'
-                        }
-                      | null
-                      | string
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'news'
                   }
-              > | null
+                | {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'publication'
+                  }
+                | {
+                    type?: 'external' | 'internal'
+                    href?: string
+                    reference?: {
+                      _ref: string
+                      _type: 'reference'
+                      _weak?: boolean
+                      [internalGroqTypeReferenceTo]?: 'page'
+                    }
+                    _type: 'link'
+                    _key: string
+                  }
+              >
               level?: number
               _type: 'block'
               _key: string
@@ -3859,11 +6092,11 @@ export type HomePageQueryResult = {
               buttons: Array<
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
-                    slug: string
+                    slug: string | null
                     docType: 'news'
                     linkExternal?: string
                     linkInternal?:
@@ -3892,17 +6125,74 @@ export type HomePageQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
-                    slug: string
+                    slug: string | null
                     docType: 'page'
                     linkExternal?: string
                     linkInternal?:
@@ -3931,14 +6221,71 @@ export type HomePageQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
                     slug: null
@@ -3970,14 +6317,71 @@ export type HomePageQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
                     linkExternal?: string
@@ -4007,9 +6411,60 @@ export type HomePageQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
                   }
               > | null
               _type: 'buttons'
@@ -4023,9 +6478,545 @@ export type HomePageQueryResult = {
                 _weak?: boolean
                 [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
               }
+              media?: unknown
               hotspot?: SanityImageHotspot
               crop?: SanityImageCrop
-              altText: string
+              altText?: string
+              promptForImage?: string
+              _type: 'imageBlock'
+              _key: string
+              markDefs: null
+              image: null
+            }
+        > | null
+        loadTags?: Array<string>
+        testimonials: Array<{
+          _id: string
+          _type: 'testimonial'
+          _createdAt: string
+          _updatedAt: string
+          _rev: string
+          title?: string
+          body: Array<{
+            children: Array<{
+              marks?: Array<string>
+              text?: string
+              _type: 'span'
+              _key: string
+            }> | null
+            style?:
+              | 'blockquote'
+              | 'h3'
+              | 'h4'
+              | 'h5'
+              | 'h6'
+              | 'normal'
+              | 'small'
+            listItem?: 'bullet' | 'number'
+            markDefs?: Array<{
+              type?: 'external' | 'internal'
+              href?: string
+              reference?: {
+                _ref: string
+                _type: 'reference'
+                _weak?: boolean
+                [internalGroqTypeReferenceTo]?: 'page'
+              }
+              _type: 'link'
+              _key: string
+            }>
+            level?: number
+            _type: 'block'
+            _key: string
+          }> | null
+          tags?: Array<string>
+        }>
+      }
+    | {
+        _key: string
+        _type: 'testimonialSection'
+        title?: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'normal'
+          listItem?: never
+          markDefs?: null
+          level?: number
+          _type: 'block'
+          _key: string
+        }>
+        body: Array<
+          | {
+              _ref: string
+              _type: 'reference'
+              _weak?: boolean
+              _key: string
+              markDefs: null
+            }
+          | {
+              children: Array<
+                | {
+                    code?: 'placeholder1' | 'placeholder2'
+                    _type: 'placeholder'
+                    _key: string
+                    siblingMarks: Array<
+                      | {
+                          _key: string
+                          marks: null
+                        }
+                      | {
+                          _key: string
+                          marks: Array<string> | null
+                        }
+                    > | null
+                  }
+                | {
+                    marks?: Array<string>
+                    text?: string
+                    _type: 'span'
+                    _key: string
+                  }
+              > | null
+              style?:
+                | 'blockquote'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+                | 'small'
+              listItem?: 'bullet' | 'number'
+              markDefs?: Array<
+                | {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'news'
+                  }
+                | {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'publication'
+                  }
+                | {
+                    type?: 'external' | 'internal'
+                    href?: string
+                    reference?: {
+                      _ref: string
+                      _type: 'reference'
+                      _weak?: boolean
+                      [internalGroqTypeReferenceTo]?: 'page'
+                    }
+                    _type: 'link'
+                    _key: string
+                  }
+              >
+              level?: number
+              _type: 'block'
+              _key: string
+            }
+          | {
+              buttons: Array<
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string | null
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string | null
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                  }
+              > | null
+              _type: 'buttons'
+              _key: string
+              markDefs: null
+            }
+          | {
+              asset?: {
+                _ref: string
+                _type: 'reference'
+                _weak?: boolean
+                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+              }
+              media?: unknown
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              altText?: string
               promptForImage?: string
               _type: 'imageBlock'
               _key: string
@@ -4045,7 +7036,7 @@ export type HomePageQueryResult = {
     | {
         _key: string
         _type: 'textHeaderSection'
-        title: Array<{
+        title?: Array<{
           children?: Array<{
             marks?: Array<string>
             text?: string
@@ -4082,12 +7073,29 @@ export type HomePageQueryResult = {
               markDefs: null
             }
           | {
-              children?: Array<{
-                marks?: Array<string>
-                text?: string
-                _type: 'span'
-                _key: string
-              }>
+              children: Array<
+                | {
+                    code?: 'placeholder1' | 'placeholder2'
+                    _type: 'placeholder'
+                    _key: string
+                    siblingMarks: Array<
+                      | {
+                          _key: string
+                          marks: null
+                        }
+                      | {
+                          _key: string
+                          marks: Array<string> | null
+                        }
+                    > | null
+                  }
+                | {
+                    marks?: Array<string>
+                    text?: string
+                    _type: 'span'
+                    _key: string
+                  }
+              > | null
               style?:
                 | 'blockquote'
                 | 'h2'
@@ -4098,19 +7106,34 @@ export type HomePageQueryResult = {
                 | 'normal'
                 | 'small'
               listItem?: 'bullet' | 'number'
-              markDefs: Array<
-                | {}
+              markDefs?: Array<
                 | {
-                    type: 'external' | 'internal'
-                    href:
-                      | {
-                          slug: string
-                          _type: 'page'
-                        }
-                      | null
-                      | string
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'news'
                   }
-              > | null
+                | {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'publication'
+                  }
+                | {
+                    type?: 'external' | 'internal'
+                    href?: string
+                    reference?: {
+                      _ref: string
+                      _type: 'reference'
+                      _weak?: boolean
+                      [internalGroqTypeReferenceTo]?: 'page'
+                    }
+                    _type: 'link'
+                    _key: string
+                  }
+              >
               level?: number
               _type: 'block'
               _key: string
@@ -4119,11 +7142,11 @@ export type HomePageQueryResult = {
               buttons: Array<
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
-                    slug: string
+                    slug: string | null
                     docType: 'news'
                     linkExternal?: string
                     linkInternal?:
@@ -4152,17 +7175,74 @@ export type HomePageQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
-                    slug: string
+                    slug: string | null
                     docType: 'page'
                     linkExternal?: string
                     linkInternal?:
@@ -4191,14 +7271,71 @@ export type HomePageQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
                     slug: null
@@ -4230,14 +7367,71 @@ export type HomePageQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
                     linkExternal?: string
@@ -4267,9 +7461,60 @@ export type HomePageQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
                   }
               > | null
               _type: 'buttons'
@@ -4283,21 +7528,22 @@ export type HomePageQueryResult = {
                 _weak?: boolean
                 [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
               }
+              media?: unknown
               hotspot?: SanityImageHotspot
               crop?: SanityImageCrop
-              altText: string
+              altText?: string
               promptForImage?: string
               _type: 'imageBlock'
               _key: string
               markDefs: null
               image: null
             }
-        >
+        > | null
       }
     | {
         _key: string
         _type: 'textSection'
-        title: Array<{
+        title?: Array<{
           children?: Array<{
             marks?: Array<string>
             text?: string
@@ -4334,12 +7580,29 @@ export type HomePageQueryResult = {
               markDefs: null
             }
           | {
-              children?: Array<{
-                marks?: Array<string>
-                text?: string
-                _type: 'span'
-                _key: string
-              }>
+              children: Array<
+                | {
+                    code?: 'placeholder1' | 'placeholder2'
+                    _type: 'placeholder'
+                    _key: string
+                    siblingMarks: Array<
+                      | {
+                          _key: string
+                          marks: null
+                        }
+                      | {
+                          _key: string
+                          marks: Array<string> | null
+                        }
+                    > | null
+                  }
+                | {
+                    marks?: Array<string>
+                    text?: string
+                    _type: 'span'
+                    _key: string
+                  }
+              > | null
               style?:
                 | 'blockquote'
                 | 'h2'
@@ -4350,19 +7613,34 @@ export type HomePageQueryResult = {
                 | 'normal'
                 | 'small'
               listItem?: 'bullet' | 'number'
-              markDefs: Array<
-                | {}
+              markDefs?: Array<
                 | {
-                    type: 'external' | 'internal'
-                    href:
-                      | {
-                          slug: string
-                          _type: 'page'
-                        }
-                      | null
-                      | string
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'news'
                   }
-              > | null
+                | {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'publication'
+                  }
+                | {
+                    type?: 'external' | 'internal'
+                    href?: string
+                    reference?: {
+                      _ref: string
+                      _type: 'reference'
+                      _weak?: boolean
+                      [internalGroqTypeReferenceTo]?: 'page'
+                    }
+                    _type: 'link'
+                    _key: string
+                  }
+              >
               level?: number
               _type: 'block'
               _key: string
@@ -4371,11 +7649,11 @@ export type HomePageQueryResult = {
               buttons: Array<
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
-                    slug: string
+                    slug: string | null
                     docType: 'news'
                     linkExternal?: string
                     linkInternal?:
@@ -4404,17 +7682,74 @@ export type HomePageQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
-                    slug: string
+                    slug: string | null
                     docType: 'page'
                     linkExternal?: string
                     linkInternal?:
@@ -4443,14 +7778,71 @@ export type HomePageQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
                     slug: null
@@ -4482,14 +7874,71 @@ export type HomePageQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
                     linkExternal?: string
@@ -4519,9 +7968,60 @@ export type HomePageQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
                   }
               > | null
               _type: 'buttons'
@@ -4535,18 +8035,19 @@ export type HomePageQueryResult = {
                 _weak?: boolean
                 [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
               }
+              media?: unknown
               hotspot?: SanityImageHotspot
               crop?: SanityImageCrop
-              altText: string
+              altText?: string
               promptForImage?: string
               _type: 'imageBlock'
               _key: string
               markDefs: null
               image: null
             }
-        >
+        > | null
       }
-  >
+  > | null
   image: {
     asset: {
       _ref: string
@@ -4554,6 +8055,7 @@ export type HomePageQueryResult = {
       _weak?: boolean
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
     }
+    media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
     altText:
@@ -4563,20 +8065,20 @@ export type HomePageQueryResult = {
     promptForImage?: string
     _type: 'aiImage'
     blurHashURL: string | null
-  }
+  } | null
 } | null
 // Variable: pagesBySlugQuery
-// Query:   *[_type == "page" && slug.current == $slug][0]{    _id,    title,    description,    "slug": slug.current,    content[]{  ...,  _type == 'imageHeaderSection' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},  },  _type == 'textHeaderSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}  },  _type == 'textSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}  },  _type == 'accordionSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},    accordion[]{      ...,      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}    }  },  _type == 'ctaBannerSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},  },  _type == 'furtherLinkSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},    links[]{      ...,      defined(internalLink)=> {        ...internalLink->{          "slug": slug.current,          "docType": _type        }      },    }  },  _type == 'newsSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},    defined(news) && !loadAll => {news[]->{      ...,      image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},      'slug': slug.current    }},    loadAll => {'news': *[_type == 'news']{      ...,      image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},      'slug': slug.current    }},  },  _type == 'testimonialSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},  },},    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  }
+// Query: *[_type == "page" && slug.current == $slug][0]{    _id,    title,    description,    "slug": slug.current,    content[]{  ...,  _type == 'imageHeaderSection' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},  },  _type == 'textHeaderSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },}  },  _type == 'textSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },}  },  _type == 'accordionSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},    accordion[]{      ...,      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },}    }  },  _type == 'ctaBannerSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},  },  _type == 'furtherLinkSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},    links[]{      ...,      defined(internalLink)=> {        ...internalLink->{          "slug": slug.current,          "docType": _type        }      },    }  },  _type == 'newsSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},    defined(news) && !loadAll => {news[]->{      ...,      image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},      'slug': slug.current    }},    loadAll => {'news': *[_type == 'news']{      ...,      image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},      'slug': slug.current    }},  },  _type == 'testimonialSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},    // Specific testimonials selected by editors    defined(testimonials) && !loadTags => {testimonials[]->{      ...,      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},    }},    // All testimonials    !defined(testimonials) && 'loadAll' in loadTags =>{      'testimonials': *[_type == 'testimonial'] {        ...,        body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },}      }    },    // Specific testimonials by tags    !defined(testimonials) && !('loadAll' in loadTags) => {      'testimonials': *[_type == 'testimonial' && count(tags[@ in ^.^.loadTags]) > 0]{        ...,        body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},      }    },  },},    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  }
 export type PagesBySlugQueryResult = {
   _id: string
-  title: string
-  description: Overview
-  slug: string
+  title: string | null
+  description: Overview | null
+  slug: string | null
   content: Array<
     | {
         _key: string
         _type: 'accordionSection'
-        title: Array<{
+        title?: Array<{
           children?: Array<{
             marks?: Array<string>
             text?: string
@@ -4599,12 +8101,29 @@ export type PagesBySlugQueryResult = {
               markDefs: null
             }
           | {
-              children?: Array<{
-                marks?: Array<string>
-                text?: string
-                _type: 'span'
-                _key: string
-              }>
+              children: Array<
+                | {
+                    code?: 'placeholder1' | 'placeholder2'
+                    _type: 'placeholder'
+                    _key: string
+                    siblingMarks: Array<
+                      | {
+                          _key: string
+                          marks: null
+                        }
+                      | {
+                          _key: string
+                          marks: Array<string> | null
+                        }
+                    > | null
+                  }
+                | {
+                    marks?: Array<string>
+                    text?: string
+                    _type: 'span'
+                    _key: string
+                  }
+              > | null
               style?:
                 | 'blockquote'
                 | 'h2'
@@ -4615,19 +8134,34 @@ export type PagesBySlugQueryResult = {
                 | 'normal'
                 | 'small'
               listItem?: 'bullet' | 'number'
-              markDefs: Array<
-                | {}
+              markDefs?: Array<
                 | {
-                    type: 'external' | 'internal'
-                    href:
-                      | {
-                          slug: string
-                          _type: 'page'
-                        }
-                      | null
-                      | string
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'news'
                   }
-              > | null
+                | {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'publication'
+                  }
+                | {
+                    type?: 'external' | 'internal'
+                    href?: string
+                    reference?: {
+                      _ref: string
+                      _type: 'reference'
+                      _weak?: boolean
+                      [internalGroqTypeReferenceTo]?: 'page'
+                    }
+                    _type: 'link'
+                    _key: string
+                  }
+              >
               level?: number
               _type: 'block'
               _key: string
@@ -4636,11 +8170,11 @@ export type PagesBySlugQueryResult = {
               buttons: Array<
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
-                    slug: string
+                    slug: string | null
                     docType: 'news'
                     linkExternal?: string
                     linkInternal?:
@@ -4669,17 +8203,74 @@ export type PagesBySlugQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
-                    slug: string
+                    slug: string | null
                     docType: 'page'
                     linkExternal?: string
                     linkInternal?:
@@ -4708,14 +8299,71 @@ export type PagesBySlugQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
                     slug: null
@@ -4747,14 +8395,71 @@ export type PagesBySlugQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
                     linkExternal?: string
@@ -4784,9 +8489,60 @@ export type PagesBySlugQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
                   }
               > | null
               _type: 'buttons'
@@ -4800,9 +8556,10 @@ export type PagesBySlugQueryResult = {
                 _weak?: boolean
                 [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
               }
+              media?: unknown
               hotspot?: SanityImageHotspot
               crop?: SanityImageCrop
-              altText: string
+              altText?: string
               promptForImage?: string
               _type: 'imageBlock'
               _key: string
@@ -4813,14 +8570,14 @@ export type PagesBySlugQueryResult = {
         accordion: Array<{
           _key: string
           _type: 'accordionItem'
-          title: string
+          title?: string
           body: Array<{
-            children?: Array<{
+            children: Array<{
               marks?: Array<string>
               text?: string
               _type: 'span'
               _key: string
-            }>
+            }> | null
             style?:
               | 'blockquote'
               | 'h3'
@@ -4830,26 +8587,28 @@ export type PagesBySlugQueryResult = {
               | 'normal'
               | 'small'
             listItem?: 'bullet' | 'number'
-            markDefs: Array<{
-              type: 'external' | 'internal'
-              href:
-                | {
-                    slug: string
-                    _type: 'page'
-                  }
-                | null
-                | string
-            }> | null
+            markDefs?: Array<{
+              type?: 'external' | 'internal'
+              href?: string
+              reference?: {
+                _ref: string
+                _type: 'reference'
+                _weak?: boolean
+                [internalGroqTypeReferenceTo]?: 'page'
+              }
+              _type: 'link'
+              _key: string
+            }>
             level?: number
             _type: 'block'
             _key: string
-          }>
-        }>
+          }> | null
+        }> | null
       }
     | {
         _key: string
         _type: 'ctaBannerSection'
-        title: Array<{
+        title?: Array<{
           children?: Array<{
             marks?: Array<string>
             text?: string
@@ -4872,12 +8631,29 @@ export type PagesBySlugQueryResult = {
               markDefs: null
             }
           | {
-              children?: Array<{
-                marks?: Array<string>
-                text?: string
-                _type: 'span'
-                _key: string
-              }>
+              children: Array<
+                | {
+                    code?: 'placeholder1' | 'placeholder2'
+                    _type: 'placeholder'
+                    _key: string
+                    siblingMarks: Array<
+                      | {
+                          _key: string
+                          marks: null
+                        }
+                      | {
+                          _key: string
+                          marks: Array<string> | null
+                        }
+                    > | null
+                  }
+                | {
+                    marks?: Array<string>
+                    text?: string
+                    _type: 'span'
+                    _key: string
+                  }
+              > | null
               style?:
                 | 'blockquote'
                 | 'h2'
@@ -4888,19 +8664,34 @@ export type PagesBySlugQueryResult = {
                 | 'normal'
                 | 'small'
               listItem?: 'bullet' | 'number'
-              markDefs: Array<
-                | {}
+              markDefs?: Array<
                 | {
-                    type: 'external' | 'internal'
-                    href:
-                      | {
-                          slug: string
-                          _type: 'page'
-                        }
-                      | null
-                      | string
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'news'
                   }
-              > | null
+                | {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'publication'
+                  }
+                | {
+                    type?: 'external' | 'internal'
+                    href?: string
+                    reference?: {
+                      _ref: string
+                      _type: 'reference'
+                      _weak?: boolean
+                      [internalGroqTypeReferenceTo]?: 'page'
+                    }
+                    _type: 'link'
+                    _key: string
+                  }
+              >
               level?: number
               _type: 'block'
               _key: string
@@ -4909,11 +8700,11 @@ export type PagesBySlugQueryResult = {
               buttons: Array<
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
-                    slug: string
+                    slug: string | null
                     docType: 'news'
                     linkExternal?: string
                     linkInternal?:
@@ -4942,17 +8733,74 @@ export type PagesBySlugQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
-                    slug: string
+                    slug: string | null
                     docType: 'page'
                     linkExternal?: string
                     linkInternal?:
@@ -4981,14 +8829,71 @@ export type PagesBySlugQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
                     slug: null
@@ -5020,14 +8925,71 @@ export type PagesBySlugQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
                     linkExternal?: string
@@ -5057,9 +9019,60 @@ export type PagesBySlugQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
                   }
               > | null
               _type: 'buttons'
@@ -5073,21 +9086,22 @@ export type PagesBySlugQueryResult = {
                 _weak?: boolean
                 [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
               }
+              media?: unknown
               hotspot?: SanityImageHotspot
               crop?: SanityImageCrop
-              altText: string
+              altText?: string
               promptForImage?: string
               _type: 'imageBlock'
               _key: string
               markDefs: null
               image: null
             }
-        >
+        > | null
       }
     | {
         _key: string
         _type: 'furtherLinkSection'
-        title: Array<{
+        title?: Array<{
           children?: Array<{
             marks?: Array<string>
             text?: string
@@ -5110,12 +9124,29 @@ export type PagesBySlugQueryResult = {
               markDefs: null
             }
           | {
-              children?: Array<{
-                marks?: Array<string>
-                text?: string
-                _type: 'span'
-                _key: string
-              }>
+              children: Array<
+                | {
+                    code?: 'placeholder1' | 'placeholder2'
+                    _type: 'placeholder'
+                    _key: string
+                    siblingMarks: Array<
+                      | {
+                          _key: string
+                          marks: null
+                        }
+                      | {
+                          _key: string
+                          marks: Array<string> | null
+                        }
+                    > | null
+                  }
+                | {
+                    marks?: Array<string>
+                    text?: string
+                    _type: 'span'
+                    _key: string
+                  }
+              > | null
               style?:
                 | 'blockquote'
                 | 'h2'
@@ -5126,19 +9157,34 @@ export type PagesBySlugQueryResult = {
                 | 'normal'
                 | 'small'
               listItem?: 'bullet' | 'number'
-              markDefs: Array<
-                | {}
+              markDefs?: Array<
                 | {
-                    type: 'external' | 'internal'
-                    href:
-                      | {
-                          slug: string
-                          _type: 'page'
-                        }
-                      | null
-                      | string
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'news'
                   }
-              > | null
+                | {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'publication'
+                  }
+                | {
+                    type?: 'external' | 'internal'
+                    href?: string
+                    reference?: {
+                      _ref: string
+                      _type: 'reference'
+                      _weak?: boolean
+                      [internalGroqTypeReferenceTo]?: 'page'
+                    }
+                    _type: 'link'
+                    _key: string
+                  }
+              >
               level?: number
               _type: 'block'
               _key: string
@@ -5147,11 +9193,11 @@ export type PagesBySlugQueryResult = {
               buttons: Array<
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
-                    slug: string
+                    slug: string | null
                     docType: 'news'
                     linkExternal?: string
                     linkInternal?:
@@ -5180,17 +9226,74 @@ export type PagesBySlugQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
-                    slug: string
+                    slug: string | null
                     docType: 'page'
                     linkExternal?: string
                     linkInternal?:
@@ -5219,14 +9322,71 @@ export type PagesBySlugQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
                     slug: null
@@ -5258,14 +9418,71 @@ export type PagesBySlugQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
                     linkExternal?: string
@@ -5295,9 +9512,60 @@ export type PagesBySlugQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
                   }
               > | null
               _type: 'buttons'
@@ -5311,9 +9579,10 @@ export type PagesBySlugQueryResult = {
                 _weak?: boolean
                 [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
               }
+              media?: unknown
               hotspot?: SanityImageHotspot
               crop?: SanityImageCrop
-              altText: string
+              altText?: string
               promptForImage?: string
               _type: 'imageBlock'
               _key: string
@@ -5325,8 +9594,8 @@ export type PagesBySlugQueryResult = {
           | {
               _key: string
               _type: 'linkCard'
-              title: Overview
-              description: Overview
+              title?: Overview
+              description?: Overview
               url?: string
               internalLink?:
                 | {
@@ -5341,14 +9610,14 @@ export type PagesBySlugQueryResult = {
                     _weak?: boolean
                     [internalGroqTypeReferenceTo]?: 'page'
                   }
-              slug: string
+              slug: string | null
               docType: 'news'
             }
           | {
               _key: string
               _type: 'linkCard'
-              title: Overview
-              description: Overview
+              title?: Overview
+              description?: Overview
               url?: string
               internalLink?:
                 | {
@@ -5363,14 +9632,14 @@ export type PagesBySlugQueryResult = {
                     _weak?: boolean
                     [internalGroqTypeReferenceTo]?: 'page'
                   }
-              slug: string
+              slug: string | null
               docType: 'page'
             }
           | {
               _key: string
               _type: 'linkCard'
-              title: Overview
-              description: Overview
+              title?: Overview
+              description?: Overview
               url?: string
               internalLink?:
                 | {
@@ -5386,12 +9655,12 @@ export type PagesBySlugQueryResult = {
                     [internalGroqTypeReferenceTo]?: 'page'
                   }
             }
-        >
+        > | null
       }
     | {
         _key: string
         _type: 'imageHeaderSection'
-        title: Array<{
+        title?: Array<{
           children?: Array<{
             marks?: Array<string>
             text?: string
@@ -5426,6 +9695,7 @@ export type PagesBySlugQueryResult = {
             _weak?: boolean
             [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
           }
+          media?: unknown
           hotspot?: SanityImageHotspot
           crop?: SanityImageCrop
           altText:
@@ -5435,12 +9705,12 @@ export type PagesBySlugQueryResult = {
           promptForImage?: string
           _type: 'aiImage'
           blurHashURL: string | null
-        }
+        } | null
       }
     | {
         _key: string
         _type: 'newsSection'
-        title: Array<{
+        title?: Array<{
           children?: Array<{
             marks?: Array<string>
             text?: string
@@ -5463,12 +9733,29 @@ export type PagesBySlugQueryResult = {
               markDefs: null
             }
           | {
-              children?: Array<{
-                marks?: Array<string>
-                text?: string
-                _type: 'span'
-                _key: string
-              }>
+              children: Array<
+                | {
+                    code?: 'placeholder1' | 'placeholder2'
+                    _type: 'placeholder'
+                    _key: string
+                    siblingMarks: Array<
+                      | {
+                          _key: string
+                          marks: null
+                        }
+                      | {
+                          _key: string
+                          marks: Array<string> | null
+                        }
+                    > | null
+                  }
+                | {
+                    marks?: Array<string>
+                    text?: string
+                    _type: 'span'
+                    _key: string
+                  }
+              > | null
               style?:
                 | 'blockquote'
                 | 'h2'
@@ -5479,19 +9766,34 @@ export type PagesBySlugQueryResult = {
                 | 'normal'
                 | 'small'
               listItem?: 'bullet' | 'number'
-              markDefs: Array<
-                | {}
+              markDefs?: Array<
                 | {
-                    type: 'external' | 'internal'
-                    href:
-                      | {
-                          slug: string
-                          _type: 'page'
-                        }
-                      | null
-                      | string
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'news'
                   }
-              > | null
+                | {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'publication'
+                  }
+                | {
+                    type?: 'external' | 'internal'
+                    href?: string
+                    reference?: {
+                      _ref: string
+                      _type: 'reference'
+                      _weak?: boolean
+                      [internalGroqTypeReferenceTo]?: 'page'
+                    }
+                    _type: 'link'
+                    _key: string
+                  }
+              >
               level?: number
               _type: 'block'
               _key: string
@@ -5500,11 +9802,11 @@ export type PagesBySlugQueryResult = {
               buttons: Array<
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
-                    slug: string
+                    slug: string | null
                     docType: 'news'
                     linkExternal?: string
                     linkInternal?:
@@ -5533,17 +9835,74 @@ export type PagesBySlugQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
-                    slug: string
+                    slug: string | null
                     docType: 'page'
                     linkExternal?: string
                     linkInternal?:
@@ -5572,14 +9931,71 @@ export type PagesBySlugQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
                     slug: null
@@ -5611,14 +10027,71 @@ export type PagesBySlugQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
                     linkExternal?: string
@@ -5648,9 +10121,60 @@ export type PagesBySlugQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
                   }
               > | null
               _type: 'buttons'
@@ -5664,9 +10188,10 @@ export type PagesBySlugQueryResult = {
                 _weak?: boolean
                 [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
               }
+              media?: unknown
               hotspot?: SanityImageHotspot
               crop?: SanityImageCrop
-              altText: string
+              altText?: string
               promptForImage?: string
               _type: 'imageBlock'
               _key: string
@@ -5681,8 +10206,8 @@ export type PagesBySlugQueryResult = {
           _createdAt: string
           _updatedAt: string
           _rev: string
-          title: string
-          subtitle: string
+          title?: string
+          subtitle?: string
           body: Array<
             | {
                 _ref: string
@@ -5692,12 +10217,29 @@ export type PagesBySlugQueryResult = {
                 markDefs: null
               }
             | {
-                children?: Array<{
-                  marks?: Array<string>
-                  text?: string
-                  _type: 'span'
-                  _key: string
-                }>
+                children: Array<
+                  | {
+                      code?: 'placeholder1' | 'placeholder2'
+                      _type: 'placeholder'
+                      _key: string
+                      siblingMarks: Array<
+                        | {
+                            _key: string
+                            marks: null
+                          }
+                        | {
+                            _key: string
+                            marks: Array<string> | null
+                          }
+                      > | null
+                    }
+                  | {
+                      marks?: Array<string>
+                      text?: string
+                      _type: 'span'
+                      _key: string
+                    }
+                > | null
                 style?:
                   | 'blockquote'
                   | 'h2'
@@ -5708,19 +10250,34 @@ export type PagesBySlugQueryResult = {
                   | 'normal'
                   | 'small'
                 listItem?: 'bullet' | 'number'
-                markDefs: Array<
-                  | {}
+                markDefs?: Array<
                   | {
-                      type: 'external' | 'internal'
-                      href:
-                        | {
-                            slug: string
-                            _type: 'page'
-                          }
-                        | null
-                        | string
+                      _ref: string
+                      _type: 'reference'
+                      _weak?: boolean
+                      _key: string
+                      [internalGroqTypeReferenceTo]?: 'news'
                     }
-                > | null
+                  | {
+                      _ref: string
+                      _type: 'reference'
+                      _weak?: boolean
+                      _key: string
+                      [internalGroqTypeReferenceTo]?: 'publication'
+                    }
+                  | {
+                      type?: 'external' | 'internal'
+                      href?: string
+                      reference?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'page'
+                      }
+                      _type: 'link'
+                      _key: string
+                    }
+                >
                 level?: number
                 _type: 'block'
                 _key: string
@@ -5729,11 +10286,11 @@ export type PagesBySlugQueryResult = {
                 buttons: Array<
                   | {
                       _key: string
-                      title: string
-                      type: 'external' | 'file' | 'functional' | 'internal'
+                      title?: string
+                      type?: 'external' | 'file' | 'functional' | 'internal'
                       _type: 'button'
                       href: string | null
-                      slug: string
+                      slug: string | null
                       docType: 'news'
                       linkExternal?: string
                       linkInternal?:
@@ -5762,17 +10319,84 @@ export type PagesBySlugQueryResult = {
                           _weak?: boolean
                           [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                         }
+                        media?: unknown
                         _type: 'file'
                       }
                       functional?: 'contact' | 'subscribe'
                     }
                   | {
                       _key: string
-                      title: string
-                      type: 'external' | 'file' | 'functional' | 'internal'
+                      title?: string
+                      type?: 'external' | 'file' | 'functional' | 'internal'
+                      _type: 'button'
+                      slug: string | null
+                      docType: 'news'
+                      linkExternal?: string
+                      linkInternal?:
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'news'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'page'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'publication'
+                          }
+                      file?: {
+                        asset?: {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                        }
+                        media?: unknown
+                        _type: 'file'
+                      }
+                      functional?: 'contact' | 'subscribe'
+                    }
+                  | {
+                      _key: string
+                      title: string | null
+                      type:
+                        | 'external'
+                        | 'file'
+                        | 'functional'
+                        | 'internal'
+                        | null
+                      _type: 'button'
+                      slug: string | null
+                      docType: 'news'
+                      href: string | null
+                    }
+                  | {
+                      _key: string
+                      title: string | null
+                      type:
+                        | 'external'
+                        | 'file'
+                        | 'functional'
+                        | 'internal'
+                        | null
+                      _type: 'button'
+                      slug: string | null
+                      docType: 'news'
+                    }
+                  | {
+                      _key: string
+                      title?: string
+                      type?: 'external' | 'file' | 'functional' | 'internal'
                       _type: 'button'
                       href: string | null
-                      slug: string
+                      slug: string | null
                       docType: 'page'
                       linkExternal?: string
                       linkInternal?:
@@ -5801,14 +10425,81 @@ export type PagesBySlugQueryResult = {
                           _weak?: boolean
                           [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                         }
+                        media?: unknown
                         _type: 'file'
                       }
                       functional?: 'contact' | 'subscribe'
                     }
                   | {
                       _key: string
-                      title: string
-                      type: 'external' | 'file' | 'functional' | 'internal'
+                      title?: string
+                      type?: 'external' | 'file' | 'functional' | 'internal'
+                      _type: 'button'
+                      slug: string | null
+                      docType: 'page'
+                      linkExternal?: string
+                      linkInternal?:
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'news'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'page'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'publication'
+                          }
+                      file?: {
+                        asset?: {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                        }
+                        media?: unknown
+                        _type: 'file'
+                      }
+                      functional?: 'contact' | 'subscribe'
+                    }
+                  | {
+                      _key: string
+                      title: string | null
+                      type:
+                        | 'external'
+                        | 'file'
+                        | 'functional'
+                        | 'internal'
+                        | null
+                      _type: 'button'
+                      slug: string | null
+                      docType: 'page'
+                      href: string | null
+                    }
+                  | {
+                      _key: string
+                      title: string | null
+                      type:
+                        | 'external'
+                        | 'file'
+                        | 'functional'
+                        | 'internal'
+                        | null
+                      _type: 'button'
+                      slug: string | null
+                      docType: 'page'
+                    }
+                  | {
+                      _key: string
+                      title?: string
+                      type?: 'external' | 'file' | 'functional' | 'internal'
                       _type: 'button'
                       href: string | null
                       slug: null
@@ -5840,14 +10531,81 @@ export type PagesBySlugQueryResult = {
                           _weak?: boolean
                           [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                         }
+                        media?: unknown
                         _type: 'file'
                       }
                       functional?: 'contact' | 'subscribe'
                     }
                   | {
                       _key: string
-                      title: string
-                      type: 'external' | 'file' | 'functional' | 'internal'
+                      title?: string
+                      type?: 'external' | 'file' | 'functional' | 'internal'
+                      _type: 'button'
+                      slug: null
+                      docType: 'publication'
+                      linkExternal?: string
+                      linkInternal?:
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'news'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'page'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'publication'
+                          }
+                      file?: {
+                        asset?: {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                        }
+                        media?: unknown
+                        _type: 'file'
+                      }
+                      functional?: 'contact' | 'subscribe'
+                    }
+                  | {
+                      _key: string
+                      title: string | null
+                      type:
+                        | 'external'
+                        | 'file'
+                        | 'functional'
+                        | 'internal'
+                        | null
+                      _type: 'button'
+                      slug: null
+                      docType: 'publication'
+                      href: string | null
+                    }
+                  | {
+                      _key: string
+                      title: string | null
+                      type:
+                        | 'external'
+                        | 'file'
+                        | 'functional'
+                        | 'internal'
+                        | null
+                      _type: 'button'
+                      slug: null
+                      docType: 'publication'
+                    }
+                  | {
+                      _key: string
+                      title?: string
+                      type?: 'external' | 'file' | 'functional' | 'internal'
                       _type: 'button'
                       href: string | null
                       linkExternal?: string
@@ -5877,9 +10635,70 @@ export type PagesBySlugQueryResult = {
                           _weak?: boolean
                           [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                         }
+                        media?: unknown
                         _type: 'file'
                       }
                       functional?: 'contact' | 'subscribe'
+                    }
+                  | {
+                      _key: string
+                      title?: string
+                      type?: 'external' | 'file' | 'functional' | 'internal'
+                      _type: 'button'
+                      linkExternal?: string
+                      linkInternal?:
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'news'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'page'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'publication'
+                          }
+                      file?: {
+                        asset?: {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                        }
+                        media?: unknown
+                        _type: 'file'
+                      }
+                      functional?: 'contact' | 'subscribe'
+                    }
+                  | {
+                      _key: string
+                      title: string | null
+                      type:
+                        | 'external'
+                        | 'file'
+                        | 'functional'
+                        | 'internal'
+                        | null
+                      _type: 'button'
+                      href: string | null
+                    }
+                  | {
+                      _key: string
+                      title: string | null
+                      type:
+                        | 'external'
+                        | 'file'
+                        | 'functional'
+                        | 'internal'
+                        | null
+                      _type: 'button'
                     }
                 > | null
                 _type: 'buttons'
@@ -5893,9 +10712,10 @@ export type PagesBySlugQueryResult = {
                   _weak?: boolean
                   [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
                 }
+                media?: unknown
                 hotspot?: SanityImageHotspot
                 crop?: SanityImageCrop
-                altText: string
+                altText?: string
                 promptForImage?: string
                 _type: 'imageBlock'
                 _key: string
@@ -5903,7 +10723,7 @@ export type PagesBySlugQueryResult = {
                 image: null
               }
           > | null
-          slug: string
+          slug: string | null
           image: {
             asset: {
               _ref: string
@@ -5911,6 +10731,7 @@ export type PagesBySlugQueryResult = {
               _weak?: boolean
               [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
             }
+            media?: unknown
             hotspot?: SanityImageHotspot
             crop?: SanityImageCrop
             altText:
@@ -5920,7 +10741,7 @@ export type PagesBySlugQueryResult = {
             promptForImage?: string
             _type: 'aiImage'
             blurHashURL: string | null
-          }
+          } | null
           isInMenu?: boolean
           firstPublishedAt?: string
         }>
@@ -5928,7 +10749,7 @@ export type PagesBySlugQueryResult = {
     | {
         _key: string
         _type: 'newsSection'
-        title: Array<{
+        title?: Array<{
           children?: Array<{
             marks?: Array<string>
             text?: string
@@ -5951,12 +10772,29 @@ export type PagesBySlugQueryResult = {
               markDefs: null
             }
           | {
-              children?: Array<{
-                marks?: Array<string>
-                text?: string
-                _type: 'span'
-                _key: string
-              }>
+              children: Array<
+                | {
+                    code?: 'placeholder1' | 'placeholder2'
+                    _type: 'placeholder'
+                    _key: string
+                    siblingMarks: Array<
+                      | {
+                          _key: string
+                          marks: null
+                        }
+                      | {
+                          _key: string
+                          marks: Array<string> | null
+                        }
+                    > | null
+                  }
+                | {
+                    marks?: Array<string>
+                    text?: string
+                    _type: 'span'
+                    _key: string
+                  }
+              > | null
               style?:
                 | 'blockquote'
                 | 'h2'
@@ -5967,19 +10805,34 @@ export type PagesBySlugQueryResult = {
                 | 'normal'
                 | 'small'
               listItem?: 'bullet' | 'number'
-              markDefs: Array<
-                | {}
+              markDefs?: Array<
                 | {
-                    type: 'external' | 'internal'
-                    href:
-                      | {
-                          slug: string
-                          _type: 'page'
-                        }
-                      | null
-                      | string
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'news'
                   }
-              > | null
+                | {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'publication'
+                  }
+                | {
+                    type?: 'external' | 'internal'
+                    href?: string
+                    reference?: {
+                      _ref: string
+                      _type: 'reference'
+                      _weak?: boolean
+                      [internalGroqTypeReferenceTo]?: 'page'
+                    }
+                    _type: 'link'
+                    _key: string
+                  }
+              >
               level?: number
               _type: 'block'
               _key: string
@@ -5988,11 +10841,11 @@ export type PagesBySlugQueryResult = {
               buttons: Array<
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
-                    slug: string
+                    slug: string | null
                     docType: 'news'
                     linkExternal?: string
                     linkInternal?:
@@ -6021,17 +10874,74 @@ export type PagesBySlugQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
-                    slug: string
+                    slug: string | null
                     docType: 'page'
                     linkExternal?: string
                     linkInternal?:
@@ -6060,14 +10970,71 @@ export type PagesBySlugQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
                     slug: null
@@ -6099,14 +11066,71 @@ export type PagesBySlugQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
                     linkExternal?: string
@@ -6136,9 +11160,60 @@ export type PagesBySlugQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
                   }
               > | null
               _type: 'buttons'
@@ -6152,9 +11227,10 @@ export type PagesBySlugQueryResult = {
                 _weak?: boolean
                 [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
               }
+              media?: unknown
               hotspot?: SanityImageHotspot
               crop?: SanityImageCrop
-              altText: string
+              altText?: string
               promptForImage?: string
               _type: 'imageBlock'
               _key: string
@@ -6174,7 +11250,7 @@ export type PagesBySlugQueryResult = {
     | {
         _key: string
         _type: 'newsSection'
-        title: Array<{
+        title?: Array<{
           children?: Array<{
             marks?: Array<string>
             text?: string
@@ -6197,12 +11273,29 @@ export type PagesBySlugQueryResult = {
               markDefs: null
             }
           | {
-              children?: Array<{
-                marks?: Array<string>
-                text?: string
-                _type: 'span'
-                _key: string
-              }>
+              children: Array<
+                | {
+                    code?: 'placeholder1' | 'placeholder2'
+                    _type: 'placeholder'
+                    _key: string
+                    siblingMarks: Array<
+                      | {
+                          _key: string
+                          marks: null
+                        }
+                      | {
+                          _key: string
+                          marks: Array<string> | null
+                        }
+                    > | null
+                  }
+                | {
+                    marks?: Array<string>
+                    text?: string
+                    _type: 'span'
+                    _key: string
+                  }
+              > | null
               style?:
                 | 'blockquote'
                 | 'h2'
@@ -6213,19 +11306,34 @@ export type PagesBySlugQueryResult = {
                 | 'normal'
                 | 'small'
               listItem?: 'bullet' | 'number'
-              markDefs: Array<
-                | {}
+              markDefs?: Array<
                 | {
-                    type: 'external' | 'internal'
-                    href:
-                      | {
-                          slug: string
-                          _type: 'page'
-                        }
-                      | null
-                      | string
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'news'
                   }
-              > | null
+                | {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'publication'
+                  }
+                | {
+                    type?: 'external' | 'internal'
+                    href?: string
+                    reference?: {
+                      _ref: string
+                      _type: 'reference'
+                      _weak?: boolean
+                      [internalGroqTypeReferenceTo]?: 'page'
+                    }
+                    _type: 'link'
+                    _key: string
+                  }
+              >
               level?: number
               _type: 'block'
               _key: string
@@ -6234,11 +11342,11 @@ export type PagesBySlugQueryResult = {
               buttons: Array<
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
-                    slug: string
+                    slug: string | null
                     docType: 'news'
                     linkExternal?: string
                     linkInternal?:
@@ -6267,17 +11375,74 @@ export type PagesBySlugQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
-                    slug: string
+                    slug: string | null
                     docType: 'page'
                     linkExternal?: string
                     linkInternal?:
@@ -6306,14 +11471,71 @@ export type PagesBySlugQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
                     slug: null
@@ -6345,14 +11567,71 @@ export type PagesBySlugQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
                     linkExternal?: string
@@ -6382,9 +11661,60 @@ export type PagesBySlugQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
                   }
               > | null
               _type: 'buttons'
@@ -6398,9 +11728,10 @@ export type PagesBySlugQueryResult = {
                 _weak?: boolean
                 [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
               }
+              media?: unknown
               hotspot?: SanityImageHotspot
               crop?: SanityImageCrop
-              altText: string
+              altText?: string
               promptForImage?: string
               _type: 'imageBlock'
               _key: string
@@ -6415,8 +11746,8 @@ export type PagesBySlugQueryResult = {
           _createdAt: string
           _updatedAt: string
           _rev: string
-          title: string
-          subtitle: string
+          title?: string
+          subtitle?: string
           body: Array<
             | {
                 _ref: string
@@ -6426,12 +11757,29 @@ export type PagesBySlugQueryResult = {
                 markDefs: null
               }
             | {
-                children?: Array<{
-                  marks?: Array<string>
-                  text?: string
-                  _type: 'span'
-                  _key: string
-                }>
+                children: Array<
+                  | {
+                      code?: 'placeholder1' | 'placeholder2'
+                      _type: 'placeholder'
+                      _key: string
+                      siblingMarks: Array<
+                        | {
+                            _key: string
+                            marks: null
+                          }
+                        | {
+                            _key: string
+                            marks: Array<string> | null
+                          }
+                      > | null
+                    }
+                  | {
+                      marks?: Array<string>
+                      text?: string
+                      _type: 'span'
+                      _key: string
+                    }
+                > | null
                 style?:
                   | 'blockquote'
                   | 'h2'
@@ -6442,19 +11790,34 @@ export type PagesBySlugQueryResult = {
                   | 'normal'
                   | 'small'
                 listItem?: 'bullet' | 'number'
-                markDefs: Array<
-                  | {}
+                markDefs?: Array<
                   | {
-                      type: 'external' | 'internal'
-                      href:
-                        | {
-                            slug: string
-                            _type: 'page'
-                          }
-                        | null
-                        | string
+                      _ref: string
+                      _type: 'reference'
+                      _weak?: boolean
+                      _key: string
+                      [internalGroqTypeReferenceTo]?: 'news'
                     }
-                > | null
+                  | {
+                      _ref: string
+                      _type: 'reference'
+                      _weak?: boolean
+                      _key: string
+                      [internalGroqTypeReferenceTo]?: 'publication'
+                    }
+                  | {
+                      type?: 'external' | 'internal'
+                      href?: string
+                      reference?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'page'
+                      }
+                      _type: 'link'
+                      _key: string
+                    }
+                >
                 level?: number
                 _type: 'block'
                 _key: string
@@ -6463,11 +11826,11 @@ export type PagesBySlugQueryResult = {
                 buttons: Array<
                   | {
                       _key: string
-                      title: string
-                      type: 'external' | 'file' | 'functional' | 'internal'
+                      title?: string
+                      type?: 'external' | 'file' | 'functional' | 'internal'
                       _type: 'button'
                       href: string | null
-                      slug: string
+                      slug: string | null
                       docType: 'news'
                       linkExternal?: string
                       linkInternal?:
@@ -6496,17 +11859,84 @@ export type PagesBySlugQueryResult = {
                           _weak?: boolean
                           [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                         }
+                        media?: unknown
                         _type: 'file'
                       }
                       functional?: 'contact' | 'subscribe'
                     }
                   | {
                       _key: string
-                      title: string
-                      type: 'external' | 'file' | 'functional' | 'internal'
+                      title?: string
+                      type?: 'external' | 'file' | 'functional' | 'internal'
+                      _type: 'button'
+                      slug: string | null
+                      docType: 'news'
+                      linkExternal?: string
+                      linkInternal?:
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'news'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'page'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'publication'
+                          }
+                      file?: {
+                        asset?: {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                        }
+                        media?: unknown
+                        _type: 'file'
+                      }
+                      functional?: 'contact' | 'subscribe'
+                    }
+                  | {
+                      _key: string
+                      title: string | null
+                      type:
+                        | 'external'
+                        | 'file'
+                        | 'functional'
+                        | 'internal'
+                        | null
+                      _type: 'button'
+                      slug: string | null
+                      docType: 'news'
+                      href: string | null
+                    }
+                  | {
+                      _key: string
+                      title: string | null
+                      type:
+                        | 'external'
+                        | 'file'
+                        | 'functional'
+                        | 'internal'
+                        | null
+                      _type: 'button'
+                      slug: string | null
+                      docType: 'news'
+                    }
+                  | {
+                      _key: string
+                      title?: string
+                      type?: 'external' | 'file' | 'functional' | 'internal'
                       _type: 'button'
                       href: string | null
-                      slug: string
+                      slug: string | null
                       docType: 'page'
                       linkExternal?: string
                       linkInternal?:
@@ -6535,14 +11965,81 @@ export type PagesBySlugQueryResult = {
                           _weak?: boolean
                           [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                         }
+                        media?: unknown
                         _type: 'file'
                       }
                       functional?: 'contact' | 'subscribe'
                     }
                   | {
                       _key: string
-                      title: string
-                      type: 'external' | 'file' | 'functional' | 'internal'
+                      title?: string
+                      type?: 'external' | 'file' | 'functional' | 'internal'
+                      _type: 'button'
+                      slug: string | null
+                      docType: 'page'
+                      linkExternal?: string
+                      linkInternal?:
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'news'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'page'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'publication'
+                          }
+                      file?: {
+                        asset?: {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                        }
+                        media?: unknown
+                        _type: 'file'
+                      }
+                      functional?: 'contact' | 'subscribe'
+                    }
+                  | {
+                      _key: string
+                      title: string | null
+                      type:
+                        | 'external'
+                        | 'file'
+                        | 'functional'
+                        | 'internal'
+                        | null
+                      _type: 'button'
+                      slug: string | null
+                      docType: 'page'
+                      href: string | null
+                    }
+                  | {
+                      _key: string
+                      title: string | null
+                      type:
+                        | 'external'
+                        | 'file'
+                        | 'functional'
+                        | 'internal'
+                        | null
+                      _type: 'button'
+                      slug: string | null
+                      docType: 'page'
+                    }
+                  | {
+                      _key: string
+                      title?: string
+                      type?: 'external' | 'file' | 'functional' | 'internal'
                       _type: 'button'
                       href: string | null
                       slug: null
@@ -6574,14 +12071,81 @@ export type PagesBySlugQueryResult = {
                           _weak?: boolean
                           [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                         }
+                        media?: unknown
                         _type: 'file'
                       }
                       functional?: 'contact' | 'subscribe'
                     }
                   | {
                       _key: string
-                      title: string
-                      type: 'external' | 'file' | 'functional' | 'internal'
+                      title?: string
+                      type?: 'external' | 'file' | 'functional' | 'internal'
+                      _type: 'button'
+                      slug: null
+                      docType: 'publication'
+                      linkExternal?: string
+                      linkInternal?:
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'news'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'page'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'publication'
+                          }
+                      file?: {
+                        asset?: {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                        }
+                        media?: unknown
+                        _type: 'file'
+                      }
+                      functional?: 'contact' | 'subscribe'
+                    }
+                  | {
+                      _key: string
+                      title: string | null
+                      type:
+                        | 'external'
+                        | 'file'
+                        | 'functional'
+                        | 'internal'
+                        | null
+                      _type: 'button'
+                      slug: null
+                      docType: 'publication'
+                      href: string | null
+                    }
+                  | {
+                      _key: string
+                      title: string | null
+                      type:
+                        | 'external'
+                        | 'file'
+                        | 'functional'
+                        | 'internal'
+                        | null
+                      _type: 'button'
+                      slug: null
+                      docType: 'publication'
+                    }
+                  | {
+                      _key: string
+                      title?: string
+                      type?: 'external' | 'file' | 'functional' | 'internal'
                       _type: 'button'
                       href: string | null
                       linkExternal?: string
@@ -6611,9 +12175,70 @@ export type PagesBySlugQueryResult = {
                           _weak?: boolean
                           [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                         }
+                        media?: unknown
                         _type: 'file'
                       }
                       functional?: 'contact' | 'subscribe'
+                    }
+                  | {
+                      _key: string
+                      title?: string
+                      type?: 'external' | 'file' | 'functional' | 'internal'
+                      _type: 'button'
+                      linkExternal?: string
+                      linkInternal?:
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'news'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'page'
+                          }
+                        | {
+                            _ref: string
+                            _type: 'reference'
+                            _weak?: boolean
+                            [internalGroqTypeReferenceTo]?: 'publication'
+                          }
+                      file?: {
+                        asset?: {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                        }
+                        media?: unknown
+                        _type: 'file'
+                      }
+                      functional?: 'contact' | 'subscribe'
+                    }
+                  | {
+                      _key: string
+                      title: string | null
+                      type:
+                        | 'external'
+                        | 'file'
+                        | 'functional'
+                        | 'internal'
+                        | null
+                      _type: 'button'
+                      href: string | null
+                    }
+                  | {
+                      _key: string
+                      title: string | null
+                      type:
+                        | 'external'
+                        | 'file'
+                        | 'functional'
+                        | 'internal'
+                        | null
+                      _type: 'button'
                     }
                 > | null
                 _type: 'buttons'
@@ -6627,9 +12252,10 @@ export type PagesBySlugQueryResult = {
                   _weak?: boolean
                   [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
                 }
+                media?: unknown
                 hotspot?: SanityImageHotspot
                 crop?: SanityImageCrop
-                altText: string
+                altText?: string
                 promptForImage?: string
                 _type: 'imageBlock'
                 _key: string
@@ -6637,7 +12263,7 @@ export type PagesBySlugQueryResult = {
                 image: null
               }
           > | null
-          slug: string
+          slug: string | null
           image: {
             asset: {
               _ref: string
@@ -6645,6 +12271,7 @@ export type PagesBySlugQueryResult = {
               _weak?: boolean
               [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
             }
+            media?: unknown
             hotspot?: SanityImageHotspot
             crop?: SanityImageCrop
             altText:
@@ -6654,7 +12281,7 @@ export type PagesBySlugQueryResult = {
             promptForImage?: string
             _type: 'aiImage'
             blurHashURL: string | null
-          }
+          } | null
           isInMenu?: boolean
           firstPublishedAt?: string
         }> | null
@@ -6662,7 +12289,7 @@ export type PagesBySlugQueryResult = {
     | {
         _key: string
         _type: 'testimonialSection'
-        title: Array<{
+        title?: Array<{
           children?: Array<{
             marks?: Array<string>
             text?: string
@@ -6685,12 +12312,29 @@ export type PagesBySlugQueryResult = {
               markDefs: null
             }
           | {
-              children?: Array<{
-                marks?: Array<string>
-                text?: string
-                _type: 'span'
-                _key: string
-              }>
+              children: Array<
+                | {
+                    code?: 'placeholder1' | 'placeholder2'
+                    _type: 'placeholder'
+                    _key: string
+                    siblingMarks: Array<
+                      | {
+                          _key: string
+                          marks: null
+                        }
+                      | {
+                          _key: string
+                          marks: Array<string> | null
+                        }
+                    > | null
+                  }
+                | {
+                    marks?: Array<string>
+                    text?: string
+                    _type: 'span'
+                    _key: string
+                  }
+              > | null
               style?:
                 | 'blockquote'
                 | 'h2'
@@ -6701,19 +12345,34 @@ export type PagesBySlugQueryResult = {
                 | 'normal'
                 | 'small'
               listItem?: 'bullet' | 'number'
-              markDefs: Array<
-                | {}
+              markDefs?: Array<
                 | {
-                    type: 'external' | 'internal'
-                    href:
-                      | {
-                          slug: string
-                          _type: 'page'
-                        }
-                      | null
-                      | string
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'news'
                   }
-              > | null
+                | {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'publication'
+                  }
+                | {
+                    type?: 'external' | 'internal'
+                    href?: string
+                    reference?: {
+                      _ref: string
+                      _type: 'reference'
+                      _weak?: boolean
+                      [internalGroqTypeReferenceTo]?: 'page'
+                    }
+                    _type: 'link'
+                    _key: string
+                  }
+              >
               level?: number
               _type: 'block'
               _key: string
@@ -6722,11 +12381,11 @@ export type PagesBySlugQueryResult = {
               buttons: Array<
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
-                    slug: string
+                    slug: string | null
                     docType: 'news'
                     linkExternal?: string
                     linkInternal?:
@@ -6755,17 +12414,74 @@ export type PagesBySlugQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
-                    slug: string
+                    slug: string | null
                     docType: 'page'
                     linkExternal?: string
                     linkInternal?:
@@ -6794,14 +12510,71 @@ export type PagesBySlugQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
                     slug: null
@@ -6833,14 +12606,71 @@ export type PagesBySlugQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
                     linkExternal?: string
@@ -6870,9 +12700,60 @@ export type PagesBySlugQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
                   }
               > | null
               _type: 'buttons'
@@ -6886,9 +12767,545 @@ export type PagesBySlugQueryResult = {
                 _weak?: boolean
                 [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
               }
+              media?: unknown
               hotspot?: SanityImageHotspot
               crop?: SanityImageCrop
-              altText: string
+              altText?: string
+              promptForImage?: string
+              _type: 'imageBlock'
+              _key: string
+              markDefs: null
+              image: null
+            }
+        > | null
+        loadTags?: Array<string>
+        testimonials: Array<{
+          _id: string
+          _type: 'testimonial'
+          _createdAt: string
+          _updatedAt: string
+          _rev: string
+          title?: string
+          body: Array<{
+            children: Array<{
+              marks?: Array<string>
+              text?: string
+              _type: 'span'
+              _key: string
+            }> | null
+            style?:
+              | 'blockquote'
+              | 'h3'
+              | 'h4'
+              | 'h5'
+              | 'h6'
+              | 'normal'
+              | 'small'
+            listItem?: 'bullet' | 'number'
+            markDefs?: Array<{
+              type?: 'external' | 'internal'
+              href?: string
+              reference?: {
+                _ref: string
+                _type: 'reference'
+                _weak?: boolean
+                [internalGroqTypeReferenceTo]?: 'page'
+              }
+              _type: 'link'
+              _key: string
+            }>
+            level?: number
+            _type: 'block'
+            _key: string
+          }> | null
+          tags?: Array<string>
+        }>
+      }
+    | {
+        _key: string
+        _type: 'testimonialSection'
+        title?: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'normal'
+          listItem?: never
+          markDefs?: null
+          level?: number
+          _type: 'block'
+          _key: string
+        }>
+        body: Array<
+          | {
+              _ref: string
+              _type: 'reference'
+              _weak?: boolean
+              _key: string
+              markDefs: null
+            }
+          | {
+              children: Array<
+                | {
+                    code?: 'placeholder1' | 'placeholder2'
+                    _type: 'placeholder'
+                    _key: string
+                    siblingMarks: Array<
+                      | {
+                          _key: string
+                          marks: null
+                        }
+                      | {
+                          _key: string
+                          marks: Array<string> | null
+                        }
+                    > | null
+                  }
+                | {
+                    marks?: Array<string>
+                    text?: string
+                    _type: 'span'
+                    _key: string
+                  }
+              > | null
+              style?:
+                | 'blockquote'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+                | 'small'
+              listItem?: 'bullet' | 'number'
+              markDefs?: Array<
+                | {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'news'
+                  }
+                | {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'publication'
+                  }
+                | {
+                    type?: 'external' | 'internal'
+                    href?: string
+                    reference?: {
+                      _ref: string
+                      _type: 'reference'
+                      _weak?: boolean
+                      [internalGroqTypeReferenceTo]?: 'page'
+                    }
+                    _type: 'link'
+                    _key: string
+                  }
+              >
+              level?: number
+              _type: 'block'
+              _key: string
+            }
+          | {
+              buttons: Array<
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string | null
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: string | null
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    href: string | null
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                  }
+              > | null
+              _type: 'buttons'
+              _key: string
+              markDefs: null
+            }
+          | {
+              asset?: {
+                _ref: string
+                _type: 'reference'
+                _weak?: boolean
+                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+              }
+              media?: unknown
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              altText?: string
               promptForImage?: string
               _type: 'imageBlock'
               _key: string
@@ -6908,7 +13325,7 @@ export type PagesBySlugQueryResult = {
     | {
         _key: string
         _type: 'textHeaderSection'
-        title: Array<{
+        title?: Array<{
           children?: Array<{
             marks?: Array<string>
             text?: string
@@ -6945,12 +13362,29 @@ export type PagesBySlugQueryResult = {
               markDefs: null
             }
           | {
-              children?: Array<{
-                marks?: Array<string>
-                text?: string
-                _type: 'span'
-                _key: string
-              }>
+              children: Array<
+                | {
+                    code?: 'placeholder1' | 'placeholder2'
+                    _type: 'placeholder'
+                    _key: string
+                    siblingMarks: Array<
+                      | {
+                          _key: string
+                          marks: null
+                        }
+                      | {
+                          _key: string
+                          marks: Array<string> | null
+                        }
+                    > | null
+                  }
+                | {
+                    marks?: Array<string>
+                    text?: string
+                    _type: 'span'
+                    _key: string
+                  }
+              > | null
               style?:
                 | 'blockquote'
                 | 'h2'
@@ -6961,19 +13395,34 @@ export type PagesBySlugQueryResult = {
                 | 'normal'
                 | 'small'
               listItem?: 'bullet' | 'number'
-              markDefs: Array<
-                | {}
+              markDefs?: Array<
                 | {
-                    type: 'external' | 'internal'
-                    href:
-                      | {
-                          slug: string
-                          _type: 'page'
-                        }
-                      | null
-                      | string
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'news'
                   }
-              > | null
+                | {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'publication'
+                  }
+                | {
+                    type?: 'external' | 'internal'
+                    href?: string
+                    reference?: {
+                      _ref: string
+                      _type: 'reference'
+                      _weak?: boolean
+                      [internalGroqTypeReferenceTo]?: 'page'
+                    }
+                    _type: 'link'
+                    _key: string
+                  }
+              >
               level?: number
               _type: 'block'
               _key: string
@@ -6982,11 +13431,11 @@ export type PagesBySlugQueryResult = {
               buttons: Array<
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
-                    slug: string
+                    slug: string | null
                     docType: 'news'
                     linkExternal?: string
                     linkInternal?:
@@ -7015,17 +13464,74 @@ export type PagesBySlugQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
-                    slug: string
+                    slug: string | null
                     docType: 'page'
                     linkExternal?: string
                     linkInternal?:
@@ -7054,14 +13560,71 @@ export type PagesBySlugQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
                     slug: null
@@ -7093,14 +13656,71 @@ export type PagesBySlugQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
                     linkExternal?: string
@@ -7130,9 +13750,60 @@ export type PagesBySlugQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
                   }
               > | null
               _type: 'buttons'
@@ -7146,21 +13817,22 @@ export type PagesBySlugQueryResult = {
                 _weak?: boolean
                 [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
               }
+              media?: unknown
               hotspot?: SanityImageHotspot
               crop?: SanityImageCrop
-              altText: string
+              altText?: string
               promptForImage?: string
               _type: 'imageBlock'
               _key: string
               markDefs: null
               image: null
             }
-        >
+        > | null
       }
     | {
         _key: string
         _type: 'textSection'
-        title: Array<{
+        title?: Array<{
           children?: Array<{
             marks?: Array<string>
             text?: string
@@ -7197,12 +13869,29 @@ export type PagesBySlugQueryResult = {
               markDefs: null
             }
           | {
-              children?: Array<{
-                marks?: Array<string>
-                text?: string
-                _type: 'span'
-                _key: string
-              }>
+              children: Array<
+                | {
+                    code?: 'placeholder1' | 'placeholder2'
+                    _type: 'placeholder'
+                    _key: string
+                    siblingMarks: Array<
+                      | {
+                          _key: string
+                          marks: null
+                        }
+                      | {
+                          _key: string
+                          marks: Array<string> | null
+                        }
+                    > | null
+                  }
+                | {
+                    marks?: Array<string>
+                    text?: string
+                    _type: 'span'
+                    _key: string
+                  }
+              > | null
               style?:
                 | 'blockquote'
                 | 'h2'
@@ -7213,19 +13902,34 @@ export type PagesBySlugQueryResult = {
                 | 'normal'
                 | 'small'
               listItem?: 'bullet' | 'number'
-              markDefs: Array<
-                | {}
+              markDefs?: Array<
                 | {
-                    type: 'external' | 'internal'
-                    href:
-                      | {
-                          slug: string
-                          _type: 'page'
-                        }
-                      | null
-                      | string
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'news'
                   }
-              > | null
+                | {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    _key: string
+                    [internalGroqTypeReferenceTo]?: 'publication'
+                  }
+                | {
+                    type?: 'external' | 'internal'
+                    href?: string
+                    reference?: {
+                      _ref: string
+                      _type: 'reference'
+                      _weak?: boolean
+                      [internalGroqTypeReferenceTo]?: 'page'
+                    }
+                    _type: 'link'
+                    _key: string
+                  }
+              >
               level?: number
               _type: 'block'
               _key: string
@@ -7234,11 +13938,11 @@ export type PagesBySlugQueryResult = {
               buttons: Array<
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
-                    slug: string
+                    slug: string | null
                     docType: 'news'
                     linkExternal?: string
                     linkInternal?:
@@ -7267,17 +13971,74 @@ export type PagesBySlugQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'news'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
-                    slug: string
+                    slug: string | null
                     docType: 'page'
                     linkExternal?: string
                     linkInternal?:
@@ -7306,14 +14067,71 @@ export type PagesBySlugQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: string | null
+                    docType: 'page'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
                     slug: null
@@ -7345,14 +14163,71 @@ export type PagesBySlugQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
                   }
                 | {
                     _key: string
-                    title: string
-                    type: 'external' | 'file' | 'functional' | 'internal'
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    slug: null
+                    docType: 'publication'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
                     _type: 'button'
                     href: string | null
                     linkExternal?: string
@@ -7382,9 +14257,60 @@ export type PagesBySlugQueryResult = {
                         _weak?: boolean
                         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
                       }
+                      media?: unknown
                       _type: 'file'
                     }
                     functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title?: string
+                    type?: 'external' | 'file' | 'functional' | 'internal'
+                    _type: 'button'
+                    linkExternal?: string
+                    linkInternal?:
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'news'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'page'
+                        }
+                      | {
+                          _ref: string
+                          _type: 'reference'
+                          _weak?: boolean
+                          [internalGroqTypeReferenceTo]?: 'publication'
+                        }
+                    file?: {
+                      asset?: {
+                        _ref: string
+                        _type: 'reference'
+                        _weak?: boolean
+                        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+                      }
+                      media?: unknown
+                      _type: 'file'
+                    }
+                    functional?: 'contact' | 'subscribe'
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
+                    href: string | null
+                  }
+                | {
+                    _key: string
+                    title: string | null
+                    type: 'external' | 'file' | 'functional' | 'internal' | null
+                    _type: 'button'
                   }
               > | null
               _type: 'buttons'
@@ -7398,18 +14324,19 @@ export type PagesBySlugQueryResult = {
                 _weak?: boolean
                 [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
               }
+              media?: unknown
               hotspot?: SanityImageHotspot
               crop?: SanityImageCrop
-              altText: string
+              altText?: string
               promptForImage?: string
               _type: 'imageBlock'
               _key: string
               markDefs: null
               image: null
             }
-        >
+        > | null
       }
-  >
+  > | null
   image: {
     asset: {
       _ref: string
@@ -7417,6 +14344,7 @@ export type PagesBySlugQueryResult = {
       _weak?: boolean
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
     }
+    media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
     altText:
@@ -7426,68 +14354,81 @@ export type PagesBySlugQueryResult = {
     promptForImage?: string
     _type: 'aiImage'
     blurHashURL: string | null
-  }
+  } | null
 } | null
 // Variable: settingsQuery
-// Query:   *[_type == "siteSettings"][0]{  menu[]{    title,    _key,    !isNested => {      ...link->{ 'slug': slug.current, 'docType': _type }    },    isNested => {      menuItems[]{        title,        _key,         ...link->{ 'slug': slug.current, 'docType': _type }      }    }  },  quickLinks[]{    _key,    ...@->{ 'slug': slug.current, 'docType': _type }  },  logos,  ogImage,  serverError,  pageNotFound,}
+// Query: *[_type == "siteSettings"][0]{  menu[]{    title,    _key,    !isNested => {      ...link->{ 'slug': slug.current, 'docType': _type }    },    isNested => {      menuItems[]{        title,        _key,         ...link->{ 'slug': slug.current, 'docType': _type }      }    }  },  quickLinks[]{    _key,    ...@->{ 'slug': slug.current, 'docType': _type }  },  logos,  ogImage,  serverError,  pageNotFound,}
 export type SettingsQueryResult = {
   menu: Array<
     | {
-        title: string
+        title: string | null
         _key: string
-        slug: string
+        slug: string | null
         docType: 'page'
-        menuItems: Array<{
-          title: string
-          _key: string
-          slug: string
-          docType: 'page'
-        }> | null
+        menuItems: Array<
+          | {
+              title: string | null
+              _key: string
+              slug: string | null
+              docType: 'page'
+            }
+          | {
+              title: string | null
+              _key: string
+            }
+        > | null
       }
     | {
-        title: string
+        title: string | null
         _key: string
-        slug: string
+        slug: string | null
         docType: 'page'
       }
     | {
-        title: string
+        title: string | null
         _key: string
-        menuItems: Array<{
-          title: string
-          _key: string
-          slug: string
-          docType: 'page'
-        }> | null
+        menuItems: Array<
+          | {
+              title: string | null
+              _key: string
+              slug: string | null
+              docType: 'page'
+            }
+          | {
+              title: string | null
+              _key: string
+            }
+        > | null
       }
     | {
-        title: string
+        title: string | null
         _key: string
       }
-  >
+  > | null
   quickLinks: Array<
     | {
         _key: null
-        slug: string
+        slug: string | null
         docType: 'news'
       }
     | {
         _key: null
-        slug: string
+        slug: string | null
         docType: 'page'
       }
   > | null
   logos: {
-    logoColor: {
+    logoColor?: {
       asset: {
         _ref: string
         _type: 'reference'
         _weak?: boolean
         [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
       }
+      media?: unknown
       hotspot?: SanityImageHotspot
       crop?: SanityImageCrop
-      altText: string
+      altText?: string
       promptForImage?: string
       _type: 'aiImage'
     }
@@ -7498,9 +14439,10 @@ export type SettingsQueryResult = {
         _weak?: boolean
         [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
       }
+      media?: unknown
       hotspot?: SanityImageHotspot
       crop?: SanityImageCrop
-      altText: string
+      altText?: string
       promptForImage?: string
       _type: 'aiImage'
     }
@@ -7511,9 +14453,10 @@ export type SettingsQueryResult = {
         _weak?: boolean
         [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
       }
+      media?: unknown
       hotspot?: SanityImageHotspot
       crop?: SanityImageCrop
-      altText: string
+      altText?: string
       promptForImage?: string
       _type: 'aiImage'
     }
@@ -7525,9 +14468,10 @@ export type SettingsQueryResult = {
       _weak?: boolean
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
     }
+    media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
-    altText: string
+    altText?: string
     promptForImage?: string
     _type: 'aiImage'
   } | null
@@ -7538,12 +14482,13 @@ export type SettingsQueryResult = {
       _weak?: boolean
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
     }
+    media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
-    altText: string
+    altText?: string
     promptForImage?: string
     _type: 'aiImage'
-  }
+  } | null
   pageNotFound: {
     asset: {
       _ref: string
@@ -7551,21 +14496,22 @@ export type SettingsQueryResult = {
       _weak?: boolean
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
     }
+    media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
-    altText: string
+    altText?: string
     promptForImage?: string
     _type: 'aiImage'
-  }
+  } | null
 } | null
 // Variable: allNewsQuery
-// Query: *[ _type == 'news' && defined(slug.current) && defined(firstPublishedAt)]{  _id,  _type,  title,   description,  'slug': slug.current,  firstPublishedAt,  content[]{  ...,  _type == 'imageHeaderSection' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},  },  _type == 'textHeaderSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}  },  _type == 'textSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}  },  _type == 'accordionSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},    accordion[]{      ...,      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}    }  },  _type == 'ctaBannerSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},  },  _type == 'furtherLinkSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},    links[]{      ...,      defined(internalLink)=> {        ...internalLink->{          "slug": slug.current,          "docType": _type        }      },    }  },  _type == 'newsSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},    defined(news) && !loadAll => {news[]->{      ...,      image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},      'slug': slug.current    }},    loadAll => {'news': *[_type == 'news']{      ...,      image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},      'slug': slug.current    }},  },  _type == 'testimonialSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},  },},  image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}} | order(firstPublishedAt desc)
+// Query: *[ _type == 'news' && defined(slug.current) && defined(firstPublishedAt)]{  _id,  _type,  title,   description,  'slug': slug.current,  firstPublishedAt,  content[]{  ...,  _type == 'imageHeaderSection' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},  },  _type == 'textHeaderSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },}  },  _type == 'textSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },}  },  _type == 'accordionSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},    accordion[]{      ...,      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },}    }  },  _type == 'ctaBannerSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},  },  _type == 'furtherLinkSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},    links[]{      ...,      defined(internalLink)=> {        ...internalLink->{          "slug": slug.current,          "docType": _type        }      },    }  },  _type == 'newsSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},    defined(news) && !loadAll => {news[]->{      ...,      image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},      'slug': slug.current    }},    loadAll => {'news': *[_type == 'news']{      ...,      image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},      'slug': slug.current    }},  },  _type == 'testimonialSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},    // Specific testimonials selected by editors    defined(testimonials) && !loadTags => {testimonials[]->{      ...,      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},    }},    // All testimonials    !defined(testimonials) && 'loadAll' in loadTags =>{      'testimonials': *[_type == 'testimonial'] {        ...,        body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },}      }    },    // Specific testimonials by tags    !defined(testimonials) && !('loadAll' in loadTags) => {      'testimonials': *[_type == 'testimonial' && count(tags[@ in ^.^.loadTags]) > 0]{        ...,        body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},      }    },  },},  image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}} | order(firstPublishedAt desc)
 export type AllNewsQueryResult = Array<{
   _id: string
   _type: 'news'
-  title: string
+  title: string | null
   description: null
-  slug: string
+  slug: string | null
   firstPublishedAt: string | null
   content: null
   image: {
@@ -7575,6 +14521,7 @@ export type AllNewsQueryResult = Array<{
       _weak?: boolean
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
     }
+    media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
     altText:
@@ -7584,16 +14531,16 @@ export type AllNewsQueryResult = Array<{
     promptForImage?: string
     _type: 'aiImage'
     blurHashURL: string | null
-  }
+  } | null
 }>
 // Variable: newsBySlugQuery
-// Query: *[ _type == 'news' && slug.current == $slug][0]{  _id,  _type,  title,   description,  'slug': slug.current,  firstPublishedAt,  content[]{  ...,  _type == 'imageHeaderSection' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},  },  _type == 'textHeaderSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}  },  _type == 'textSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}  },  _type == 'accordionSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},    accordion[]{      ...,      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,}    }  },  _type == 'ctaBannerSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},  },  _type == 'furtherLinkSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},    links[]{      ...,      defined(internalLink)=> {        ...internalLink->{          "slug": slug.current,          "docType": _type        }      },    }  },  _type == 'newsSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},    defined(news) && !loadAll => {news[]->{      ...,      image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},      'slug': slug.current    }},    loadAll => {'news': *[_type == 'news']{      ...,      image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},      'slug': slug.current    }},  },  _type == 'testimonialSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       type,      'href': select(         type == 'internal' => @.reference->{             'slug': slug.current,          _type        },         type == 'external' => href       )     },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType':_type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->,},  },},  image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}}
+// Query: *[ _type == 'news' && slug.current == $slug][0]{  _id,  _type,  title,   description,  'slug': slug.current,  firstPublishedAt,  content[]{  ...,  _type == 'imageHeaderSection' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},  },  _type == 'textHeaderSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },}  },  _type == 'textSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },}  },  _type == 'accordionSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},    accordion[]{      ...,      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },}    }  },  _type == 'ctaBannerSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},  },  _type == 'furtherLinkSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},    links[]{      ...,      defined(internalLink)=> {        ...internalLink->{          "slug": slug.current,          "docType": _type        }      },    }  },  _type == 'newsSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},    defined(news) && !loadAll => {news[]->{      ...,      image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},      'slug': slug.current    }},    loadAll => {'news': *[_type == 'news']{      ...,      image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }},      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},      'slug': slug.current    }},  },  _type == 'testimonialSection' => {    ...,    body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},    // Specific testimonials selected by editors    defined(testimonials) && !loadTags => {testimonials[]->{      ...,      body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},    }},    // All testimonials    !defined(testimonials) && 'loadAll' in loadTags =>{      'testimonials': *[_type == 'testimonial'] {        ...,        body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },}      }    },    // Specific testimonials by tags    !defined(testimonials) && !('loadAll' in loadTags) => {      'testimonials': *[_type == 'testimonial' && count(tags[@ in ^.^.loadTags]) > 0]{        ...,        body[]{  ...,  // * ANNOTATIONS  markDefs[]{    // * LINK ANNOTATION    _type == "link" => {       ...,      ...reference->{             'slug': slug.current,          'docType': _type,          title,      }    },    // * PUBLICATION ANNOTATION    _type == "publication" =>  {       ..., ...@->{ url, title, description, "file": @.file.asset->url }       },    // * NEWS ANNOTATION    _type == "news" => {      ...@->{ "slug":slug.current, title, subtitle } },      },  _type == 'block' => {    ...,     children[]{      ...,      // * INLINE BLOCKS      _type == 'placeholder' => {        ...,        "siblingMarks": ^.children[]{          _key, marks        }      },    },  },  // * IMAGE BLOCK  _type == 'imageBlock' => {    ...,    image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}  },  // * BUTTONS BLOCK  _type == 'buttons' => {    ...,    buttons[]{      _key,       title,      type,      _type,      type == 'external' => {        'href': linkExternal      },      type == 'internal' => {        // TODO: Add logic for publication        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }      },      type == 'file' => {        ...file.asset-> { 'href': url + '?dl' }      },      type == 'functional' => {        ...,      },    }  },  // * TESTIMONIAL BLOCK  _type == 'testimonial' => @->{    ...,    body[]{      ...,      markDefs[]{        _type == "link" => {           ...,          ...reference->{                 'slug': slug.current,              'docType': _type,              title,          }        },      }    }  },},      }    },  },},  image{  ...,    ...asset->{        "altText": select(          defined(altText) => @.altText,           defined(^.altText) =>  ^.altText,           'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),        'blurHashURL': metadata.lqip,    }}}
 export type NewsBySlugQueryResult = {
   _id: string
   _type: 'news'
-  title: string
+  title: string | null
   description: null
-  slug: string
+  slug: string | null
   firstPublishedAt: string | null
   content: null
   image: {
@@ -7603,6 +14550,7 @@ export type NewsBySlugQueryResult = {
       _weak?: boolean
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
     }
+    media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
     altText:
@@ -7612,259 +14560,16 @@ export type NewsBySlugQueryResult = {
     promptForImage?: string
     _type: 'aiImage'
     blurHashURL: string | null
-  }
+  } | null
 } | null
-// Source: ./sanity/components/inspector/MultipleBodyTableOfContents.tsx
-// Variable: BODY_HEADING_FRAGMENT
-// Query: body[style != 'normal'] {  _key, _type, style, "text": array::join(children[].text, ' ')}
-export type BODY_HEADING_FRAGMENTResult = never
-// Variable: query
-// Query: *[_id == $documentId && _type == 'page'][0]{      content[]{        _type == 'imageHeaderSection' => {          title,          _key,          _type        },        _type == "textHeaderSection" => {          title,          _key,          _type,          body[style != 'normal'] {  _key, _type, style, "text": array::join(children[].text, ' ')}        },        _type == "textSection" => {          title,          _key,          _type,          body[style != 'normal'] {  _key, _type, style, "text": array::join(children[].text, ' ')}        },        _type == 'accordionSection' => {          'title':pt::text(title),          _key,          body[style != 'normal'] {  _key, _type, style, "text": array::join(children[].text, ' ')},          _type,          accordion[]{            title,            _key,            body[style != 'normal'] {  _key, _type, style, "text": array::join(children[].text, ' ')}          }        },        _type == 'ctaBannerSection'=> {          'title':pt::text(title),          _key,          _type,          body[style != 'normal'] {  _key, _type, style, "text": array::join(children[].text, ' ')}        },        _type == 'furtherLinkSection' => {          'title':pt::text(title),          _key,          _type,          links[]{            'title':pt::text(title),            _key,          }        },        _type == 'testimonialSection'=> {          'title':pt::text(title),          _key,          _type,          body[style != 'normal'] {  _key, _type, style, "text": array::join(children[].text, ' ')}        },        _type == 'newsSection' => {          'title':pt::text(title),          _key,          _type,          body[style != 'normal'] {  _key, _type, style, "text": array::join(children[].text, ' ')}        },      } // end of content    }
-export type QueryResult = {
-  content: Array<
-    | {
-        title: string
-        _key: string
-        body: Array<
-          | {
-              _key: string
-              _type: 'buttons'
-              style: null
-              text: null
-            }
-          | {
-              _key: string
-              _type: 'imageBlock'
-              style: null
-              text: null
-            }
-          | {
-              _key: string
-              _type: 'reference'
-              style: null
-              text: null
-            }
-        > | null
-        _type: 'accordionSection'
-        accordion: Array<{
-          title: string
-          _key: string
-          body: Array<never>
-        }>
-      }
-    | {
-        title: string
-        _key: string
-        _type: 'ctaBannerSection'
-        body: Array<
-          | {
-              _key: string
-              _type: 'buttons'
-              style: null
-              text: null
-            }
-          | {
-              _key: string
-              _type: 'imageBlock'
-              style: null
-              text: null
-            }
-          | {
-              _key: string
-              _type: 'reference'
-              style: null
-              text: null
-            }
-        >
-      }
-    | {
-        title: string
-        _key: string
-        _type: 'furtherLinkSection'
-        links: Array<{
-          title: string
-          _key: string
-        }>
-      }
-    | {
-        title: Array<{
-          children?: Array<{
-            marks?: Array<string>
-            text?: string
-            _type: 'span'
-            _key: string
-          }>
-          style?: 'normal'
-          listItem?: never
-          markDefs?: null
-          level?: number
-          _type: 'block'
-          _key: string
-        }>
-        _key: string
-        _type: 'imageHeaderSection'
-      }
-    | {
-        title: string
-        _key: string
-        _type: 'newsSection'
-        body: Array<
-          | {
-              _key: string
-              _type: 'buttons'
-              style: null
-              text: null
-            }
-          | {
-              _key: string
-              _type: 'imageBlock'
-              style: null
-              text: null
-            }
-          | {
-              _key: string
-              _type: 'reference'
-              style: null
-              text: null
-            }
-        > | null
-      }
-    | {
-        title: string
-        _key: string
-        _type: 'testimonialSection'
-        body: Array<
-          | {
-              _key: string
-              _type: 'buttons'
-              style: null
-              text: null
-            }
-          | {
-              _key: string
-              _type: 'imageBlock'
-              style: null
-              text: null
-            }
-          | {
-              _key: string
-              _type: 'reference'
-              style: null
-              text: null
-            }
-        > | null
-      }
-    | {
-        title: Array<{
-          children?: Array<{
-            marks?: Array<string>
-            text?: string
-            _type: 'span'
-            _key: string
-          }>
-          style?: 'normal'
-          listItem?: never
-          markDefs?: null
-          level?: number
-          _type: 'block'
-          _key: string
-        }>
-        _key: string
-        _type: 'textHeaderSection'
-        body: Array<
-          | {
-              _key: string
-              _type: 'buttons'
-              style: null
-              text: null
-            }
-          | {
-              _key: string
-              _type: 'imageBlock'
-              style: null
-              text: null
-            }
-          | {
-              _key: string
-              _type: 'reference'
-              style: null
-              text: null
-            }
-        >
-      }
-    | {
-        title: Array<{
-          children?: Array<{
-            marks?: Array<string>
-            text?: string
-            _type: 'span'
-            _key: string
-          }>
-          style?: 'normal'
-          listItem?: never
-          markDefs?: null
-          level?: number
-          _type: 'block'
-          _key: string
-        }>
-        _key: string
-        _type: 'textSection'
-        body: Array<
-          | {
-              _key: string
-              _type: 'buttons'
-              style: null
-              text: null
-            }
-          | {
-              _key: string
-              _type: 'imageBlock'
-              style: null
-              text: null
-            }
-          | {
-              _key: string
-              _type: 'reference'
-              style: null
-              text: null
-            }
-        >
-      }
-  >
-} | null
-// Source: ./sanity/components/inspector/TableOfContents.tsx
-// Variable: tableOfContentQuery
-// Query: *[_id == $documentId && _type == 'news'][0]{      body[style != 'normal'] {          _key, _type, style, "text": array::join(children[].text, ' ')        },        _type,        "bodyPath": "body",    }
-export type TableOfContentQueryResult = {
-  body: Array<
-    | {
-        _key: string
-        _type: 'buttons'
-        style: null
-        text: null
-      }
-    | {
-        _key: string
-        _type: 'imageBlock'
-        style: null
-        text: null
-      }
-    | {
-        _key: string
-        _type: 'reference'
-        style: null
-        text: null
-      }
-  > | null
-  _type: 'news'
-  bodyPath: 'body'
-} | null
+
 // Source: ./sanity/schemas/singletons/bin-solution/DeletionLogInputComponent.tsx
 // Variable: checkDocumentQuery
-// Query: *[_id in $docIds]{              'docId': _id,            }
+// Query: *[_id in $docIds]{              'docId': _originalId,            }
 export type CheckDocumentQueryResult = Array<{
-  docId: string
+  docId: null
 }>
+
 // Source: ./sanity/schemas/singletons/bin-solution/deletedDocBinDocument.tsx
 // Variable: getAllDeletedDocIdsUnique
 // Query: *[_id == 'deletedDocs.bin']{  "uniqueIds": array::unique(deletedDocIds)}
@@ -7876,3 +14581,21 @@ export type GetAllDeletedDocIdsUniqueResult = Array<
       uniqueIds: Array<string> | null
     }
 >
+
+// Query TypeMap
+import '@sanity/client'
+declare module '@sanity/client' {
+  interface SanityQueries {
+    "image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}": IMAGE_FRAGMENTResult
+    "body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n}": BODY_FRAGMENTResult
+    "content[]{\n  ...,\n  _type == 'imageHeaderSection' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n},\n  },\n  _type == 'textHeaderSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n}\n  },\n\n  _type == 'textSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n}\n  },\n  _type == 'accordionSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n    accordion[]{\n      ...,\n      body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n}\n    }\n  },\n  _type == 'ctaBannerSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n  },\n  _type == 'furtherLinkSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n    links[]{\n      ...,\n      defined(internalLink)=> {\n        ...internalLink->{\n          \"slug\": slug.current,\n          \"docType\": _type\n        }\n      },\n    }\n  },\n  _type == 'newsSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n    defined(news) && !loadAll => {news[]->{\n      ...,\n      image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n},\n      body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n      'slug': slug.current\n    }},\n    loadAll => {'news': *[_type == 'news']{\n      ...,\n      image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n},\n      body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n      'slug': slug.current\n    }},\n  },\n  _type == 'testimonialSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n    // Specific testimonials selected by editors\n    defined(testimonials) && !loadTags => {testimonials[]->{\n      ...,\n      body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n    }},\n    // All testimonials\n    !defined(testimonials) && 'loadAll' in loadTags =>{\n      'testimonials': *[_type == 'testimonial'] {\n        ...,\n        body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n}\n      }\n    },\n    // Specific testimonials by tags\n    !defined(testimonials) && !('loadAll' in loadTags) => {\n      'testimonials': *[_type == 'testimonial' && count(tags[@ in ^.^.loadTags]) > 0]{\n        ...,\n        body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n      }\n    },\n\n  },\n}": CONTENT_FRAGMENTResult
+    "{\n    _id,\n    title,\n    description,\n    \"slug\": slug.current,\n    content[]{\n  ...,\n  _type == 'imageHeaderSection' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n},\n  },\n  _type == 'textHeaderSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n}\n  },\n\n  _type == 'textSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n}\n  },\n  _type == 'accordionSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n    accordion[]{\n      ...,\n      body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n}\n    }\n  },\n  _type == 'ctaBannerSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n  },\n  _type == 'furtherLinkSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n    links[]{\n      ...,\n      defined(internalLink)=> {\n        ...internalLink->{\n          \"slug\": slug.current,\n          \"docType\": _type\n        }\n      },\n    }\n  },\n  _type == 'newsSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n    defined(news) && !loadAll => {news[]->{\n      ...,\n      image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n},\n      body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n      'slug': slug.current\n    }},\n    loadAll => {'news': *[_type == 'news']{\n      ...,\n      image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n},\n      body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n      'slug': slug.current\n    }},\n  },\n  _type == 'testimonialSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n    // Specific testimonials selected by editors\n    defined(testimonials) && !loadTags => {testimonials[]->{\n      ...,\n      body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n    }},\n    // All testimonials\n    !defined(testimonials) && 'loadAll' in loadTags =>{\n      'testimonials': *[_type == 'testimonial'] {\n        ...,\n        body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n}\n      }\n    },\n    // Specific testimonials by tags\n    !defined(testimonials) && !('loadAll' in loadTags) => {\n      'testimonials': *[_type == 'testimonial' && count(tags[@ in ^.^.loadTags]) > 0]{\n        ...,\n        body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n      }\n    },\n\n  },\n},\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  }": PAGE_FRAGMENTResult
+    "\n  *[_type == \"siteSettings\"][0].homePage->{\n    _id,\n    title,\n    description,\n    \"slug\": slug.current,\n    content[]{\n  ...,\n  _type == 'imageHeaderSection' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n},\n  },\n  _type == 'textHeaderSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n}\n  },\n\n  _type == 'textSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n}\n  },\n  _type == 'accordionSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n    accordion[]{\n      ...,\n      body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n}\n    }\n  },\n  _type == 'ctaBannerSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n  },\n  _type == 'furtherLinkSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n    links[]{\n      ...,\n      defined(internalLink)=> {\n        ...internalLink->{\n          \"slug\": slug.current,\n          \"docType\": _type\n        }\n      },\n    }\n  },\n  _type == 'newsSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n    defined(news) && !loadAll => {news[]->{\n      ...,\n      image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n},\n      body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n      'slug': slug.current\n    }},\n    loadAll => {'news': *[_type == 'news']{\n      ...,\n      image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n},\n      body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n      'slug': slug.current\n    }},\n  },\n  _type == 'testimonialSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n    // Specific testimonials selected by editors\n    defined(testimonials) && !loadTags => {testimonials[]->{\n      ...,\n      body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n    }},\n    // All testimonials\n    !defined(testimonials) && 'loadAll' in loadTags =>{\n      'testimonials': *[_type == 'testimonial'] {\n        ...,\n        body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n}\n      }\n    },\n    // Specific testimonials by tags\n    !defined(testimonials) && !('loadAll' in loadTags) => {\n      'testimonials': *[_type == 'testimonial' && count(tags[@ in ^.^.loadTags]) > 0]{\n        ...,\n        body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n      }\n    },\n\n  },\n},\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  }\n": HomePageQueryResult
+    "\n  *[_type == \"page\" && slug.current == $slug][0]{\n    _id,\n    title,\n    description,\n    \"slug\": slug.current,\n    content[]{\n  ...,\n  _type == 'imageHeaderSection' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n},\n  },\n  _type == 'textHeaderSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n}\n  },\n\n  _type == 'textSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n}\n  },\n  _type == 'accordionSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n    accordion[]{\n      ...,\n      body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n}\n    }\n  },\n  _type == 'ctaBannerSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n  },\n  _type == 'furtherLinkSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n    links[]{\n      ...,\n      defined(internalLink)=> {\n        ...internalLink->{\n          \"slug\": slug.current,\n          \"docType\": _type\n        }\n      },\n    }\n  },\n  _type == 'newsSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n    defined(news) && !loadAll => {news[]->{\n      ...,\n      image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n},\n      body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n      'slug': slug.current\n    }},\n    loadAll => {'news': *[_type == 'news']{\n      ...,\n      image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n},\n      body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n      'slug': slug.current\n    }},\n  },\n  _type == 'testimonialSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n    // Specific testimonials selected by editors\n    defined(testimonials) && !loadTags => {testimonials[]->{\n      ...,\n      body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n    }},\n    // All testimonials\n    !defined(testimonials) && 'loadAll' in loadTags =>{\n      'testimonials': *[_type == 'testimonial'] {\n        ...,\n        body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n}\n      }\n    },\n    // Specific testimonials by tags\n    !defined(testimonials) && !('loadAll' in loadTags) => {\n      'testimonials': *[_type == 'testimonial' && count(tags[@ in ^.^.loadTags]) > 0]{\n        ...,\n        body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n      }\n    },\n\n  },\n},\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  }\n": PagesBySlugQueryResult
+    "\n  *[_type == \"siteSettings\"][0]{\n  menu[]{\n    title,\n    _key,\n    !isNested => {\n      ...link->{ 'slug': slug.current, 'docType': _type }\n    },\n    isNested => {\n      menuItems[]{\n        title,\n        _key, \n        ...link->{ 'slug': slug.current, 'docType': _type }\n      }\n    }\n  },\n  quickLinks[]{\n    _key,\n    ...@->{ 'slug': slug.current, 'docType': _type }\n  },\n  logos,\n  ogImage,\n  serverError,\n  pageNotFound,\n}\n": SettingsQueryResult
+    "*[ _type == 'news' && defined(slug.current) && defined(firstPublishedAt)]{\n  _id,\n  _type,\n  title, \n  description,\n  'slug': slug.current,\n  firstPublishedAt,\n  content[]{\n  ...,\n  _type == 'imageHeaderSection' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n},\n  },\n  _type == 'textHeaderSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n}\n  },\n\n  _type == 'textSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n}\n  },\n  _type == 'accordionSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n    accordion[]{\n      ...,\n      body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n}\n    }\n  },\n  _type == 'ctaBannerSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n  },\n  _type == 'furtherLinkSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n    links[]{\n      ...,\n      defined(internalLink)=> {\n        ...internalLink->{\n          \"slug\": slug.current,\n          \"docType\": _type\n        }\n      },\n    }\n  },\n  _type == 'newsSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n    defined(news) && !loadAll => {news[]->{\n      ...,\n      image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n},\n      body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n      'slug': slug.current\n    }},\n    loadAll => {'news': *[_type == 'news']{\n      ...,\n      image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n},\n      body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n      'slug': slug.current\n    }},\n  },\n  _type == 'testimonialSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n    // Specific testimonials selected by editors\n    defined(testimonials) && !loadTags => {testimonials[]->{\n      ...,\n      body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n    }},\n    // All testimonials\n    !defined(testimonials) && 'loadAll' in loadTags =>{\n      'testimonials': *[_type == 'testimonial'] {\n        ...,\n        body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n}\n      }\n    },\n    // Specific testimonials by tags\n    !defined(testimonials) && !('loadAll' in loadTags) => {\n      'testimonials': *[_type == 'testimonial' && count(tags[@ in ^.^.loadTags]) > 0]{\n        ...,\n        body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n      }\n    },\n\n  },\n},\n  image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n} | order(firstPublishedAt desc)": AllNewsQueryResult
+    "*[ _type == 'news' && slug.current == $slug][0]{\n  _id,\n  _type,\n  title, \n  description,\n  'slug': slug.current,\n  firstPublishedAt,\n  content[]{\n  ...,\n  _type == 'imageHeaderSection' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n},\n  },\n  _type == 'textHeaderSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n}\n  },\n\n  _type == 'textSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n}\n  },\n  _type == 'accordionSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n    accordion[]{\n      ...,\n      body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n}\n    }\n  },\n  _type == 'ctaBannerSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n  },\n  _type == 'furtherLinkSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n    links[]{\n      ...,\n      defined(internalLink)=> {\n        ...internalLink->{\n          \"slug\": slug.current,\n          \"docType\": _type\n        }\n      },\n    }\n  },\n  _type == 'newsSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n    defined(news) && !loadAll => {news[]->{\n      ...,\n      image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n},\n      body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n      'slug': slug.current\n    }},\n    loadAll => {'news': *[_type == 'news']{\n      ...,\n      image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n},\n      body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n      'slug': slug.current\n    }},\n  },\n  _type == 'testimonialSection' => {\n    ...,\n    body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n    // Specific testimonials selected by editors\n    defined(testimonials) && !loadTags => {testimonials[]->{\n      ...,\n      body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n    }},\n    // All testimonials\n    !defined(testimonials) && 'loadAll' in loadTags =>{\n      'testimonials': *[_type == 'testimonial'] {\n        ...,\n        body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n}\n      }\n    },\n    // Specific testimonials by tags\n    !defined(testimonials) && !('loadAll' in loadTags) => {\n      'testimonials': *[_type == 'testimonial' && count(tags[@ in ^.^.loadTags]) > 0]{\n        ...,\n        body[]{\n  ...,\n  // * ANNOTATIONS\n  markDefs[]{\n    // * LINK ANNOTATION\n    _type == \"link\" => { \n      ...,\n      ...reference->{   \n          'slug': slug.current,\n          'docType': _type,\n          title,\n      }\n    },\n    // * PUBLICATION ANNOTATION\n    _type == \"publication\" =>  { \n      ..., ...@->{ url, title, description, \"file\": @.file.asset->url } \n      },\n    // * NEWS ANNOTATION\n    _type == \"news\" => {\n      ...@->{ \"slug\":slug.current, title, subtitle } },\n    \n  },\n  _type == 'block' => {\n    ..., \n    children[]{\n      ...,\n      // * INLINE BLOCKS\n      _type == 'placeholder' => {\n        ...,\n        \"siblingMarks\": ^.children[]{\n          _key, marks\n        }\n      },\n    },\n  },\n  // * IMAGE BLOCK\n  _type == 'imageBlock' => {\n    ...,\n    image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n  },\n  // * BUTTONS BLOCK\n  _type == 'buttons' => {\n    ...,\n    buttons[]{\n      _key, \n      title,\n      type,\n      _type,\n      type == 'external' => {\n        'href': linkExternal\n      },\n      type == 'internal' => {\n        // TODO: Add logic for publication\n        ...linkInternal-> { 'slug': slug.current ,'docType': _type  }\n      },\n      type == 'file' => {\n        ...file.asset-> { 'href': url + '?dl' }\n      },\n      type == 'functional' => {\n        ...,\n      },\n    }\n  },\n  // * TESTIMONIAL BLOCK\n  _type == 'testimonial' => @->{\n    ...,\n    body[]{\n      ...,\n      markDefs[]{\n        _type == \"link\" => { \n          ...,\n          ...reference->{   \n              'slug': slug.current,\n              'docType': _type,\n              title,\n          }\n        },\n      }\n    }\n  },\n\n},\n      }\n    },\n\n  },\n},\n  image{\n  ...,\n\n    ...asset->{\n        \"altText\": select(\n          defined(altText) => @.altText, \n          defined(^.altText) =>  ^.altText, \n          'Unfortunately, we forgot to add alt text to this image. We will do better next time!'),\n        'blurHashURL': metadata.lqip,\n    }\n}\n}": NewsBySlugQueryResult
+    "*[_id in $docIds]{\n              'docId': _originalId,\n            }": CheckDocumentQueryResult
+    '*[_id == \'deletedDocs.bin\']{\n  "uniqueIds": array::unique(deletedDocIds)\n}': GetAllDeletedDocIdsUniqueResult
+  }
+}

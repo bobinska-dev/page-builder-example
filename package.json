@@ -3,13 +3,15 @@
   "private": true,
   "description": "An example of a page builder using Next.js and Sanity. This work is based on the work of @bobinska-dev and @sanity-io.",
   "scripts": {
-    "build": "next build",
-    "dev": "next",
+    "build": "next build --turbopack && sanity manifest extract --path public/studio/static",
+
+    "dev": "next --turbopack",
     "format": "npx prettier --write . --ignore-path .gitignore",
-    "lint": "next lint .",
+    "lint": "eslint .",
     "lint:fix": "npm run format && npm run lint -- --fix",
     "start": "next start",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "typegen": "sanity schema extract && sanity typegen generate"
   },
   "prettier": {
     "semi": false,
@@ -21,26 +23,25 @@
     "@radix-ui/react-accordion": "^1.2.8",
     "@radix-ui/react-tooltip": "^1.2.8",
     "@sanity/assist": "^5.0.0",
-    "@sanity/cli": "^4.6.0",
-    "@sanity/demo": "^2.0.0",
+    "@sanity/cli": "^4.10.1",
     "@sanity/icons": "^3.7.4",
     "@sanity/image-url": "^1.2.0",
-    "@sanity/preview-url-secret": "^2.1.14",
+    "@sanity/preview-url-secret": "^2.1.15",
     "@sanity/react-loader": "^1.11.18",
-    "@sanity/ui": "^3.0.8",
-    "@sanity/vision": "^4.6.0",
+    "@sanity/ui": "^3.1.7",
+    "@sanity/vision": "^4.10.1",
     "@tailwindcss/typography": "^0.5.16",
     "classnames": "^2.5.1",
     "date-fns": "^4.1.0",
     "groq": "^4.6.0",
     "next": "^15.5.2",
-    "next-sanity": "^10.0.15",
+    "next-sanity": "^11.4.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-icons": "^5.5.0",
     "react-multi-carousel": "^2.8.6",
     "rxjs": "^7.8.2",
-    "sanity": "^4.6.0",
+    "sanity": "^4.10.1",
     "sanity-plugin-asset-source-unsplash": "^4.0.1",
     "sanity-plugin-iframe-pane": "^4.0.0",
     "sanity-plugin-media": "^4.0.0",
@@ -50,6 +51,8 @@
     "styled-components": "^6.1.19"
   },
   "devDependencies": {
+    "@sanity/demo": "^2.0.0",
+    "@tailwindcss/postcss": "^4.1.13",
     "@types/react": "^19.1.1",
     "autoprefixer": "^10.4.21",
     "eslint": "^9.34.0",
@@ -59,7 +62,7 @@
     "prettier": "^3.6.2",
     "prettier-plugin-packagejson": "^2.5.19",
     "prettier-plugin-tailwindcss": "^0.6.14",
-    "tailwindcss": "^4.1.12",
+    "tailwindcss": "^4.1.13",
     "typescript": "^5.9.2"
   }
 }
