@@ -9,7 +9,7 @@ import { presentationTool } from 'sanity/presentation'
 import { structureTool } from 'sanity/structure'
 import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash'
 import { media } from 'sanity-plugin-media'
-import { ptString } from 'sanity-plugin-pt-string'
+
 import { tableOfContentsPlugin } from 'sanity-plugin-table-of-contents'
 
 import {
@@ -59,9 +59,6 @@ export default defineConfig([
         },
       }),
 
-      // Adds a custom string input type for Portable text
-      // https://www.npmjs.com/package/sanity-plugin-pt-string
-      ptString(),
 
       // AI Assist
       assist(),
@@ -110,10 +107,6 @@ export default defineConfig([
           },
         },
       }),
-
-      // Adds a custom string input type for Portable text
-      // https://www.npmjs.com/package/sanity-plugin-pt-string
-      ptString(),
 
       // AI Assist
       assist(),
