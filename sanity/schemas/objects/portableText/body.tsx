@@ -1,6 +1,6 @@
 import { BodyFieldWithActions } from '@/sanity/components/fields/BodyFieldWithActions'
 import { ButtonsPTItem } from '@/sanity/components/inputs/ButttonsPTinput'
-import { BellIcon, BookIcon, CommentIcon } from '@sanity/icons'
+import { ArrowUpIcon, AsteriskIcon, BellIcon, BookIcon, CommentIcon } from '@sanity/icons'
 import { defineArrayMember, defineField, defineType } from 'sanity'
 import NewsAnnotation from '../../documents/news/NewsAnnotation'
 import PublicationAnnotation from '../../documents/publication/PublicationAnnotation'
@@ -11,6 +11,8 @@ import {
   warnWhenHeadingOrBlockIsAllBold,
 } from '../../validations/portableTextValidations'
 import link from './annotations/link'
+import { Highlighter } from './decorators/Highleighter'
+import { BiggerSizeDecorator } from '@/sanity/schemas/objects/portableText/decorators/BiggerSizeDecorator'
 
 // TODO: ADD blocks, annotations, decorators etc. and add TS docs for them
 /** ## `body` Type - Portable Text
@@ -18,7 +20,7 @@ import link from './annotations/link'
  * Used for the main body of text on the website.
  *
  * @name body
- * @type {PortableTextBlock[]}
+ * @type {PortableText[]}
  * @validation {Rule} - TODO: Add validation
  *
  * ### Blocks
@@ -40,6 +42,7 @@ export default defineType({
     defineArrayMember({
       type: 'block',
       validation: (rule) => [warnWhenHeadingOrBlockIsAllBold(rule)],
+      // Inline blocks
       of: [
         defineArrayMember({
           name: 'placeholder',
@@ -99,7 +102,25 @@ export default defineType({
             to: { type: 'news' },
           }),
         ],
-        // decorators: [],
+        decorators: [
+          {title: 'Bold', value: 'strong'},
+          {title: 'Italic', value: 'em'},
+          {title: 'Underline', value: 'underline'},
+          {title: 'Code', value: 'code'},
+          {title: 'Strikethrough', value: 'strike-through'},
+          {
+            title: 'Highlight',
+            value: 'highlight',
+            component: Highlighter,
+            icon: AsteriskIcon,
+          },
+          {
+            title: 'Bigger Size',
+            value: 'bigger',
+            icon: ArrowUpIcon,
+            component: BiggerSizeDecorator,
+          }
+        ],
       },
       styles: [
         { title: 'Normal', value: 'normal' },

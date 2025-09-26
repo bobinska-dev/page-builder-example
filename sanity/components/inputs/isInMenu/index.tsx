@@ -89,8 +89,8 @@ const InMenuInput: ComponentType<BooleanInputProps> = (props) => {
       await client
         .fetch(settingsQuery, params)
         .then((res) => {
-          res.menuItems.length > 0 && setMenuItems(res.menuItems)
-          res.footerQuickLinks.length > 0 && setFooterQuickLinks(res.footerQuickLinks)
+          res?.menuItems.length > 0 && setMenuItems(res?.menuItems)
+          res?.footerQuickLinks.length > 0 && setFooterQuickLinks(res.footerQuickLinks)
           setLoading(false)
         })
         .catch(console.error)
