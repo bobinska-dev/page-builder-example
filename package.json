@@ -4,7 +4,6 @@
   "description": "An example of a page builder using Next.js and Sanity. This work is based on the work of @bobinska-dev and @sanity-io.",
   "scripts": {
     "build": "next build --turbopack && sanity manifest extract --path public/studio/static",
-
     "dev": "next --turbopack",
     "format": "npx prettier --write . --ignore-path .gitignore",
     "lint": "eslint .",
